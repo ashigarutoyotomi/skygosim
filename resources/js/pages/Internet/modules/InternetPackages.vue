@@ -1,0 +1,158 @@
+<template>
+    <section class="s-py-80 s-py-lg-120 s-py-xl-160 ls ms">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h5 class="special-heading text-center">Choose</h5>
+                    <h1 class="text-center">Package</h1>
+                    <p class="text-center big">Get ready for more potential, more opportunity and more of everything you expect from internet provider</p>
+                </div>
+            </div>
+            <div class="divider-45 d-none d-lg-block"></div>
+            <div class="row c-gutter-60">
+                <div class="col-lg-4 col-12">
+                    <div class="pricing-plan hero-bg rounded">
+                        <div class="plan-name text-uppercase bg-maincolor">
+                            <h3>
+                                Platinum
+                            </h3>
+                        </div>
+                        <div class="plan-desc">
+                            <div class="plan-content">
+                                <h4 class="color-main">350</h4>
+                                <p class="small-text text-left">
+                                    <i class="color-main fa fa-angle-down" aria-hidden="true"></i>
+                                    mb/s
+                                </p>
+                                <h4 class="color-main2">250</h4>
+                                <p class="small-text text-left">
+                                    <i class="color-main2 fa fa-angle-up" aria-hidden="true"></i>
+                                    mb/s
+                                </p>
+                            </div>
+                            <div class="price-icon">
+                                <img src="images/price-icon01.png" alt="">
+                            </div>
+                        </div>
+                        <div class="plan-features">
+                            <ul class="list-bordered">
+                                <li>VOIP Service</li>
+                                <li>Online IPTV HD</li>
+                                <li>Giga Port</li>
+                                <li>24/7 Support</li>
+                                <li>Free TV Set Installation</li>
+                            </ul>
+                        </div>
+                        <div class="price-wrap d-flex">
+                            <span class="plan-sign small-text">usd</span>
+                            <span class="plan-price color-main2">99</span>
+                            <span class="plan-decimals small-text">/mo</span>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#" class="btn btn-maincolor"><span>Purchase</span></a>
+                        </div>
+                    </div>
+                    <div class="divider-45 d-block d-lg-none"></div>
+                </div>
+                <div class="col-lg-4 col-12">
+                    <div class="pricing-plan hero-bg rounded">
+                        <div class="plan-name text-uppercase bg-maincolor2">
+                            <h3>
+                                Advanced
+                            </h3>
+                        </div>
+                        <div class="plan-desc">
+                            <div class="plan-content">
+                                <h4 class="color-main3">200</h4>
+                                <p class="small-text">
+                                    <i class="color-main3 fa fa-angle-down" aria-hidden="true"></i>
+                                    mb/s
+                                </p>
+                                <h4 class="color-main4">150</h4>
+                                <p class="small-text">
+                                    <i class="color-main4 fa fa-angle-up" aria-hidden="true"></i>
+                                    mb/s
+                                </p>
+                            </div>
+                            <div class="price-icon">
+                                <img src="images/price-icon02.png" alt="">
+                            </div>
+                        </div>
+                        <div class="plan-features">
+                            <ul class="list-bordered">
+                                <li>VOIP Service</li>
+                                <li>Online IPTV</li>
+                                <li>Giga Port</li>
+                                <li>24/7 Support</li>
+                                <li>Free TV Set Installation</li>
+                            </ul>
+                        </div>
+                        <div class="price-wrap d-flex">
+                            <span class="plan-sign small-text">usd</span>
+                            <span class="plan-price color-main3">79</span>
+                            <span class="plan-decimals small-text">/mo</span>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#" class="btn btn-maincolor2"><span>Purchase</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider-20 d-block d-md-none"></div>
+                <div class="col-lg-4 col-12">
+                    <div class="pricing-plan hero-bg rounded">
+                        <div class="plan-name text-uppercase bg-maincolor3">
+                            <h3>
+                                Starter
+                            </h3>
+                        </div>
+                        <div class="plan-desc">
+                            <div class="plan-content">
+                                <h4 class="color-main5">100</h4>
+                                <p class="small-text">
+                                    <i class="color-main5 fa fa-angle-down" aria-hidden="true"></i>
+                                    mb/s
+                                </p>
+                                <h4 class="color-main6">50</h4>
+                                <p class="small-text">
+                                    <i class="color-main6 fa fa-angle-up" aria-hidden="true"></i>
+                                    mb/s
+                                </p>
+                            </div>
+                            <div class="price-icon">
+                                <img src="images/price-icon03.png" alt="">
+                            </div>
+                        </div>
+                        <div class="plan-features">
+                            <ul class="list-bordered">
+                                <li>VOIP Service</li>
+                                <li>Online IPTV</li>
+                                <li>Giga Port</li>
+                                <li>24/7 Support</li>
+                                <li>Free TV Set Installation</li>
+                            </ul>
+                        </div>
+                        <div class="price-wrap d-flex">
+                            <span class="plan-sign small-text">usd</span>
+                            <span class="plan-price color-main5">49</span>
+                            <span class="plan-decimals small-text">/mo</span>
+                        </div>
+                        <div class="plan-button">
+                            <a href="#" class="btn btn-maincolor3"><span>Purchase</span></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script>
+    export default {
+        name: "InternetPackages"
+    }
+</script>
+
+<style scoped>
+
+</style>
