@@ -61,9 +61,12 @@
                                     </span>
                                 </div>
                                 <div class="plan-button">
-                                    <a href="/checkout" :class="`btn btn-maincolor${getRandomInt(1, 3)}`">
+                                    <button
+                                        :class="`btn btn-maincolor${getRandomInt(1, 3)}`"
+                                        @click="purchase(internetPackage)"
+                                    >
                                         <span>Purchase</span>
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -78,27 +81,22 @@
     export default {
         name: "InternetPackages",
 
+        props: {
+            internetPackages: {
+                type: Object,
+                default() {
+                    return null;
+                }
+            }
+        },
+
         data() {
             return {
-                internetPackages: null,
                 selectedCountry: []
             }
         },
 
-        created() {
-            this.loadData();
-        },
-
         methods: {
-            loadData() {
-                axios.get('/internet-packages')
-                    .then(({data}) => {
-                        if (data) {
-                            this.internetPackages = _.orderBy(data, 'area_eng');
-                            this.internetPackages = _.groupBy(this.internetPackages, 'area_eng');
-                        }
-                    });
-            },
 
             getRandomInt(min, max) {
                 min = Math.ceil(min);
@@ -113,6 +111,20 @@
 
             chooseCountry(country) {
                 this.selectedCountry = country;
+            },
+
+            purchase(internetPackage) {
+                let checkoutData = {
+                    'area': internetPackage.area_eng,
+                    'title': internetPackage.data_eng,
+                    'des': internetPackage.destination_eng,
+                    'days': internetPackage.days,
+                    'price': internetPackage.price_usd,
+                };
+
+                localStorage.setItem('checkout', JSON.stringify(checkoutData));
+
+                window.location.href = '/checkout'
             }
         }
     }

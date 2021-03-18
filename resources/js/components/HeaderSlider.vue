@@ -1,6 +1,6 @@
 <template>
     <section class="page_slider">
-        <div id="particles-js"></div>
+<!--        <div id="particles-js"></div>-->
         <div class="flexslider" data-nav="false">
             <ul class="slides">
                 <li class="ds">

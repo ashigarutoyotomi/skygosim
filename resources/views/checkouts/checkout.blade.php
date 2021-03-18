@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <checkout-header></checkout-header>
+    <header-comp
+        title="Checkout"
+    ></header-comp>
 
     <checkout-form></checkout-form>
 @endsection

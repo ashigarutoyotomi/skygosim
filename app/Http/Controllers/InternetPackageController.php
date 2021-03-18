@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\InternetPackagesImport;
 use App\Models\InternetPackage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -31,4 +32,26 @@ class InternetPackageController extends Controller
 
         return InternetPackage::orderBy('area_eng')->get();
     }
+
+    public function purchase(Request $request)
+    {
+//        $data = $request->validate([
+//
+//        ]);
+        $user = User::where('email', $request->input('email_address'))->first();
+
+        try {
+            $payment = $user->charge(
+                $request->input('amount') * 100,
+                $request->input('payment_method_id'),
+            );
+
+            $payment = $payment->asStripePaymentIntent();
+
+            return $payment;
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+
 }

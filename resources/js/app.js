@@ -28,17 +28,12 @@ Vue.component('admin', require('./Admin.vue').default);
 
 Vue.component('Navbar', require('./components/Navbar.vue').default);
 Vue.component('Foot', require('./components/Foot.vue').default);
+Vue.component('HeaderComp', require('./components/Header.vue').default);
+Vue.component('HeaderSlider', require('./components/HeaderSlider.vue').default);
+Vue.component('InternetPackages', require('./components/InternetPackages.vue').default);
+Vue.component('CheckoutForm', require('./components/CheckoutForm.vue').default);
 
 Vue.component('Login', require('./pages/Auth/Login.vue').default);
-
-Vue.component('HeaderSlider', require('./pages/Home/modules/HeaderSlider.vue').default);
-Vue.component('HomeInternetPackages', require('./pages/Home/modules/InternetPackages.vue').default);
-
-Vue.component('InternetHeader', require('./pages/Internet/modules/Header.vue').default);
-Vue.component('InternetPackages', require('./pages/Internet/modules/InternetPackages.vue').default);
-
-Vue.component('CheckoutHeader', require('./pages/Checkout/modules/Header.vue').default);
-Vue.component('CheckoutForm', require('./pages/Checkout/modules/Form.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

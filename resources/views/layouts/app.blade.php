@@ -17,12 +17,12 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap.addons.css" rel="stylesheet">
-    <link href="css/animations.css" rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/shop.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.addons.css" rel="stylesheet">
+    <link href="/css/animations.css" rel="stylesheet">
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/shop.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -134,8 +134,8 @@
         </div>
     </div>
 
-    <script src="js/bootstrap.addons.js" defer></script>
-    <script src="js/compressed.js" defer></script>
-    <script src="js/main.js" defer></script>
+    <script src="/js/bootstrap.addons.js" defer></script>
+    <script src="/js/compressed.js" defer></script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

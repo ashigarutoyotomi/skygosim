@@ -1,6 +1,6 @@
 <template>
     <div class="header_absolute header_layout_1">
-        <div id="particles-js"></div>
+<!--        <div id="particles-js"></div>-->
 
         <section class="page_title cs s-pt-60 s-pb-10 s-pt-lg-130 s-pb-lg-60 page_title text-center">
             <div class="container-fluid">
@@ -8,7 +8,7 @@
                     <div class="divider-60"></div>
 
                     <div class="col-md-12 text-center">
-                        <h1>Internet</h1>
+                        <h1>{{ title }}</h1>
                     </div>
 
                     <div class="divider-50"></div>
@@ -19,7 +19,7 @@
                     <router-link to="/">Home</router-link>
                 </li>
                 <li class="breadcrumb-item active">
-                    Internet
+                    {{ title }}
                 </li>
             </ol>
         </section>
@@ -28,7 +28,16 @@
 
 <script>
     export default {
-        name: "InternetHeader"
+        name: "Header",
+
+        props: {
+            title: {
+                type: String,
+                default() {
+                    return '';
+                }
+            }
+        }
     }
 </script>
 

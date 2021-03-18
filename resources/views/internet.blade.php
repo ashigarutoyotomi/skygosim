@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <internet-header></internet-header>
+    <header-comp
+        title="Internet"
+    ></header-comp>
 
-    <internet-packages></internet-packages>
+    <internet-packages
+        :internet-packages="{{$internetPackages}}"
+    ></internet-packages>
 @endsection
