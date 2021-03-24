@@ -58,6 +58,10 @@
                                                 </li>
 
                                                 <li>
+                                                    <a href="/add-sim">Add Sim</a>
+                                                </li>
+
+                                                <li>
                                                     <a href="#">|</a>
                                                 </li>
 
@@ -75,7 +79,7 @@
                                                     @endif
                                                 @else
                                                     <li>
-                                                        <a href="#">{{ Auth::user()->name }}</a>
+                                                        <a href="#">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
                                                         <ul>
                                                             <li>
                                                                 <a href="{{ route('logout') }}"
@@ -94,20 +98,6 @@
                                                 @endguest
                                             </ul>
                                         </nav>
-                                        <!-- eof main nav -->
-
-                                        <!--hidding includes on small devices. They are duplicated in topline-->
-                                        <ul class="top-includes d-none d-xl-block search-icon">
-                                            <li>
-                                                <!--modal search-->
-                                                <span>
-                                        <a class="search_modal_button">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </span>
-                                            </li>
-                                        </ul>
-
                                     </div>
                                 </div>
                             </div>

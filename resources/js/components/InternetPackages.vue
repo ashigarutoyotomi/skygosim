@@ -1,6 +1,10 @@
 <template>
-    <section class="internet-packages s-py-80 s-py-lg-120 s-py-xl-160 ls ms">
+    <section
+        id="internet-packages"
+        class="ls s-pt-50 s-pb-50 s-pt-lg-120 s-pb-lg-90 s-pt-xl-160 s-pb-xl-130 c-gutter-30 c-mb-30 service-page"
+    >
         <div class="container">
+
             <div class="row">
                 <div class="col-lg-8 offset-lg-2" id="price">
                     <h5 class="special-heading text-center">Choose</h5>
@@ -8,25 +12,39 @@
                     <p class="text-center big">Get ready for more potential, more opportunity and more of everything you expect from internet provider</p>
                 </div>
             </div>
-            <div class="divider-45 d-none d-lg-block"></div>
 
-            <template v-if="internetPackages && !selectedCountry.length">
-                <div class="row c-gutter-60">
-                    <template v-for="(internetPackage, key) in internetPackages">
-                        <div class="col-lg-3 col-md-4" @click="chooseCountry(internetPackage)">
-                            <div class="pricing-plan bordered">
-                                <div
-                                    :class="`plan-name bg-maincolor${getRandomInt(1, 3)}`"
-                                >
-                                    <h3>
-                                        {{ key }}
-                                    </h3>
+            <template
+                v-if="internetPackages && !selectedCountry.length"
+            >
+                <div class="row">
+                    <template
+                        v-for="(internetPackage, area) in internetPackages"
+                    >
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="vertical-item rounded rounded-image-top hero-bg content-padding padding-small text-center">
+                                <div class="item-media">
+                                    <img :src="`/images/regions/${getImgNameByArea(area)}.jpg`" alt="">
+                                    <div class="media-links">
+                                        <a
+                                            class="abs-link"
+                                            href="#internet-packages"
+                                            @click="chooseCountry(internetPackage)"
+                                        ></a>
+                                    </div>
                                 </div>
-                                <div class="price-wrap color-darkgrey">
-                                    <span class="plan-price">{{ internetPackage.length }}</span>
-                                </div>
-                                <div class="plan-description small-text color-darkgrey">
-                                    Packages
+                                <div class="item-content">
+                                    <h5 class="service-title">
+                                        <a
+                                            href="#internet-packages"
+                                            @click="chooseCountry(internetPackage)"
+                                        >
+                                            {{ area }}
+                                        </a>
+                                    </h5>
+
+                                    <p>
+                                        {{ internetPackages[area].length }} <br> Packages
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -35,9 +53,9 @@
             </template>
 
             <template v-if="internetPackages && selectedCountry.length">
-                <div class="row c-gutter-60">
+                <div class="row">
                     <template v-for="internetPackage in selectedCountry">
-                        <div class="col-lg-4 col-12">
+                        <div class="col-lg-4 col-sm-6">
                             <div class="pricing-plan hero-bg rounded">
                                 <div :class="`plan-name text-uppercase bg-maincolor${getRandomInt(1, 3)}`">
                                     <h3>
@@ -73,6 +91,7 @@
                     </template>
                 </div>
             </template>
+
         </div>
     </section>
 </template>
@@ -97,7 +116,6 @@
         },
 
         methods: {
-
             getRandomInt(min, max) {
                 min = Math.ceil(min);
                 max = Math.floor(max);
@@ -109,8 +127,12 @@
                 return randNumber;
             },
 
+            getImgNameByArea(area) {
+                return area.replace(/\s/g, '').toLowerCase()
+            },
+
             chooseCountry(country) {
-                this.selectedCountry = country;
+                this.selectedCountry = _.orderBy(country, 'price_usd');
             },
 
             purchase(internetPackage) {
@@ -120,6 +142,7 @@
                     'des': internetPackage.destination_eng,
                     'days': internetPackage.days,
                     'price': internetPackage.price_usd,
+                    'package_id': internetPackage.package_id
                 };
 
                 localStorage.setItem('checkout', JSON.stringify(checkoutData));
@@ -131,10 +154,20 @@
 </script>
 
 <style lang="scss">
-    .internet-packages {
-        .pricing-plan {
-            cursor: pointer;
-            margin-bottom: 50px;
+    #internet-packages {
+        .item-media {
+            img {
+                object-fit: cover;
+                height: 190px;
+            }
+        }
+
+        .item-content {
+            padding: 20px 10px;
+
+            h5 {
+                font-size: 18px;
+            }
         }
     }
 </style>

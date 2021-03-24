@@ -31,7 +31,9 @@ Vue.component('Foot', require('./components/Foot.vue').default);
 Vue.component('HeaderComp', require('./components/Header.vue').default);
 Vue.component('HeaderSlider', require('./components/HeaderSlider.vue').default);
 Vue.component('InternetPackages', require('./components/InternetPackages.vue').default);
+
 Vue.component('CheckoutForm', require('./components/CheckoutForm.vue').default);
+Vue.component('CheckoutESimForm', require('./components/checkout/CheckoutESim.vue').default);
 
 Vue.component('Login', require('./pages/Auth/Login.vue').default);
 

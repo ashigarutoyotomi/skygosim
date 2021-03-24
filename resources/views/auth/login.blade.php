@@ -1,33 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="header_absolute header_layout_1">
-        <div id="particles-js"></div>
-        <section class="page_title cs s-pt-60 s-pb-10 s-pt-lg-130 s-pb-lg-60 page_title text-center">
-            <div class="container-fluid">
-                <div class="row">
+    <header-comp
+        title="Login"
+    ></header-comp>
 
-                    <div class="divider-60"></div>
-
-                    <div class="col-md-12 text-center">
-                        <h1>Account - Login</h1>
-                    </div>
-
-                    <div class="divider-50"></div>
-
-                </div>
-
-            </div>
-            <ol class="breadcrumb full-width">
-                <li class="breadcrumb-item">
-                    <a href="/">Home</a>
-                </li>
-                <li class="breadcrumb-item active">
-                    Login
-                </li>
-            </ol>
-        </section>
-    </div>
+{{--    <login></login>--}}
 
     <section class="ls s-pt-80 s-pb-70 s-pt-lg-120 s-pb-lg-110 s-pt-xl-160 s-pb-xl-150">
         <div class="container">

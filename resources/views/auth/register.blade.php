@@ -44,21 +44,42 @@
                                     @csrf
 
                                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                        <label for="name">
-                                            {{ __('Name') }}
+                                        <label for="first_name">
+                                            First Name
                                             <span class="required">*</span>
                                         </label>
                                         <input
                                             type="text"
                                             class="form-control text-center woocommerce-Input woocommerce-Input--text input-text"
-                                            name="name"
-                                            id="name"
+                                            name="first_name"
+                                            id="first_name"
                                             value=""
-                                            placeholder="Name"
+                                            placeholder="First Name"
                                         >
 
-                                        @error('name')
+                                        @error('first_name')
                                             <span class="text-danger">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </p>
+
+                                    <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                        <label for="last_name">
+                                            Last Name
+                                            <span class="required">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="form-control text-center woocommerce-Input woocommerce-Input--text input-text"
+                                            name="last_name"
+                                            id="last_name"
+                                            value=""
+                                            placeholder="Last Name"
+                                        >
+
+                                        @error('last_name')
+                                        <span class="text-danger">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror

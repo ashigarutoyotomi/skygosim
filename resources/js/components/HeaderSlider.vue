@@ -1,10 +1,10 @@
 <template>
-    <section class="page_slider">
+    <section id="header-slider" class="page_slider">
 <!--        <div id="particles-js"></div>-->
         <div class="flexslider" data-nav="false">
             <ul class="slides">
                 <li class="ds">
-                    <img src="images/slide01.jpg" alt="">
+                    <div class="slider-bg-1"></div>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
@@ -19,6 +19,14 @@
                                         <div class="intro_layer" data-animation="fadeInUp">
                                             <p class="text-uppercase intro_after_featured_word">Check our Internet Plans</p>
                                         </div>
+
+                                        <a
+                                            href="/add-sim"
+                                            type="button"
+                                            class="btn btn-maincolor2"
+                                        >
+                                            <span>Add Sim</span>
+                                        </a>
                                     </div> <!-- eof .intro_layers -->
                                 </div> <!-- eof .intro_layers_wrapper -->
                             </div> <!-- eof .col-* -->
@@ -26,7 +34,7 @@
                     </div><!-- eof .container -->
                 </li>
                 <li class="ds slide2">
-                    <img src="images/slide02.jpg" alt="">
+                    <div class="slider-bg-2"></div>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
@@ -41,6 +49,14 @@
                                         <div class="intro_layer" data-animation="fadeInUp">
                                             <p class="text-uppercase intro_after_featured_word">Check our Services</p>
                                         </div>
+
+                                        <a
+                                            href="/add-sim"
+                                            type="button"
+                                            class="btn btn-maincolor2"
+                                        >
+                                            <span>Add Sim</span>
+                                        </a>
                                     </div> <!-- eof .intro_layers -->
                                 </div> <!-- eof .intro_layers_wrapper -->
                             </div> <!-- eof .col-* -->
@@ -58,7 +74,7 @@
                     </div>
                 </li>
                 <li class="ds slide3">
-                    <img src="images/slide03.jpg" alt="">
+                    <div class="slider-bg-3"></div>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
@@ -73,6 +89,14 @@
                                         <div class="intro_layer" data-animation="fadeInUp">
                                             <p class="text-uppercase intro_after_featured_word">Check Testimonials</p>
                                         </div>
+
+                                        <a
+                                            href="/add-sim"
+                                            type="button"
+                                            class="btn btn-maincolor2"
+                                        >
+                                            <span>Add Sim</span>
+                                        </a>
                                     </div> <!-- eof .intro_layers -->
                                 </div> <!-- eof .intro_layers_wrapper -->
                             </div> <!-- eof .col-* -->
@@ -91,18 +115,6 @@
                 <a href="#" class="fa fa-youtube-play color-white" title="google"></a>
             </p>
         </div>
-        <div class="arrow">
-            <img src="images/bottom.png" alt="">
-        </div>
-        <div class="animated-arrow">
-            <a href="#price">
-                <div class="mouse_scroll">
-                    <span class=""><i class="color-main fa fa-angle-down unu"></i></span>
-                    <span class=""><i class="color-main fa fa-angle-down doi"></i></span>
-                    <span class=""><i class="color-main fa fa-angle-down trei"></i></span>
-                </div>
-            </a>
-        </div>
     </section>
 </template>
 
@@ -112,6 +124,27 @@
     }
 </script>
 
-<style>
+<style lang="scss">
+    #header-slider {
+        .slider-bg-1 {
+            height: 100vh;
+            width: 100vw;
+            background-color: #434ae0;
+            background-image: linear-gradient(43deg, #434ae0 23%, #d46f35 59%, #d46f35 100%);
+        }
 
+        .slider-bg-2 {
+            height: 100vh;
+            width: 100vw;
+            background-color: #434ae0;
+            background-image: linear-gradient(160deg, #434ae0 8%, #d46f35 57%);
+        }
+
+        .slider-bg-3 {
+            height: 100vh;
+            width: 100vw;
+            background-color: #434ae0;
+            background-image: linear-gradient(to top, #fcc5e4 0%, #fda34b 15%, #ff7882 35%, #c8699e 52%, #7046aa 71%, #0c1db8 87%, #020f75 100%);
+        }
+    }
 </style>

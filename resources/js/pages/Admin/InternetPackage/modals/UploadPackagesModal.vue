@@ -74,6 +74,7 @@
                     file: null
                 },
 
+                loading: false,
                 errors: {}
             }
         },
