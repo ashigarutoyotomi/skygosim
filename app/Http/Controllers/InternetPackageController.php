@@ -51,16 +51,19 @@ class InternetPackageController extends Controller
 
 //            $endpoint = "http://112.74.196.154:18091/sim/v1/payOrder/test";
 //            $client = new \GuzzleHttp\Client();
-
+//
 //            $response = $client->request('POST', $endpoint, ['query' => [
-//                'iccid' => '89852340003821789121',
+//                'iccid' => '89852340003821789113',
 //                'packageId' => $request->input('package_id'),
 //                'currency' => 'USD',
-//                'ourOrderID' => 'aman89852340003821789121'
+//                'ourOrderID' => 'orderID89852340003821789113'
 //            ]]);
 //
 //            $statusCode = $response->getStatusCode();
 //            $content = $response->getBody();
+//
+//            dump($statusCode);
+//            dd($content);
 
             return $payment;
         } catch (\Exception $e) {

@@ -102,7 +102,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
-                    <h3 class="text-center">E-SIM</h3>
+                    <h3 class="text-center">Physical SIM</h3>
                 </div>
             </div>
 
@@ -113,7 +113,7 @@
                             <img src="/images/icon-4.png" alt="">
                         </a>
                         <h5>
-                            Purchase e-sim
+                            Purchase physical SIM
                         </h5>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                             <img src="/images/icon-1.png" alt="">
                         </a>
                         <h5>
-                            We will send a QR code to your e-mail
+                            Cost of physical SIM  $2
                         </h5>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                             <img src="/images/icon-2.png" alt="">
                         </a>
                         <h5>
-                            On your phone  “Add new cellular plan”
+                            Cost of shipping  $5
                         </h5>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                             <img src="/images/icon-3.png" alt="">
                         </a>
                         <h5>
-                            Scan the QR code
+                            Enter your shipping details
                         </h5>
                     </div>
                 </div>
@@ -153,29 +153,7 @@
                             <img src="/images/icon-1.png" alt="">
                         </a>
                         <h5>
-                            Check your ICCID
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="icon-box rounded text-center hero-bg">
-                        <a href="service-single.html">
-                            <img src="/images/icon-2.png" alt="">
-                        </a>
-                        <h5>
-                            Come back to our website
-                            <a href="/">link</a>
-                            enter your ICCID
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="icon-box rounded text-center hero-bg">
-                        <a href="service-single.html">
-                            <img src="/images/icon-3.png" alt="">
-                        </a>
-                        <h5>
-                            Continue shopping packages
+                            Checkout
                         </h5>
                     </div>
                 </div>
@@ -187,7 +165,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2" id="price">
-                    <h3 class="text-center">Physical SIM</h3>
+                    <h3 class="text-center">E-SIM</h3>
                 </div>
             </div>
 
@@ -198,7 +176,7 @@
                             <img alt="" src="/images/icon-1.png">
                         </div>
                         <h5>
-                            Purchase physical SIM
+                            Purchase e-sim
                         </h5>
                     </div>
                 </div><!-- .col-* -->
@@ -209,7 +187,7 @@
                         </div>
 
                         <h5>
-                            Cost of physical SIM  $2
+                            We will send a QR code to your e-mail
                         </h5>
                     </div>
                 </div><!-- .col-* -->
@@ -220,28 +198,50 @@
                         </div>
 
                         <h5>
-                            Cost of shipping  $5
+                            On your phone  “Add new cellular plan”
                         </h5>
                     </div>
                 </div><!-- .col-* -->
-                <div class="col-xl-6 col-md-6 animate" data-animation="fadeInUp">
+                <div class="col-xl-4 col-md-6 animate" data-animation="fadeInUp">
                     <div class="icon-box text-center">
                         <div class="image-styled">
                             <img alt="" src="/images/icon-4.png">
                         </div>
 
                         <h5>
-                            Enter your shipping details
+                            Scan the QR code
                         </h5>
                     </div>
                 </div><!-- .col-* -->
-                <div class="col-xl-6 col-md-6 animate" data-animation="fadeInUp">
+                <div class="col-xl-4 col-md-6 animate" data-animation="fadeInUp">
                     <div class="icon-box text-center">
                         <div class="image-styled">
                             <img alt="" src="/images/icon-5.png">
                         </div>
                         <h5>
-                            Checkout
+                            Check your ICCID
+                        </h5>
+                    </div>
+                </div><!-- .col-* -->
+                <div class="col-xl-4 col-md-6 animate" data-animation="fadeInUp">
+                    <div class="icon-box text-center">
+                        <div class="image-styled">
+                            <img alt="" src="/images/icon-5.png">
+                        </div>
+                        <h5>
+                            Come back to our website
+                            <a href="/">link</a>
+                            enter your ICCID
+                        </h5>
+                    </div>
+                </div><!-- .col-* -->
+                <div class="col-xl-12 col-md-6 animate" data-animation="fadeInUp">
+                    <div class="icon-box text-center">
+                        <div class="image-styled">
+                            <img alt="" src="/images/icon-5.png">
+                        </div>
+                        <h5>
+                            Continue shopping packages
                         </h5>
                     </div>
                 </div><!-- .col-* -->

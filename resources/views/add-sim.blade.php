@@ -85,4 +85,42 @@
             </div>
         </div>
     </section>
+
+    <section class="ls s-pt-75 s-pb-80 s-pb-lg-100 about-section text-center text-lg-left">
+        <div class="d-none d-lg-block divider-10"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-6 order-2 order-lg-1">
+                    <div class="about-image">
+                        <img src="/images/about-image.png" alt="">
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 order-1 order-lg-2">
+                    <div class="d-none d-lg-block divider-20"></div>
+                    <div class="item-content">
+                        <h3>No SIM? No ICCID?</h3>
+                        <h6 class="fw-500 font-italic">
+                            Choose between a physical SIM and e-sim
+                        </h6>
+
+                        <div class="d-none d-lg-block divider-20"></div>
+
+                        <a
+                            href="/checkout/physical-sim"
+                            class="btn btn-maincolor"
+                        >
+                            <span>Phisical SIM</span>
+                        </a>
+                        <a
+                            href="/checkout/e-sim"
+                            class="btn btn-maincolor2"
+                        >
+                            <span>E-SIM</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

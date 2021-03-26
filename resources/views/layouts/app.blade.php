@@ -40,7 +40,8 @@
                             <div class="row align-items-center">
                                 <div class="col-xl-2 col-lg-4 col-md-5 col-11">
                                     <a href="/" class="logo">
-                                        <span class="logo-text py-20"><strong>Sky</strong>Go</span>
+                                        <img class="py-20" src="/images/skygo_logo.png" alt="">
+{{--                                        <span class="logo-text py-20"><strong>Sky</strong>Go</span>--}}
                                     </a>
                                 </div>
                                 <div class="col-xl-9 col-lg-8 col-md-7 col-1">
@@ -54,11 +55,11 @@
                                                 </li>
 
                                                 <li>
-                                                    <a href="/internet">Internet</a>
+                                                    <a href="/add-sim">Add Sim</a>
                                                 </li>
 
                                                 <li>
-                                                    <a href="/add-sim">Add Sim</a>
+                                                    <a href="/internet">Internet</a>
                                                 </li>
 
                                                 <li>

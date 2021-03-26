@@ -42880,11 +42880,7 @@ var staticRenderFns = [
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                                Best Internet Service"
-                                  ),
-                                  _c("br"),
-                                  _vm._v(
-                                    " Provider In Country\n                                            "
+                                    "\n                                                Best global SIM Provider\n                                            "
                                   )
                                 ]
                               )

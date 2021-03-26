@@ -13,7 +13,7 @@
                                         <div class="intro_layer" data-animation="fadeInRight">
                                             <h1 class="intro_featured_word">Prepare<br>for<br>High Speed<br> Internet</h1>
                                             <h5 class="intro_before_featured_word intro-absolute text-uppercase fw-200">
-                                                Best Internet Service<br> Provider In Country
+                                                Best global SIM Provider
                                             </h5>
                                         </div>
                                         <div class="intro_layer" data-animation="fadeInUp">
