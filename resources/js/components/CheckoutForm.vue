@@ -312,7 +312,7 @@ export default {
                 this.form.amount = Math.ceil(this.checkoutData.price);
                 this.form.package_id = this.checkoutData.package_id;
 
-                axios.post('/internet-packages/purchase', this.form)
+                axios.post('/packages/purchase', this.form)
                     .then(response => {
                         if (response) {
                             // window.location.href = '/checkout/result'

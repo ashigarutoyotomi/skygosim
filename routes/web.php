@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InternetPackageController;
+use App\Http\Controllers\Pages\AddSimPageController;
+use App\Http\Controllers\Pages\FaqPageController;
+use App\Http\Controllers\Pages\HomePageController;
+use App\Http\Controllers\Pages\HowToPageController;
+use App\Http\Controllers\Pages\PackagesPageController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,17 +23,21 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [PagesController::class, 'home'])->name('home');
-Route::get('/internet', [PagesController::class, 'internet']);
+Route::get('/', [HomePageController::class, 'index']);
+
+Route::get('/packages', [PackagesPageController::class, 'index']);
+Route::post('/packages/purchase', [InternetPackageController::class, 'purchase']);
+
+Route::get('/add-sim', [AddSimPageController::class, 'index']);
+
+Route::get('/how-to', [HowToPageController::class, 'index']);
+
+Route::get('/faq', [FaqPageController::class, 'index']);
+
 Route::get('/checkout', [PagesController::class, 'checkout']);
 Route::get('/checkout/physical-sim', [PagesController::class, 'checkoutPhysicalSim']);
 Route::get('/checkout/e-sim', [PagesController::class, 'checkoutESim']);
 Route::get('/checkout/result', [PagesController::class, 'checkoutResult']);
-
-Route::get('/add-sim', [PagesController::class, 'addSim']);
-
-
-Route::post('/internet-packages/purchase', [InternetPackageController::class, 'purchase']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])

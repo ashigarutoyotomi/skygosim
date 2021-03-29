@@ -9,23 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
-    public function home()
-    {
-        $internetPackages = InternetPackage::orderBy('area_eng')->get();
-
-        return view('home', [
-            'internetPackages' => $internetPackages->groupBy('area_eng'),
-        ]);
-    }
-
-    public function internet()
-    {
-        $internetPackages = InternetPackage::orderBy('area_eng')->get();
-
-        return view('internet', [
-            'internetPackages' => $internetPackages->groupBy('area_eng'),
-        ]);
-    }
 
     public function checkout()
     {
@@ -60,10 +43,5 @@ class PagesController extends Controller
     public function checkoutResult()
     {
         return view('checkouts.result');
-    }
-
-    public function addSim()
-    {
-        return view('add-sim');
     }
 }

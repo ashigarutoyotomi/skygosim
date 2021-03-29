@@ -59,7 +59,15 @@
                                                 </li>
 
                                                 <li>
-                                                    <a href="/internet">Internet</a>
+                                                    <a href="/packages">Packages</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/how-to">How To</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/faq">FAQ</a>
                                                 </li>
 
                                                 <li>

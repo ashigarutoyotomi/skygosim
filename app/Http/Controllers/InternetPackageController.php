@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\InternetPackage\PurchaseInternetPackageRequest;
 use App\Imports\InternetPackagesImport;
 use App\Models\InternetPackage;
 use App\Models\User;
@@ -33,21 +34,18 @@ class InternetPackageController extends Controller
         return InternetPackage::orderBy('area_eng')->get();
     }
 
-    public function purchase(Request $request)
+    public function purchase(PurchaseInternetPackageRequest $request)
     {
-//        $data = $request->validate([
-//
-//        ]);
         $user = User::where('email', $request->input('email_address'))->first();
 
-        try {
+//        try {
             $payment = $user->charge(
                 $request->input('amount') * 100,
                 $request->input('payment_method_id'),
             );
 
             $payment = $payment->asStripePaymentIntent();
-//            dd($payment);
+            dd($payment);
 
 //            $endpoint = "http://112.74.196.154:18091/sim/v1/payOrder/test";
 //            $client = new \GuzzleHttp\Client();
@@ -66,9 +64,9 @@ class InternetPackageController extends Controller
 //            dd($content);
 
             return $payment;
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
+//        } catch (\Exception $e) {
+//            return response()->json(['message' => $e->getMessage()], 500);
+//        }
     }
 
 }
