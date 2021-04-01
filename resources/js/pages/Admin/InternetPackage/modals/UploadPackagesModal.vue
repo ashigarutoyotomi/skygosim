@@ -37,20 +37,32 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        @click="uploadPackages"
-                    >
-                        Import
-                    </button>
+                    <template v-if="!loading">
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            data-dismiss="modal"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-success"
+                            @click="uploadPackages"
+                        >
+                            Upload
+                        </button>
+                    </template>
+                    <template v-if="loading">
+                        <button
+                            type="button"
+                            class="btn btn-success"
+                            disabled
+                        >
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Uploading...
+                        </button>
+                    </template>
                 </div>
             </div>
         </div>
@@ -80,19 +92,27 @@
         },
 
         methods: {
+            closeModal() {
+                $(`#${this.modalId}`).modal('hide');
+            },
+
             handlePackagesFileUpload() {
                 this.form.file = this.$refs.packagesFileInput.files[0];
             },
 
             uploadPackages() {
+                this.loading = true;
                 const formData = new FormData();
                 formData.append('file', this.form.file);
 
                 axios.post('/internet-packages/upload_packages', formData)
                     .then(({data}) => {
-                        $(this.modalId).modal('hide');
+                        this.loading = false;
+                        this.$root.$emit('internet-packages.load');
+                        this.closeModal();
                     })
                     .catch(e => {
+                        this.loading = false;
                         this.errors = e.response.data.errors
                     });
             }

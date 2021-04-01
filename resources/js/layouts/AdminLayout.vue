@@ -1,8 +1,10 @@
 <template>
     <main class="min-vh-100 bg-light">
-        <navbar></navbar>
+        <navbar
+            :user="user"
+        ></navbar>
 
-        <div class="container py-4">
+        <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-3">
                     <sidebar></sidebar>
@@ -26,6 +28,13 @@
         components: {
             Navbar,
             Sidebar,
+        },
+
+        props: {
+            user: {
+                type: Object,
+                default: () => {}
+            }
         }
     }
 </script>

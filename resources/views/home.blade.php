@@ -24,13 +24,13 @@
                         <div class="d-none d-lg-block divider-20"></div>
 
                         <a
-                            href="/checkout/physical-sim"
+                            href="/physical-sim/order"
                             class="btn btn-maincolor"
                         >
                             <span>Phisical SIM</span>
                         </a>
                         <a
-                            href="/checkout/e-sim"
+                            href="/e-sim/order"
                             class="btn btn-maincolor2"
                         >
                             <span>E-SIM</span>

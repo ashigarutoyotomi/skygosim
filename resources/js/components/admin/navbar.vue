@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
+        <div class="container-fluid">
             <router-link class="navbar-brand" to="/">
                 SkyGo
             </router-link>
@@ -17,10 +17,17 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            User Name
+                        <a
+                            id="navbarDropdown"
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            role="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                        >
+                            {{ user.first_name }} {{ user.last_name }}
                         </a>
-
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/logout">
                                Logout
@@ -35,10 +42,17 @@
 
 <script>
     export default {
-        name: "navbar"
+        name: "navbar",
+
+        props: {
+            user: {
+                type: Object,
+                default: () => {}
+            }
+        }
     }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

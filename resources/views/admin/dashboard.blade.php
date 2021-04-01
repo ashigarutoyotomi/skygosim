@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <admin></admin>
+    <admin
+        :user="{{Auth::user()}}"
+    ></admin>
 @endsection

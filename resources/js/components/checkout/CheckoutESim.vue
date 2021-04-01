@@ -6,15 +6,60 @@
                     <form
                         name="checkout"
                         class="checkout woocommerce-checkout"
-                        novalidate="novalidate"
-                        @click.prevent="processPayment"
+                        @submit.prevent="processPayment"
                     >
                         <div class="col2-set" id="customer_details">
                             <div class="col-1">
                                 <div class="woocommerce-billing-fields">
                                     <h3>Billing details</h3>
 
-                                    <p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="110">
+                                    <p class="form-row form-row-first validate-required">
+                                        <label for="first_name" class="">
+                                            First name
+                                            <abbr class="required" title="required">*</abbr>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="input-text form-control"
+                                            :class="{'is-invalid' : errors.first_name}"
+                                            name="first_name"
+                                            id="first_name"
+                                            placeholder="First name"
+                                            v-model="form.first_name"
+                                        >
+
+                                        <span
+                                            v-if="errors.first_name"
+                                            class="invalid-feedback d-block"
+                                        >
+                                            {{ errors.first_name[0] }}
+                                        </span>
+                                    </p>
+
+                                    <p class="form-row form-row-last validate-required">
+                                        <label for="last_name" class="">
+                                            Last name
+                                            <abbr class="required" title="required">*</abbr>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="input-text form-control"
+                                            :class="{'is-invalid' : errors.last_name}"
+                                            name="last_name"
+                                            id="last_name"
+                                            placeholder="Last name"
+                                            v-model="form.last_name"
+                                        >
+
+                                        <span
+                                            v-if="errors.last_name"
+                                            class="invalid-feedback d-block"
+                                        >
+                                            {{ errors.last_name[0] }}
+                                        </span>
+                                    </p>
+
+                                    <p class="form-row form-row-wide validate-required validate-email">
                                         <label for="billing_email" class="">
                                             Email address
                                             <abbr class="required" title="required">*</abbr>
@@ -22,46 +67,22 @@
                                         <input
                                             type="email"
                                             class="input-text form-control"
+                                            :class="{'is-invalid' : errors.email_address}"
                                             name="billing_email"
                                             id="billing_email"
                                             placeholder="Email address "
-                                            autocomplete="email"
                                             v-model="form.email_address"
                                         >
-                                    </p>
-                                    <p class="form-row form-row-first validate-required woocommerce-invalid woocommerce-invalid-required-field" id="billing_first_name_field" data-priority="10">
-                                        <label for="billing_first_name" class="">
-                                            First name
-                                            <abbr class="required" title="required">*</abbr>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            class="input-text form-control"
-                                            name="billing_first_name"
-                                            id="billing_first_name"
-                                            placeholder="First name"
-                                            autocomplete="given-name"
-                                            autofocus="autofocus"
-                                            v-model="form.first_name"
+
+                                        <span
+                                            v-if="errors.email_address"
+                                            class="invalid-feedback d-block"
                                         >
-                                    </p>
-                                    <p class="form-row form-row-last validate-required" id="billing_last_name_field" data-priority="20">
-                                        <label for="billing_last_name" class="">
-                                            Last name
-                                            <abbr class="required" title="required">*</abbr>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            class="input-text form-control"
-                                            name="billing_last_name"
-                                            id="billing_last_name"
-                                            placeholder="Last name"
-                                            autocomplete="family-name"
-                                            v-model="form.last_name"
-                                        >
+                                            {{ errors.email_address[0] }}
+                                        </span>
                                     </p>
 
-                                    <p class="form-row form-row-wide address-field validate-required" id="billing_address_1_field" data-priority="50">
+                                    <p class="form-row form-row-wide address-field validate-required">
                                         <label for="billing_address_1" class="">
                                             Street address
                                             <abbr class="required" title="required">*</abbr>
@@ -69,14 +90,21 @@
                                         <input
                                             type="text"
                                             class="input-text form-control"
+                                            :class="{'is-invalid' : errors.street_address}"
                                             name="billing_address_1"
                                             id="billing_address_1"
                                             placeholder="Street address"
-                                            autocomplete="address-line1"
                                             v-model="form.street_address"
                                         >
+
+                                        <span
+                                            v-if="errors.street_address"
+                                            class="invalid-feedback d-block"
+                                        >
+                                            {{ errors.street_address[0] }}
+                                        </span>
                                     </p>
-                                    <p class="form-row form-row-wide address-field validate-required" id="billing_city_field" data-priority="70" data-o_class="form-row form-row-wide address-field validate-required">
+                                    <p class="form-row form-row-wide address-field validate-required">
                                         <label for="billing_city" class="">
                                             City
                                             <abbr class="required" title="required">*</abbr>
@@ -84,14 +112,21 @@
                                         <input
                                             type="text"
                                             class="input-text form-control"
+                                            :class="{'is-invalid' : errors.city}"
                                             name="billing_city"
                                             id="billing_city"
                                             placeholder="City"
-                                            autocomplete="address-level2"
                                             v-model="form.city"
                                         >
+
+                                        <span
+                                            v-if="errors.city"
+                                            class="invalid-feedback d-block"
+                                        >
+                                            {{ errors.city[0] }}
+                                        </span>
                                     </p>
-                                    <p class="form-row form-row-wide address-field validate-state validate-required" id="billing_state_field" data-priority="80" data-o_class="form-row form-row-wide address-field validate-required validate-state">
+                                    <p class="form-row form-row-wide address-field validate-state validate-required">
                                         <label for="billing_state" class="">
                                             State
                                             <abbr class="required" title="required">*</abbr>
@@ -99,15 +134,22 @@
                                         <input
                                             type="text"
                                             class="input-text form-control"
+                                            :class="{'is-invalid' : errors.state}"
                                             value=""
                                             placeholder="State"
                                             name="billing_state"
                                             id="billing_state"
-                                            autocomplete="address-level1"
                                             v-model="form.state"
                                         >
+
+                                        <span
+                                            v-if="errors.state"
+                                            class="invalid-feedback d-block"
+                                        >
+                                            {{ errors.state[0] }}
+                                        </span>
                                     </p>
-                                    <p class="form-row form-row-wide address-field validate-postcode validate-required" id="billing_postcode_field" data-priority="90" data-o_class="form-row form-row-wide address-field validate-required validate-postcode">
+                                    <p class="form-row form-row-wide address-field validate-postcode validate-required">
                                         <label for="billing_postcode" class="">
                                             Postcode / ZIP Code
                                             <abbr class="required" title="required">*</abbr>
@@ -115,12 +157,19 @@
                                         <input
                                             type="text"
                                             class="input-text form-control"
+                                            :class="{'is-invalid' : errors.zip_code}"
                                             name="billing_postcode"
                                             id="billing_postcode"
                                             placeholder="Postcode / ZIP Code"
-                                            autocomplete="postal-code"
                                             v-model="form.zip_code"
                                         >
+
+                                        <span
+                                            v-if="errors.zip_code"
+                                            class="invalid-feedback d-block"
+                                        >
+                                            {{ errors.zip_code[0] }}
+                                        </span>
                                     </p>
                                 </div>
                             </div>
@@ -154,7 +203,7 @@
                                 <tbody>
                                 <tr class="cart_item">
                                     <td class="product-name">
-                                        SIM
+                                        E-SIM
                                     </td>
                                     <td class="product-total">
                                         <span class="woocommerce-Price-amount amount">
@@ -168,7 +217,8 @@
                                     </td>
                                     <td class="product-total">
                                         <span class="woocommerce-Price-amount amount">
-                                            <span class="woocommerce-Price-currencySymbol">$</span>2
+                                            <span class="woocommerce-Price-currencySymbol">$</span>
+                                            {{ form.amount }}
                                         </span>
                                     </td>
                                 </tr>
@@ -206,7 +256,7 @@
 </template>
 
 <script>
-import { loadStripe } from '@stripe/stripe-js';
+import {loadStripe} from "@stripe/stripe-js";
 
 export default {
     name: "CheckoutESim",
@@ -225,11 +275,9 @@ export default {
             stripe: {},
             cardElement: {},
             stripeKey: process.env.MIX_STRIPE_KEY,
-            checkoutData: null,
             form: {
-                iccid: '',
                 payment_method_id: null,
-                amount: 0,
+                amount: 1,
                 cart: '',
                 first_name: '',
                 last_name: '',
@@ -246,12 +294,11 @@ export default {
     },
 
     created() {
-        this.checkoutData = JSON.parse(localStorage.getItem('checkout'));
         this.setUserData();
     },
 
     mounted() {
-        setTimeout(this.initStripe(), 3000);
+        this.initStripe()
     },
 
     methods: {
@@ -275,17 +322,15 @@ export default {
                 this.stripeCardError = error;
             } else {
                 this.form.payment_method_id = paymentMethod.id;
-                this.form.amount = Math.ceil(this.checkoutData.price);
-                this.form.package_id = this.checkoutData.package_id;
 
-                axios.post('/internet-packages/purchase', this.form)
+                axios.post('/e-sim/checkout', this.form)
                     .then(response => {
                         if (response) {
                             // window.location.href = '/checkout/result'
                         }
                     })
                     .catch(e => {
-                        this.errors = _.extend({}, e.data.errors);
+                        this.errors = e.response.data.errors;
                     });
             }
         },
@@ -311,6 +356,14 @@ export default {
             if (this.user) {
                 this.form.first_name = this.user.first_name
                 this.form.last_name = this.user.last_name
+                this.form.email_address = this.user.email
+
+                if (this.user.address) {
+                    this.form.street_address = this.user.address.street
+                    this.form.city = this.user.address.city
+                    this.form.state = this.user.address.state
+                    this.form.zip_code = this.user.address.zip_code
+                }
             }
         }
     }
@@ -318,7 +371,5 @@ export default {
 </script>
 
 <style lang="scss">
-    #card-element {
-        padding-top: 1.25rem;
-    }
+
 </style>

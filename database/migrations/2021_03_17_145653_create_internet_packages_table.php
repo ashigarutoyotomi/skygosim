@@ -27,6 +27,7 @@ class CreateInternetPackagesTable extends Migration
             $table->text('package_name_eng');
             $table->integer('days');
             $table->integer('validity_period');
+            $table->timestampTz('expired_at')->nullable();
             $table->timestamps();
         });
     }

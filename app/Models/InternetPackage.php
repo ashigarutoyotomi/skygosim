@@ -23,5 +23,6 @@ class InternetPackage extends Model
         'package_name_eng',
         'days',
         'validity_period',
+        'expired_at',
     ];
 }

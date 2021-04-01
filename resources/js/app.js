@@ -34,6 +34,7 @@ Vue.component('InternetPackages', require('./components/InternetPackages.vue').d
 
 Vue.component('CheckoutForm', require('./components/CheckoutForm.vue').default);
 Vue.component('CheckoutESimForm', require('./components/checkout/CheckoutESim.vue').default);
+Vue.component('CheckoutPhysicalSimForm', require('./components/checkout/CheckoutPhysicalSim.vue').default);
 
 Vue.component('Login', require('./pages/Auth/Login.vue').default);
 

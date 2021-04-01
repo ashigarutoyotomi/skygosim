@@ -1,15 +1,24 @@
 <template>
     <main>
-        <router-view></router-view>
+        <router-view
+            :user="user"
+        ></router-view>
     </main>
 </template>
 
 <script>
     export default {
-        name: "Admin"
+        name: "Admin",
+
+        props: {
+            user: {
+                type: Object,
+                default: () => {}
+            }
+        },
     }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

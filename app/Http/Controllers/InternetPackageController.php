@@ -4,7 +4,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Gateways\SettingsGateway;
 use App\Http\Requests\InternetPackage\PurchaseInternetPackageRequest;
+use App\Http\Requests\InternetPackage\UploadInternetPackagesFileRequest;
 use App\Imports\InternetPackagesImport;
 use App\Models\InternetPackage;
 use App\Models\User;
@@ -15,21 +17,21 @@ class InternetPackageController extends Controller
 {
     public function index()
     {
-        return InternetPackage::orderBy('area_eng')->get();
+        $internetPackages = InternetPackage::whereNull('expired_at')->orderBy('area_eng')->get();
+
+        $internetPackagesPricePercent = (int)(new SettingsGateway)->getInternetPackagesPricePercentage();
+
+        foreach ($internetPackages as $internetPackage) {
+            $internetPackage->gtt_price_usd = (int)$internetPackage->price_usd
+                + (((int)$internetPackage->price_usd * $internetPackagesPricePercent) / 100);
+        }
+
+        return $internetPackages;
     }
 
-    public function uploadPackages(Request $request)
+    public function uploadPackages(UploadInternetPackagesFileRequest $request)
     {
-        // xls xlsx xlsm xlsb xltx xltm
-        $data = $request->validate([
-            'file' => 'required|file|mimes:xlsx,xls'
-        ], [
-            'file.required' => 'Choose a file',
-            'file.file' => 'It is must be a file',
-            'file.mimes' => 'It is must be a Excel file'
-        ]);
-
-        Excel::import(new InternetPackagesImport, $data['file']);
+        Excel::import(new InternetPackagesImport, $request->file);
 
         return InternetPackage::orderBy('area_eng')->get();
     }
@@ -45,7 +47,7 @@ class InternetPackageController extends Controller
             );
 
             $payment = $payment->asStripePaymentIntent();
-            dd($payment);
+//            dd($payment);
 
 //            $endpoint = "http://112.74.196.154:18091/sim/v1/payOrder/test";
 //            $client = new \GuzzleHttp\Client();

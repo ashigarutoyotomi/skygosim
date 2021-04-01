@@ -21,7 +21,9 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'email_verified_at',
         'password',
+        'role',
     ];
 
     /**
@@ -45,9 +47,10 @@ class User extends Authenticatable
 
     const USER_ROLE_ADMIN = 1; // Роль админ
     const USER_ROLE_USER = 2; // Роль пользователь
+    const USER_ROLE_DEALER = 3; // Роль диллер
 
-    public function addresses()
+    public function address()
     {
-        return $this->hasMany(UserAddress::class, 'user_id');
+        return $this->hasOne(UserAddress::class, 'user_id');
     }
 }

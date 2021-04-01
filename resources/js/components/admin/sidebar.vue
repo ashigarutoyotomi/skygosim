@@ -13,6 +13,24 @@
                     to="/internet-packages"
                 >Internet Packages</router-link>
             </li>
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    to="/sim-cards"
+                >Sim Cards</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    to="/users"
+                >Users</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    to="/settings"
+                >Settings</router-link>
+            </li>
         </ul>
     </nav>
 </template>

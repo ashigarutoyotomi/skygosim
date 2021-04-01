@@ -4,7 +4,9 @@
 namespace App\Imports;
 
 
+use App\Gateways\SettingsGateway;
 use App\Models\InternetPackage;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
@@ -27,8 +29,19 @@ class InternetPackagesImport implements ToCollection
             }
         }
 
-        foreach ($data as $item) {
-            $internetPackage = InternetPackage::firstOrCreate($item);
+        if (count($data)) {
+            $activeInternetPackages = InternetPackage::whereNull('expired_at')->get();
+
+            foreach ($data as $item) {
+                InternetPackage::create($item);
+            }
+
+            if ($activeInternetPackages->count()) {
+                foreach ($activeInternetPackages as $activeInternetPackage) {
+                    $activeInternetPackage->expired_at = Carbon::now();
+                    $activeInternetPackage->save();
+                }
+            }
         }
     }
 }
