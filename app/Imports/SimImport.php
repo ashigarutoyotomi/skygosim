@@ -4,7 +4,7 @@
 namespace App\Imports;
 
 
-use App\Models\User\Sim\Sim;
+use App\Models\Sim\Sim;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
