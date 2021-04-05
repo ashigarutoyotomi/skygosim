@@ -24,7 +24,10 @@ class SimPageController extends Controller
     public function orderPhysicalSim()
     {
         $user = Auth::user();
-        $user->load('address');
+
+        if ($user) {
+            $user->load('address');
+        }
 
         return view('checkouts.physical-sim', [
             'user' => $user,
@@ -34,7 +37,10 @@ class SimPageController extends Controller
     public function orderESim()
     {
         $user = Auth::user();
-        $user->load('address');
+
+        if ($user) {
+            $user->load('address');
+        }
 
         return view('checkouts.e-sim', [
             'user' => $user,
