@@ -1,13 +1,11 @@
 <template>
-    <admin-layout
-        :user="$attrs.user"
-    >
+    <div id="users-create">
 
         <div class="section bg-white shadow-sm rounded-lg py-4 px-4">
             <div class="row">
                 <div class="col-12">
                     <form autocomplete="off" @submit.prevent="submit">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="last_name">First Name</label>
                             <input
                                 type="text"
@@ -23,7 +21,7 @@
                                 {{ errors.first_name[0] }}
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="first_name">Last Name</label>
                             <input
                                 type="text"
@@ -39,7 +37,7 @@
                                 {{ errors.last_name[0] }}
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="email">Email address</label>
                             <input
                                 type="email"
@@ -55,7 +53,7 @@
                                 {{ errors.email[0] }}
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="password">Password</label>
                             <input
                                 type="password"
@@ -71,7 +69,7 @@
                                 {{ errors.password[0] }}
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="confirm-password">Confirm Password</label>
                             <input
                                 type="password"
@@ -87,7 +85,7 @@
                                 {{ errors.confirm_password[0] }}
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="role">Role</label>
                             <select
                                 class="form-control"
@@ -114,18 +112,17 @@
                 </div>
             </div>
         </div>
-    </admin-layout>
+    </div>
 </template>
 
 <script>
-    import AdminLayout from "../../../../layouts/AdminLayout";
     import { USER_ROLES } from "../constants";
 
     export default {
         name: "UserCreate",
 
         components: {
-            AdminLayout,
+
         },
 
         data() {

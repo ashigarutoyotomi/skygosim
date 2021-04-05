@@ -17,14 +17,16 @@ class InternetPackageController extends Controller
 {
     public function index()
     {
-        $internetPackages = InternetPackage::whereNull('expired_at')->orderBy('area_eng')->get();
+        $internetPackages = InternetPackage::whereNull('expired_at')
+            ->orderBy('area_eng')
+            ->paginate(20);
 
-        $internetPackagesPricePercent = (int)(new SettingsGateway)->getInternetPackagesPricePercentage();
-
-        foreach ($internetPackages as $internetPackage) {
-            $internetPackage->gtt_price_usd = (int)$internetPackage->price_usd
-                + (((int)$internetPackage->price_usd * $internetPackagesPricePercent) / 100);
-        }
+//        $internetPackagesPricePercent = (int)(new SettingsGateway)->getInternetPackagesPricePercentage();
+//
+//        foreach ($internetPackages as $internetPackage) {
+//            $internetPackage->gtt_price_usd = (int)$internetPackage->price_usd
+//                + (((int)$internetPackage->price_usd * $internetPackagesPricePercent) / 100);
+//        }
 
         return $internetPackages;
     }

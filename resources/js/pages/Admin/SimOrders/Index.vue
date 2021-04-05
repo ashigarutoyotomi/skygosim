@@ -1,5 +1,5 @@
 <template>
-    <div id="users">
+    <div id="sim_orders">
         <template v-if="loading">
             <div class="row">
                 <div class="spinner-border mx-auto" style="width: 3rem; height: 3rem;" role="status">
@@ -13,19 +13,13 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="mb-4">
-                            <h5>Users ({{data ? data.total : 0}})</h5>
+                            <h5>Sim Orders ({{data ? data.total : 0}})</h5>
                         </div>
                     </div>
                     <div class="col-8">
                         <ul class="internet-packages__actions-list">
                             <li>
-                                <router-link
-                                    to="/users/create"
-                                    class="btn btn-primary btn-sm"
-                                    title="Add new user"
-                                >
-                                    Add new
-                                </router-link>
+
                             </li>
                         </ul>
                     </div>
@@ -33,36 +27,33 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <template v-if="!data">
+                        <template v-if="!data.data.length">
                             <div class="text-muted mb-4">
-                                Users not found
+                                Sim orders not found
                             </div>
-
-                            <button
-                                type="button"
-                                class="btn btn-light btn-sm"
-                            >
-                                Create new user
-                            </button>
                         </template>
 
-                        <template v-if="data">
+                        <template v-if="data.data.length">
                             <table class="table table-sm">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Full name</th>
+                                    <th scope="col">SIM ICCID</th>
+                                    <th scope="col">SIM type</th>
+                                    <th scope="col">Order Status</th>
+                                    <th scope="col">Order Date</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-for="(item, key) in data.data">
                                     <th scope="row">{{ key + 1 }}</th>
-                                    <td>{{ item.first_name }} {{ item.last_name }}</td>
-                                    <td>{{ item.email }}</td>
-                                    <td>{{ userRoles[item.role].label }}</td>
+                                    <td>{{ item.user.first_name }} {{ item.user.last_name }}</td>
+                                    <td>{{ item.sim ? item.sim.iccid : 'not selected' }}</td>
+                                    <td>{{ simTypes[item.sim_type].label }}</td>
+                                    <td>{{ orderStatuses[item.status].label }}</td>
+                                    <td>{{ moment(item.created_at).format('DD/MM/YYYY HH:mm') }}</td>
                                     <td>
                                         <button
                                             type="button"
@@ -71,11 +62,7 @@
                                         >
                                             <i class="bi bi-eye-fill"></i>
                                         </button>
-                                        <button
-                                            type="button"
-                                            class="btn btn-light btn-sm"
-                                            @click="edit(item.id)"
-                                        >
+                                        <button type="button" class="btn btn-light btn-sm">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
                                         <button type="button" class="btn btn-light btn-sm">
@@ -94,38 +81,47 @@
 </template>
 
 <script>
-    import { USER_ROLES } from "./constants";
+    import { STATUS_TYPES, SIM_TYPES } from "./constants";
+    import moment from 'moment'
 
     export default {
-        name: "UsersIndex",
+        name: "SimOrdersIndex",
 
         components: {
 
+        },
+
+        props: {
+            userId: {
+                type: String,
+                default: () => null
+            },
         },
 
         data () {
             return {
                 data: null,
                 loading: false,
-                userRoles: USER_ROLES,
+                orderStatuses: STATUS_TYPES,
+                simTypes: SIM_TYPES,
             }
         },
 
         created() {
-            this.$root.$on('users.load', this.loadData);
-
             this.loadData();
-        },
-
-        beforeDestroy() {
-            this.$root.$off('users.load', this.loadData);
         },
 
         methods: {
             loadData() {
                 this.loading = true;
 
-                axios.get('/users')
+                let url = '/sim-orders';
+
+                if (this.userId) {
+                    url = `/users/${this.userId}/orders`;
+                }
+
+                axios.get(url)
                     .then(({data}) => {
                         this.data = data;
                         this.loading = false;
@@ -133,23 +129,16 @@
             },
 
             show(userId) {
-                this.$router.push('/users/' + userId + '/show');
+                this.$router.push('/sim-orders/' + userId);
             },
 
-            edit(userId) {
-                this.$router.push('/users/' + userId + '/edit');
+            moment(date) {
+                return moment(date);
             }
         }
     }
 </script>
 
 <style lang="scss">
-    .section {
-        &__actions-list {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            list-style: none;
-        }
-    }
+
 </style>

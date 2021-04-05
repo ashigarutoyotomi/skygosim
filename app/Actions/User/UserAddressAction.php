@@ -5,7 +5,7 @@ namespace App\Actions\User;
 
 
 use App\DTO\User\CreateUserAddressData;
-use App\Models\UserAddress;
+use App\Models\User\UserAddress;
 
 class UserAddressAction
 {

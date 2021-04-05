@@ -32,7 +32,11 @@ Vue.component('HeaderComp', require('./components/Header.vue').default);
 Vue.component('HeaderSlider', require('./components/HeaderSlider.vue').default);
 Vue.component('InternetPackages', require('./components/InternetPackages.vue').default);
 
-Vue.component('CheckoutForm', require('./components/CheckoutForm.vue').default);
+Vue.component('HomeIndex', require('./pages/Home/Index').default);
+
+Vue.component('AddSimIndex', require('./components/AddSim/Index').default);
+
+Vue.component('CheckoutInternetPackage', require('./components/checkout/CheckoutInternetPackage.vue').default);
 Vue.component('CheckoutESimForm', require('./components/checkout/CheckoutESim.vue').default);
 Vue.component('CheckoutPhysicalSimForm', require('./components/checkout/CheckoutPhysicalSim.vue').default);
 

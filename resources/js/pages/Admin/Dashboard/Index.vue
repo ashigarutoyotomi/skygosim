@@ -1,21 +1,18 @@
 <template>
-    <admin-layout
-        :user="$attrs.user"
-    >
+    <div id="dashboard">
         <div class="bg-white shadow-sm rounded-lg py-4 px-4">
             <h5>Dashboard</h5>
         </div>
-    </admin-layout>
+    </div>
 </template>
 
 <script>
-    import AdminLayout from "../../../layouts/AdminLayout";
 
     export default {
         name: "DashboardIndex",
 
         components: {
-            AdminLayout
+
         }
     }
 </script>

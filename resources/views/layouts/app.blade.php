@@ -41,32 +41,31 @@
                                 <div class="col-xl-2 col-lg-4 col-md-5 col-11">
                                     <a href="/" class="logo">
                                         <img class="py-20" src="/images/skygo_logo.png" alt="">
-{{--                                        <span class="logo-text py-20"><strong>Sky</strong>Go</span>--}}
                                     </a>
                                 </div>
-                                <div class="col-xl-9 col-lg-8 col-md-7 col-1">
+                                <div class="col-xl-10 col-lg-8 col-md-7 col-1">
                                     <div class="nav-wrap">
 
                                         <!-- main nav start -->
                                         <nav class="top-nav">
                                             <ul class="nav sf-menu">
-                                                <li class="active">
+                                                <li class="{{ (request()->is('/')) ? 'active' : '' }}">
                                                     <a href="/">Home</a>
                                                 </li>
 
-                                                <li>
+                                                <li class="{{ (request()->is('/add-sim')) ? 'active' : '' }}">
                                                     <a href="/add-sim">Add Sim</a>
                                                 </li>
 
-                                                <li>
+                                                <li class="{{ (request()->is('/packages')) ? 'active' : '' }}">
                                                     <a href="/packages">Packages</a>
                                                 </li>
 
-                                                <li>
+                                                <li class="{{ (request()->is('/how-to')) ? 'active' : '' }}">
                                                     <a href="/how-to">How To</a>
                                                 </li>
 
-                                                <li>
+                                                <li class="{{ (request()->is('/faq')) ? 'active' : '' }}">
                                                     <a href="/faq">FAQ</a>
                                                 </li>
 
@@ -76,13 +75,13 @@
 
                                                 @guest
                                                     @if (Route::has('login'))
-                                                        <li>
+                                                        <li class="{{ (request()->is('/login')) ? 'active' : '' }}">
                                                             <a href="/login">Log In</a>
                                                         </li>
                                                     @endif
 
                                                     @if (Route::has('register'))
-                                                        <li>
+                                                        <li class="{{ (request()->is('/register')) ? 'active' : '' }}">
                                                             <a href="/register">Register</a>
                                                         </li>
                                                     @endif
@@ -123,7 +122,7 @@
                         <div class="row align-items-center">
                             <div class="divider-15 d-none d-lg-block"></div>
                             <div class="col-md-12 text-center">
-                                <p>&copy; Copyright <span class="copyright_year">2019</span> All Rights Reserved</p>
+                                <p>&copy; Copyright <span class="copyright_year">2021</span> All Rights Reserved</p>
                             </div>
                             <div class="divider-15 d-none d-lg-block"></div>
                         </div>

@@ -17,7 +17,7 @@ class SimOrderAction
     {
         $simOrder = SimOrder::create([
             'user_id' => $simOrderData->user_id,
-            'sim_id' => $simOrderData->sim_id,
+            'sim_id' => $simOrderData->sim_id ?? null,
             'sim_type' => $simOrderData->sim_type,
             'status' => $simOrderData->status,
         ]);

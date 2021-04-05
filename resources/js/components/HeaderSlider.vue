@@ -23,7 +23,7 @@
                                         <a
                                             href="/add-sim"
                                             type="button"
-                                            class="btn btn-maincolor2"
+                                            class="btn btn-white"
                                         >
                                             <span>Add Sim</span>
                                         </a>
@@ -53,7 +53,7 @@
                                         <a
                                             href="/add-sim"
                                             type="button"
-                                            class="btn btn-maincolor2"
+                                            class="btn btn-white"
                                         >
                                             <span>Add Sim</span>
                                         </a>
@@ -93,7 +93,7 @@
                                         <a
                                             href="/add-sim"
                                             type="button"
-                                            class="btn btn-maincolor2"
+                                            class="btn btn-white"
                                         >
                                             <span>Add Sim</span>
                                         </a>

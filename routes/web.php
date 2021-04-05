@@ -11,7 +11,7 @@ use App\Http\Controllers\Pages\PackagesPageController;
 use App\Http\Controllers\Pages\SimPageController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\Sim\SimController;
-use App\Http\Controllers\SimCardController;
+use App\Http\Controllers\Sim\SimOrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,9 +31,10 @@ Auth::routes();
 Route::get('/', [HomePageController::class, 'index']);
 
 Route::get('/packages', [PackagesPageController::class, 'index']);
-Route::post('/packages/purchase', [InternetPackageController::class, 'purchase']);
+Route::post('/packages/checkout', [PackagesPageController::class, 'checkout']);
 
 Route::get('/add-sim', [AddSimPageController::class, 'index']);
+Route::post('/add-sim', [AddSimPageController::class, 'addSim']);
 
 Route::get('/e-sim/order', [SimPageController::class, 'orderESim']);
 Route::post('/e-sim/checkout', [SimPageController::class, 'checkoutESim']);
@@ -49,16 +50,32 @@ Route::get('/checkout', [PagesController::class, 'checkout']);
 Route::get('/checkout/e-sim', [PagesController::class, 'checkoutESim']);
 Route::get('/checkout/result', [PagesController::class, 'checkoutResult']);
 
-Route::middleware(['auth'])->group(function () {
+
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+    // Users
     Route::get('/users', [UserController::class, 'index']);
-    Route::post('/users/create', [UserController::class, 'store']);
+    Route::get('/users/{user_id}/show', [UserController::class, 'show']);
+    Route::get('/users/{user_id}/edit', [UserController::class, 'edit']);
+    Route::get('/users/{user_id}/orders', [UserController::class, 'orders']);
 
+    Route::post('/users/create', [UserController::class, 'store']);
+    Route::post('/users/{user_id}/update', [UserController::class, 'update']);
+    Route::delete('/users/{user_id}/delete', [UserController::class, 'delete']);
+
+    // Internet Packages
     Route::get('/internet-packages', [InternetPackageController::class, 'index']);
     Route::post('/internet-packages/upload_packages', [InternetPackageController::class, 'uploadPackages']);
 
+
+    // Sims
     Route::get('/sim-cards', [SimController::class, 'index']);
     Route::post('/sim-cards/upload_sim_cards', [SimController::class, 'uploadSimCards']);
+
+    Route::get('/sim-orders', [SimOrderController::class, 'index']);
 });

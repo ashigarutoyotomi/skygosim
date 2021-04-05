@@ -1,7 +1,5 @@
 <template>
-    <admin-layout
-        :user="$attrs.user"
-    >
+    <div id="sim-cards">
         <upload-sim-cards-modal
             modal-id="UploadSimCardsModal"
         />
@@ -9,7 +7,7 @@
         <template v-if="loading">
             <div class="row">
                 <div class="spinner-border mx-auto" style="width: 3rem; height: 3rem;" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <span class="sr-only"></span>
                 </div>
             </div>
         </template>
@@ -84,11 +82,10 @@
                 </div>
             </div>
         </template>
-    </admin-layout>
+    </div>
 </template>
 
 <script>
-import AdminLayout from "../../../layouts/AdminLayout";
 import UploadSimCardsModal from "./modals/UploadSimCardsModal";
 import { SIM_TYPES } from "./constants";
 
@@ -96,7 +93,6 @@ export default {
     name: "SimCardsIndex",
 
     components: {
-        AdminLayout,
         UploadSimCardsModal,
     },
 

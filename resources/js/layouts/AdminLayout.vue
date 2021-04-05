@@ -4,7 +4,7 @@
             :user="user"
         ></navbar>
 
-        <div class="container-fluid py-4">
+        <div class="container-xxl py-4">
             <div class="row">
                 <div class="col-3">
                     <sidebar></sidebar>

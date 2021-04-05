@@ -10,7 +10,7 @@
                     <div class="widget widget_text">
                         <h4 class="widget-title">About</h4>
                         <p>
-                            Welcome largest broadband and Internet services provider where you can choose the best plan ever.
+                            Unlimited internet all over the world – with a single SkyGo Global SIM card.
                         </p>
                         <div class="widget widget_social_buttons">
                             <a href="#" class="fa fa-facebook color-bg-icon rounded-icon" title="facebook"></a>
@@ -24,41 +24,32 @@
                         <h4 class="widget-title">Links</h4>
                         <ul>
                             <li class="cat-item">
-                                <a href="blog-right.html">Packages</a>
+                                <a href="/">Home</a>
                             </li>
                             <li class="cat-item">
-                                <a href="blog-right.html">MaxiNet Media</a>
+                                <a href="/add-sim">Add Sim</a>
                             </li>
                             <li class="cat-item">
-                                <a href="blog-right.html">Connection</a>
+                                <a href="/packages">Packages</a>
                             </li>
                             <li class="cat-item">
-                                <a href="blog-right.html">Support</a>
+                                <a href="/how-to">How to</a>
                             </li>
                             <li class="cat-item">
-                                <a href="blog-right.html">Video Tutorials</a>
+                                <a href="/faq">Faq</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3 order-xl-3 order-md-3 animate" data-animation="fadeInUp">
                     <div class="widget services-links">
-                        <h4 class="widget-title">Services</h4>
+                        <h4 class="widget-title">Buy Sim</h4>
                         <ul>
                             <li class="cat-item">
-                                <a href="blog-right.html">4K Cable TV</a>
+                                <a href="blog-right.html">Physical SIM</a>
                             </li>
                             <li class="cat-item">
-                                <a href="blog-right.html">Dedicated Server</a>
-                            </li>
-                            <li class="cat-item">
-                                <a href="blog-right.html">High Speed Internet</a>
-                            </li>
-                            <li class="cat-item">
-                                <a href="blog-right.html">Smartphone Service</a>
-                            </li>
-                            <li class="cat-item">
-                                <a href="blog-right.html">Dedicated Server</a>
+                                <a href="blog-right.html">E-SIM</a>
                             </li>
                         </ul>
                     </div>
