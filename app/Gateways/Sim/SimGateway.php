@@ -4,7 +4,7 @@
 namespace App\Gateways\Sim;
 
 
-use App\Models\User\Sim\Sim;
+use App\Models\Sim\Sim;
 
 class SimGateway
 {
