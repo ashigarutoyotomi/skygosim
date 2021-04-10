@@ -8,9 +8,6 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
-import VueRouter from 'vue-router';
-import { routes } from "./routes";
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19,7 +16,20 @@ import { routes } from "./routes";
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
+import VueRouter from 'vue-router';
+import { routes } from "./routes";
 Vue.use(VueRouter);
+
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+Vue.use(VueToast);
+
+import VModal from 'vue-js-modal';
+Vue.use(VModal);
+
+import vSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
+Vue.component('v-select', vSelect)
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))

@@ -161,7 +161,8 @@ class SimPageController extends Controller
                     'user_id' => $user->id,
                     'sim_id' => $esim->id,
                     'sim_type' => SimOrder::SIM_TYPE_E_SIM,
-                    'status' => SimOrder::STATUS_NEW
+                    'status' => SimOrder::STATUS_NEW,
+                    'key' => PushId::generate(),
                 ]);
 
                 $simOrder = (new SimOrderAction)->create($simOrderData);

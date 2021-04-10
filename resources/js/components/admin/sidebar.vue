@@ -60,7 +60,11 @@
             <li class="nav-item">
                 <a
                     class="nav-link"
-                    :class="{'active': isActiveRoute(['internet_packages', 'sim_cards'])}"
+                    :class="{'active': isActiveRoute([
+                            'internet_packages',
+                            'inventory_sims_physical',
+                            'inventory_e_sims',
+                        ])}"
                     data-bs-toggle="collapse"
                     href="#collapseInventory"
                     role="button"
@@ -83,9 +87,17 @@
                     <li class="nav-item">
                         <router-link
                             class="nav-link"
-                            :class="{'active': isActiveRoute(['sim_cards'])}"
-                            to="/sim-cards"
-                        >Sim Cards</router-link>
+                            :class="{'active': isActiveRoute(['inventory_sims_physical'])}"
+                            to="/inventory/sims/physical"
+                        >Physical SIMs</router-link>
+                    </li>
+
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            :class="{'active': isActiveRoute(['inventory_e_sims'])}"
+                            to="/inventory/sims/e-sims"
+                        >E-SIMs</router-link>
                     </li>
                 </ul>
             </li>

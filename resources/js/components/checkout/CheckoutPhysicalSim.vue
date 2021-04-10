@@ -346,7 +346,10 @@
                         })
                         .catch(e => {
                             this.loading = false;
-                            this.errors = e.response.data.errors;
+
+                            if (e.response.status === 422) {
+                                this.errors = e.response.data.errors;
+                            }
                         });
                 }
             },

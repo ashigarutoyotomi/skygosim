@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Sim;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Sim\Sim;
 use App\Models\Sim\SimOrder;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ class SimOrderController extends Controller
     {
         $type = $request->get('type');
         $query = SimOrder::with('user', 'sim')
+            ->orderBy('status', 'asc')
             ->orderBy('created_at', 'desc');
 
         if ($type && $type === 'physical') {
@@ -36,5 +38,32 @@ class SimOrderController extends Controller
         ]);
 
         return $order;
+    }
+
+    public function addPhysicalSim($sim_order_id, Request $request)
+    {
+        $simOrder = SimOrder::find($sim_order_id);
+        abort_unless($simOrder, 404, 'Order not found');
+
+        $simICCID = $request->get('iccid');
+        $sim = Sim::where('iccid', $simICCID)->first();
+        abort_unless($sim, 404, 'SIM not found');
+
+        $simOrder->sim_id = $sim->id;
+        $simOrder->status = SimOrder::STATUS_IN_PROCESS;
+        $simOrder->save();
+
+        return $simOrder;
+    }
+
+    public function finish($sim_order_id)
+    {
+        $simOrder = SimOrder::find($sim_order_id);
+        abort_unless($simOrder, 404, 'Order not found');
+
+        $simOrder->status = SimOrder::STATUS_FINISHED;
+        $simOrder->save();
+
+        return $simOrder;
     }
 }

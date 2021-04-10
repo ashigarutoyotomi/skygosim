@@ -15,6 +15,8 @@ class CreateSimCardsTable extends Migration
     {
         Schema::create('sims', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('dealer_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('msisdn')->nullable();
             $table->string('imsi');
             $table->string('iccid');
@@ -23,6 +25,14 @@ class CreateSimCardsTable extends Migration
             $table->integer('sim_type');
             $table->string('download_url')->nullable();
             $table->integer('sim_status');
+
+            $table->foreign('dealer_id')
+                ->on('users')
+                ->references('id');
+
+            $table->foreign('user_id')
+                ->on('users')
+                ->references('id');
 
             $table->timestamps();
         });

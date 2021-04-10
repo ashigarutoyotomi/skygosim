@@ -1,5 +1,18 @@
 <template>
     <div id="users_show">
+
+        <choose-physical-sim-modal
+            v-if="!loading"
+            modal-id="ChoosePhysicalSimModal"
+            :order-id="data.id"
+        />
+
+        <confirm-close-sim-order-modal
+            v-if="!loading"
+            modal-id="ConfirmCloseSimOrderModal"
+            :order-id="data.id"
+        />
+
         <template v-if="loading">
             <div class="row">
                 <div class="spinner-border mx-auto" style="width: 3rem; height: 3rem;" role="status">
@@ -14,7 +27,9 @@
                     <div class="row">
                         <div class="col-12">
                             <dl class="row">
-                                <h5 class=""><u>Info</u></h5>
+                                <h6 class="">
+                                    <u><small>Info</small></u>
+                                </h6>
 
                                 <dt class="col-sm-3">
                                     Order ID
@@ -27,11 +42,67 @@
                                     Status
                                 </dt>
                                 <dd class="col-sm-9">
-                                    {{ data.status }}
+                                    {{ orderStatuses[data.status].label }}
                                 </dd>
 
+                                <template v-if="!data.sim">
+                                    <h6 class="mt-4">
+                                        <u><small>Ordered physical SIM info</small></u>
+                                    </h6>
+
+                                    <div class="text-muted mb-4">
+                                        SIM not selected
+                                    </div>
+
+                                    <div class="col-4">
+                                        <button
+                                            type="button"
+                                            class="btn btn-outline-info btn-sm"
+                                            @click="openChoosePhysicalSimModal()"
+                                        >
+                                            Choose physical SIM
+                                        </button>
+                                    </div>
+                                </template>
+
+                                <template v-if="data.sim">
+                                    <h6 class="mt-4">
+                                        <u><small>Ordered physical SIM info</small></u>
+                                    </h6>
+
+                                    <dt class="col-sm-3">
+                                        IMSI
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{ data.sim.imsi }}
+                                    </dd>
+
+                                    <dt class="col-sm-3">
+                                        ICCID
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{ data.sim.iccid }}
+                                    </dd>
+
+                                    <dt class="col-sm-3">
+                                        PIN 2
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{ data.sim.pin_2 }}
+                                    </dd>
+
+                                    <dt class="col-sm-3">
+                                        PUK 1
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{ data.sim.puk_1 }}
+                                    </dd>
+                                </template>
+
                                 <template v-if="data.address">
-                                    <h5 class="mt-4"><u>Order Address</u></h5>
+                                    <h6 class="mt-4">
+                                        <u><small>Order Address</small></u>
+                                    </h6>
 
                                     <dt class="col-sm-3">
                                         Street
@@ -61,25 +132,65 @@
                                         {{ data.address.zip_code }}
                                     </dd>
                                 </template>
+
+                                <template v-if="data.user">
+                                    <h6 class="mt-4">
+                                        <u><small>User info</small></u>
+                                    </h6>
+
+                                    <dt class="col-sm-3">
+                                        First Name
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{ data.user.first_name }}
+                                    </dd>
+
+                                    <dt class="col-sm-3">
+                                        Last Name
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{ data.user.last_name }}
+                                    </dd>
+
+                                    <dt class="col-sm-3">
+                                        Email
+                                    </dt>
+                                    <dd class="col-sm-9">
+                                        {{ data.user.email }}
+                                    </dd>
+                                </template>
                             </dl>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button
+                                type="button"
+                                class="btn btn-outline-primary btn-sm"
+                                @click="finishOrder"
+                            >
+                                Close order
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <sim-orders-index
-                :user-id="userId"
-            />
         </template>
     </div>
 </template>
 
 <script>
+    import { STATUS_TYPES, SIM_TYPES } from "./constants";
+    import ChoosePhysicalSimModal from "./modals/ChoosePhysicalSimModal";
+    import ConfirmCloseSimOrderModal from "./modals/ConfirmCloseSimOrderModal";
+
     export default {
         name: "ShowPhysicalSim",
 
         components: {
-
+            ConfirmCloseSimOrderModal,
+            ChoosePhysicalSimModal
         },
 
         props: {
@@ -93,11 +204,17 @@
             return {
                 data: null,
                 loading: false,
+                orderStatuses: STATUS_TYPES,
             }
         },
 
         created() {
             this.loadData();
+            this.$root.$on('sim.load', this.loadData);
+        },
+
+        beforeDestroy() {
+            this.$root.$off('sim.load', this.loadData);
         },
 
         methods: {
@@ -109,6 +226,14 @@
                         this.data = data;
                         this.loading = false;
                     });
+            },
+
+            openChoosePhysicalSimModal() {
+                this.$root.$emit('modal::show::ChoosePhysicalSimModal');
+            },
+
+            finishOrder() {
+                this.$root.$emit('modal::show::ConfirmCloseSimOrderModal');
             }
         }
     }

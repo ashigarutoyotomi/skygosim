@@ -10,9 +10,12 @@ import DealerIndex from "../pages/Admin/Dealer/Index";
 import DealerShow from "../pages/Admin/Dealer/Show";
 import DealerCreate from "../pages/Admin/Dealer/Form/Create";
 import DealerEdit from "../pages/Admin/Dealer/Form/Edit";
+import DealerAddressCreate from '../pages/Admin/Dealer/Form/CreateAddress';
 
 import InternetPackageIndex from "../pages/Admin/InternetPackage/Index";
-import SimCardIndex from "../pages/Admin/SimCard/Index";
+
+import InventoryPhysicalSims from "../pages/Admin/Inventory/Sims/PhysicalSims";
+import InventoryESims from "../pages/Admin/Inventory/Sims/ESims";
 
 import SimOrdersIndex from "../pages/Admin/SimOrders/Index";
 import ShowPhysicalSimOrder from "../pages/Admin/SimOrders/ShowPhysicalSim";
@@ -77,17 +80,31 @@ export const routes = [
     },
 
     {
+        name: 'dealers_address_create',
+        path: '/dealers/:userId/address/create',
+        props: true,
+        component: DealerAddressCreate,
+    },
+
+    {
         name: 'internet_packages',
         path: '/internet-packages',
         component: InternetPackageIndex
     },
 
+    // Inventory
     {
-        name: 'sim_cards',
-        path: '/sim-cards',
-        component: SimCardIndex
+        name: 'inventory_sims_physical',
+        path: '/inventory/sims/physical',
+        component: InventoryPhysicalSims
+    },
+    {
+        name: 'inventory_e_sims',
+        path: '/inventory/sims/e-sims',
+        component: InventoryESims
     },
 
+    // Sim Orders
     {
         name: 'sim_orders_physical',
         path: '/sim-orders/physical',

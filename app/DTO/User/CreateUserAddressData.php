@@ -9,7 +9,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 class CreateUserAddressData extends DataTransferObject
 {
     /**
-     * @var int
+     * @var integer
      */
     public $user_id;
 

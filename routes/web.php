@@ -14,6 +14,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\Sim\SimController;
 use App\Http\Controllers\Sim\SimOrderController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return "Cache is cleared";
+});
 
 Route::get('/', [HomePageController::class, 'index']);
 
@@ -71,16 +80,25 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Dealers
     Route::get('/dealers', [DealerController::class, 'index']);
+    Route::get('/dealers/{dealer_id}/physical-sims', [DealerController::class, 'getPhysicalSims']);
+    Route::get('/dealers/{dealer_id}/physical-sim-orders', [DealerController::class, 'getPhysicalSimOrders']);
+
     Route::post('/dealers/create', [DealerController::class, 'store']);
+    Route::post('/dealers/address/create', [DealerController::class, 'storeAddress']);
+    Route::post('/dealers/set-physical-sims', [DealerController::class, 'setPhysicalSims']);
 
     // Internet Packages
     Route::get('/internet-packages', [InternetPackageController::class, 'index']);
     Route::post('/internet-packages/upload_packages', [InternetPackageController::class, 'uploadPackages']);
 
     // Sims
-    Route::get('/sim-cards', [SimController::class, 'index']);
-    Route::post('/sim-cards/upload_sim_cards', [SimController::class, 'uploadSimCards']);
+    Route::get('/sims/physical', [SimController::class, 'getPhysicalSims']);
+    Route::get('/sims/physical/available', [SimController::class, 'getAvailablePhysicalSims']);
+    Route::get('/sims/e-sims', [SimController::class, 'getESims']);
+    Route::get('/sims/upload-file', [SimController::class, 'uploadSimsFromFile']);
 
     Route::get('/sim-orders', [SimOrderController::class, 'index']);
     Route::get('/sim-orders/{sim_order_id}/show', [SimOrderController::class, 'showPhysicalSim']);
+    Route::post('/sim-orders/{sim_order_id}/add-physical-sim', [SimOrderController::class, 'addPhysicalSim']);
+    Route::put('/sim-orders/{sim_order_id}/finish', [SimOrderController::class, 'finish']);
 });

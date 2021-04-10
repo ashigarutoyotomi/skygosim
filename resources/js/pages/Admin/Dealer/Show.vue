@@ -14,7 +14,9 @@
                     <div class="row">
                         <div class="col-12">
                             <dl class="row">
-                                <h5 class=""><u>Info</u></h5>
+                                <h6 class="">
+                                    <u><small>Info</small></u>
+                                </h6>
 
                                 <dt class="col-sm-3">
                                     Full name
@@ -37,8 +39,30 @@
                                     {{ userRoles[data.role].label }}
                                 </dd>
 
+                                <template v-if="!data.address">
+                                    <h6 class="mt-4">
+                                        <u><small>Dealer Address</small></u>
+                                    </h6>
+
+                                    <span class="text-muted mb-2">
+                                        <em><small>Address not added</small></em>
+                                    </span>
+
+                                    <div class="col-4">
+                                        <button
+                                            type="button"
+                                            class="btn btn-outline-info btn-sm"
+                                            @click="addAddress()"
+                                        >
+                                            Add address
+                                        </button>
+                                    </div>
+                                </template>
+
                                 <template v-if="data.address">
-                                    <h5 class="mt-4"><u>Address</u></h5>
+                                    <h6 class="mt-4">
+                                        <u><small>Dealer Address</small></u>
+                                    </h6>
 
                                     <dt class="col-sm-3">
                                         Street
@@ -73,17 +97,29 @@
                     </div>
                 </div>
             </section>
+
+            <dealer-physical-sim-orders
+                :dealer-id="userId"
+            />
+
+            <dealer-physical-sims
+                :dealer-id="userId"
+            />
         </template>
     </div>
 </template>
 
 <script>
     import {USER_ROLES} from "../Users/constants";
+    import DealerPhysicalSims from "./Sims/PhysicalSims";
+    import DealerPhysicalSimOrders from "./Sims/PhysicalSimOrders";
 
     export default {
         name: "DealerShow",
 
         components: {
+            DealerPhysicalSimOrders,
+            DealerPhysicalSims
 
         },
 
@@ -104,6 +140,11 @@
 
         created() {
             this.loadData();
+            this.$root.$on('dealer.load', this.loadData);
+        },
+
+        beforeDestroy() {
+            this.$root.$off('dealer.load', this.loadData);
         },
 
         methods: {
@@ -115,6 +156,10 @@
                         this.data = data;
                         this.loading = false;
                     });
+            },
+
+            addAddress() {
+                this.$router.push(`/dealers/${this.data.id}/address/create`);
             }
         }
     }

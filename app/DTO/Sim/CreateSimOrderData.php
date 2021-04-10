@@ -8,28 +8,13 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class CreateSimOrderData extends DataTransferObject
 {
-    /**
-     * @var integer
-     */
-    public $user_id;
+    public int $user_id;
 
-    /**
-     * @var integer|null
-     */
-    public $sim_id;
+    public ?int $sim_id;
 
-    /**
-     * @var integer
-     */
-    public $sim_type;
+    public int $sim_type;
 
-    /**
-     * @var string
-     */
-    public $key;
+    public string $key;
 
-    /**
-     * @var integer|null
-     */
-    public $status;
+    public ?int $status;
 }

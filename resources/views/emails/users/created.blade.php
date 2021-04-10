@@ -4,15 +4,51 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>User Created</title>
+    <title>Welcome to SkyGo</title>
+
+    <style>
+        .container {
+            max-width: 500px;
+            margin: auto;
+            font-family: Roboto, 'sans-serif';
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        h2 {
+            margin: 1rem 0 1.2rem 0;
+        }
+
+        h3 {
+            font-weight: normal;
+        }
+    </style>
 </head>
 <body>
     <main>
-        <h2>Hello {{ $user->first_name }} {{ $user->last_name }}</h2>
-        <h2>Welcome to SkyGo</h2>
+        <div class="container">
+            <img class="logo" src="{{config('app.url')}}/images/skygo_logo.png" alt="SkyGo">
 
-        <h4>Your login: {{ $user->email }}</h4>
-        <h4>Your password: {{ $user->password }}</h4>
+            <h2 class="text-center">
+                Your account created!
+            </h2>
+
+            <h3>Hello {{$user->first_name}} {{$user->last_name}},</h3>
+            <h3>Thank you for using SkyGo,</h3>
+
+            <br>
+
+            <h3>Account info:</h3>
+
+            <h3>Your login: {{ $user->email }}</h3>
+            <h3>Your password: {{ $user->password }}</h3>
+        </div>
     </main>
 </body>
 </html>

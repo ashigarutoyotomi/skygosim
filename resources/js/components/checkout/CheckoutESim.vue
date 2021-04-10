@@ -238,11 +238,21 @@
                             <div id="payment" class="woocommerce-checkout-payment">
                                 <div class="form-row place-order">
                                     <button
+                                        v-if="!loading"
                                         type="submit"
                                         class="btn btn-outline-maincolor small-button"
                                         name="woocommerce_checkout_place_order"
                                     >
                                         <span>Pay Now</span>
+                                    </button>
+
+                                    <button
+                                        v-if="loading"
+                                        type="button"
+                                        class="btn btn-maincolor"
+                                        disabled
+                                    >
+                                        <span>Loading...</span>
                                     </button>
                                 </div>
                             </div>
@@ -303,6 +313,8 @@ export default {
 
     methods: {
         async processPayment() {
+            this.loading = true;
+
             const {paymentMethod, error} = await this.stripe.createPaymentMethod(
                 'card', this.cardElement, {
                     billing_details: {
@@ -320,17 +332,23 @@ export default {
 
             if (error) {
                 this.stripeCardError = error;
+                this.loading = false;
             } else {
                 this.form.payment_method_id = paymentMethod.id;
 
                 axios.post('/e-sim/checkout', this.form)
                     .then(response => {
                         if (response) {
+                            this.loading = false;
                             // window.location.href = '/checkout/result'
                         }
                     })
                     .catch(e => {
-                        this.errors = e.response.data.errors;
+                        this.loading = false;
+
+                        if (e.response.status === 422) {
+                            this.errors = e.response.data.errors;
+                        }
                     });
             }
         },

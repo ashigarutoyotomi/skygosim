@@ -8,28 +8,13 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class CreateSimOrderAddressData extends DataTransferObject
 {
-    /**
-     * @var integer
-     */
-    public $sim_order_id;
+    public int $sim_order_id;
 
-    /**
-     * @var string
-     */
-    public $street;
+    public string $street;
 
-    /**
-     * @var string
-     */
-    public $city;
+    public string $city;
 
-    /**
-     * @var string
-     */
-    public $state;
+    public string $state;
 
-    /**
-     * @var string
-     */
-    public $zip_code;
+    public string $zip_code;
 }

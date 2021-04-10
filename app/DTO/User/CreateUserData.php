@@ -8,33 +8,15 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class CreateUserData extends DataTransferObject
 {
-    /**
-     * @var string
-     */
-    public $first_name;
+    public string $first_name;
 
-    /**
-     * @var string
-     */
-    public $last_name;
+    public string $last_name;
 
-    /**
-     * @var string
-     */
-    public $email;
+    public string $email;
 
-    /**
-     * @var string
-     */
-    public $password;
+    public string $password;
 
-    /**
-     * @var int
-     */
-    public $role;
+    public int $role;
 
-    /**
-     * @var bool|null
-     */
-    public $send_to_email;
+    public ?bool $send_to_email;
 }

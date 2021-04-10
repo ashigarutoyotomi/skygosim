@@ -4,6 +4,7 @@
 namespace App\Models\Sim;
 
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Sim extends Model
@@ -19,6 +20,8 @@ class Sim extends Model
         'sim_type',
         'download_url',
         'sim_status',
+        'dealer_id',
+        'user_id',
     ];
 
     const SIM_TYPE_PHYSICAL = 1; // Physical sim type
@@ -27,4 +30,14 @@ class Sim extends Model
     const SIM_STATUS_NEW = 1; // Order status new
     const SIM_STATUS_IN_PROCESS = 2; // Order status in process
     const SIM_STATUS_SOLD = 2; // Order status sold
+
+    public function dealer()
+    {
+        return $this->belongsTo(User::class, 'dealer_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
