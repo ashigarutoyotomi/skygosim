@@ -5,19 +5,25 @@ namespace App\Http\Controllers\Pages;
 
 
 use App\Actions\Sim\SimOrderAction;
+use App\Actions\Sim\SimOrderAddressAction;
 use App\Actions\User\UserAction;
 use App\Actions\User\UserAddressAction;
+use App\DTO\Sim\CreateSimOrderAddressData;
 use App\DTO\Sim\CreateSimOrderData;
 use App\DTO\User\CreateUserAddressData;
 use App\DTO\User\CreateUserData;
 use App\Gateways\Sim\SimGateway;
 use App\Gateways\User\UserGateway;
+use App\Helpers\PushId;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sim\OrderESimRequest;
 use App\Http\Requests\Sim\OrderPhysicalSimRequest;
+use App\Mail\Sim\ESimOrderMail;
+use App\Mail\Sim\PhysicalSimOrderMail;
 use App\Models\Sim\SimOrder;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class SimPageController extends Controller
 {
@@ -87,10 +93,23 @@ class SimPageController extends Controller
             $simOrderData = new CreateSimOrderData([
                 'user_id' => $user->id,
                 'sim_type' => SimOrder::SIM_TYPE_PHYSICAL,
-                'status' => SimOrder::STATUS_NEW
+                'status' => SimOrder::STATUS_NEW,
+                'key' => PushId::generate(),
             ]);
 
-            (new SimOrderAction)->create($simOrderData);
+            $simOrder = (new SimOrderAction)->create($simOrderData);
+
+            $simOrderAddressData = new CreateSimOrderAddressData([
+                'sim_order_id' => $simOrder->id,
+                'street' => $request->get('street_address'),
+                'city' => $request->get('city'),
+                'state' => $request->get('state'),
+                'zip_code' => $request->get('zip_code'),
+            ]);
+
+            (new SimOrderAddressAction)->create($simOrderAddressData);
+
+            Mail::to($simOrder->user->email)->send(new PhysicalSimOrderMail($simOrder));
         }
 
         return $payment;
@@ -128,7 +147,6 @@ class SimPageController extends Controller
         $esim = (new SimGateway)->getNewESim();
 
         if ($esim) {
-
             $payment = $user->charge(
                 $request->get('amount') * 100,
                 $request->get('payment_method_id'),
@@ -146,7 +164,9 @@ class SimPageController extends Controller
                     'status' => SimOrder::STATUS_NEW
                 ]);
 
-                (new SimOrderAction)->create($simOrderData);
+                $simOrder = (new SimOrderAction)->create($simOrderData);
+
+                Mail::to($simOrder->user->email)->send(new ESimOrderMail($simOrder));
             }
         }
 

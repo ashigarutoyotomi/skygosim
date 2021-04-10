@@ -55,19 +55,23 @@
                                     <td>{{ orderStatuses[item.status].label }}</td>
                                     <td>{{ moment(item.created_at).format('DD/MM/YYYY HH:mm') }}</td>
                                     <td>
-                                        <button
-                                            type="button"
-                                            class="btn btn-light btn-sm"
-                                            @click="show(item.id)"
+                                        <template
+                                            v-if="item.sim_type === simTypes[1].id"
                                         >
-                                            <i class="bi bi-eye-fill"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-light btn-sm">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-light btn-sm">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-light btn-sm"
+                                                @click="show(item.id)"
+                                            >
+                                                <i class="bi bi-eye-fill"></i>
+                                            </button>
+                                        </template>
+<!--                                        <button type="button" class="btn btn-light btn-sm">-->
+<!--                                            <i class="bi bi-pencil-square"></i>-->
+<!--                                        </button>-->
+<!--                                        <button type="button" class="btn btn-light btn-sm">-->
+<!--                                            <i class="bi bi-trash-fill"></i>-->
+<!--                                        </button>-->
                                     </td>
                                 </tr>
                                 </tbody>
@@ -96,6 +100,10 @@
                 type: String,
                 default: () => null
             },
+            simType: {
+                type: String,
+                default: () => 'all'
+            },
         },
 
         data () {
@@ -111,6 +119,12 @@
             this.loadData();
         },
 
+        watch: {
+            simType(value) {
+                this.loadData();
+            },
+        },
+
         methods: {
             loadData() {
                 this.loading = true;
@@ -121,15 +135,19 @@
                     url = `/users/${this.userId}/orders`;
                 }
 
-                axios.get(url)
+                axios.get(url, {
+                    params: {
+                        type: this.simType,
+                    }
+                })
                     .then(({data}) => {
                         this.data = data;
                         this.loading = false;
                     });
             },
 
-            show(userId) {
-                this.$router.push('/sim-orders/' + userId);
+            show(simOrderId) {
+                this.$router.push('/sim-orders/' + userId + '/show');
             },
 
             moment(date) {

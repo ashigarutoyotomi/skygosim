@@ -24,6 +24,11 @@ class CreateSimOrderData extends DataTransferObject
     public $sim_type;
 
     /**
+     * @var string
+     */
+    public $key;
+
+    /**
      * @var integer|null
      */
     public $status;

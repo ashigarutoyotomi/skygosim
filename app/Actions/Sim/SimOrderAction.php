@@ -20,15 +20,8 @@ class SimOrderAction
             'sim_id' => $simOrderData->sim_id ?? null,
             'sim_type' => $simOrderData->sim_type,
             'status' => $simOrderData->status,
+            'key' => $simOrderData->key,
         ]);
-
-        if ($simOrder && $simOrder->sim_type === SimOrder::SIM_TYPE_PHYSICAL) {
-            Mail::to($simOrder->user->email)->send(new PhysicalSimOrderMail($simOrder));
-        }
-
-        if ($simOrder && $simOrder->sim_type === SimOrder::SIM_TYPE_E_SIM) {
-            Mail::to($simOrder->user->email)->send(new ESimOrderMail($simOrder));
-        }
 
         return $simOrder;
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\InternetPackageController;
 use App\Http\Controllers\Pages\AddSimPageController;
 use App\Http\Controllers\Pages\CheckoutPageController;
@@ -68,14 +69,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/users/{user_id}/update', [UserController::class, 'update']);
     Route::delete('/users/{user_id}/delete', [UserController::class, 'delete']);
 
+    // Dealers
+    Route::get('/dealers', [DealerController::class, 'index']);
+    Route::post('/dealers/create', [DealerController::class, 'store']);
+
     // Internet Packages
     Route::get('/internet-packages', [InternetPackageController::class, 'index']);
     Route::post('/internet-packages/upload_packages', [InternetPackageController::class, 'uploadPackages']);
-
 
     // Sims
     Route::get('/sim-cards', [SimController::class, 'index']);
     Route::post('/sim-cards/upload_sim_cards', [SimController::class, 'uploadSimCards']);
 
     Route::get('/sim-orders', [SimOrderController::class, 'index']);
+    Route::get('/sim-orders/{sim_order_id}/show', [SimOrderController::class, 'showPhysicalSim']);
 });

@@ -20,6 +20,7 @@ class CreateSimOrdersTable extends Migration
             $table->unsignedBigInteger('sim_id')->nullable();
             $table->integer('sim_type');
             $table->integer('status')->default(SimOrder::STATUS_NEW);
+            $table->string('key')->unique();
             $table->timestamps();
 
             $table->foreign('user_id')

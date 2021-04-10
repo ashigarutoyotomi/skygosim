@@ -16,6 +16,7 @@ class PhysicalSimOrderMail extends Mailable
     use Queueable, SerializesModels;
 
     public $order;
+    public $address;
     public $user;
 
     /**
@@ -26,6 +27,7 @@ class PhysicalSimOrderMail extends Mailable
     public function __construct(SimOrder $order)
     {
         $this->order = $order;
+        $this->address = $order->address;
         $this->user = $order->user;
     }
 

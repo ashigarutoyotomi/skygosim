@@ -10,7 +10,7 @@
             <div class="row">
                 <main class="col-lg-12">
                     <div class="woocommerce-info">
-                        Congratulations, you have successfully activated package!
+                        Congratulations, your purchase was successful!
                     </div>
                 </main>
             </div>

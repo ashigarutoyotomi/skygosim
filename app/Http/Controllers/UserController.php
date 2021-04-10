@@ -13,7 +13,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('first_name')->paginate(20);
+        $users = User::where('role', '!=', User::USER_ROLE_DEALER)
+            ->orderBy('first_name')->paginate(20);
 
         return $users;
     }

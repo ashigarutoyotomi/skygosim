@@ -8,34 +8,88 @@
                     to="/"
                 >Home</router-link>
             </li>
+
             <li class="nav-item">
-                <router-link
+                <a
                     class="nav-link"
-                    :class="{'active': isActiveRoute(['internet_packages'])}"
-                    to="/internet-packages"
-                >Internet Packages</router-link>
+                    :class="{'active': isActiveRoute(['sim_orders_physical', 'sim_orders_e_sim'])}"
+                    data-bs-toggle="collapse"
+                    href="#collapseOrders"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseOrders"
+                >
+                    Orders
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <ul class="collapse pl-4" id="collapseOrders">
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            :class="{'active': isActiveRoute(['sim_orders_physical'])}"
+                            to="/sim-orders/physical"
+                        >Physical SIM</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            :class="{'active': isActiveRoute(['sim_orders_e_sim'])}"
+                            to="/sim-orders/e-sim"
+                        >E-SIM</router-link>
+                    </li>
+                </ul>
             </li>
+
             <li class="nav-item">
                 <router-link
                     class="nav-link"
-                    :class="{'active': isActiveRoute(['sim_cards'])}"
-                    to="/sim-cards"
-                >Sim Cards</router-link>
+                    :class="{'active': isActiveRoute(['dealers', 'dealer_show', 'dealer_create', 'dealers_edit'])}"
+                    to="/dealers"
+                >Dealers</router-link>
             </li>
+
             <li class="nav-item">
                 <router-link
                     class="nav-link"
-                    :class="{'active': isActiveRoute(['sim_orders'])}"
-                    to="/sim-orders"
-                >Sim Orders</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link
-                    class="nav-link"
-                    :class="{'active': isActiveRoute(['users', 'users_show', 'users_create'])}"
+                    :class="{'active': isActiveRoute(['users', 'users_show', 'users_create', 'users_edit'])}"
                     to="/users"
                 >Users</router-link>
             </li>
+
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    :class="{'active': isActiveRoute(['internet_packages', 'sim_cards'])}"
+                    data-bs-toggle="collapse"
+                    href="#collapseInventory"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseInventory"
+                >
+                    Inventory
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <ul class="collapse pl-4" id="collapseInventory">
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            :class="{'active': isActiveRoute(['internet_packages'])}"
+                            to="/internet-packages"
+                        >Internet Packages</router-link>
+                    </li>
+
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            :class="{'active': isActiveRoute(['sim_cards'])}"
+                            to="/sim-cards"
+                        >Sim Cards</router-link>
+                    </li>
+                </ul>
+            </li>
+
             <li class="nav-item">
                 <router-link
                     class="nav-link"
@@ -71,6 +125,10 @@
             &.active {
                 color: #0d6efd;
             }
+        }
+
+        ul {
+            list-style: none;
         }
     }
 </style>

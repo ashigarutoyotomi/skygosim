@@ -16,6 +16,7 @@ class SimOrder extends Model
         'sim_id',
         'sim_type',
         'status',
+        'key',
     ];
 
     const SIM_TYPE_PHYSICAL = 1; // Physical sim type
@@ -33,5 +34,10 @@ class SimOrder extends Model
     public function sim()
     {
         return $this->belongsTo(Sim::class, 'sim_id');
+    }
+
+    public function address()
+    {
+        return $this->hasOne(SimOrderAddress::class, 'sim_order_id');
     }
 }
