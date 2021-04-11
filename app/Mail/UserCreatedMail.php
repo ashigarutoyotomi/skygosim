@@ -31,7 +31,7 @@ class UserCreatedMail extends Mailable
      */
     public function build()
     {
-        return $this->from('info@skygosim.com')
-            ->view('emails.users.created');
+        return $this->view('emails.users.created')
+            ->subject("Welcome to SkyGo!");
     }
 }

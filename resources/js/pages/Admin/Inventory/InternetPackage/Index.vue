@@ -1,8 +1,6 @@
 <template>
     <div id="internet-packages">
-        <upload-packages-modal
-            modal-id="uploadPackagesModal"
-        />
+        <upload-packages-modal />
 
         <template v-if="loading">
             <div class="row">
@@ -27,8 +25,7 @@
                                     type="button"
                                     class="btn btn-light btn-sm"
                                     title="Upload new packages"
-                                    data-toggle="modal"
-                                    data-target="#uploadPackagesModal"
+                                    @click="openUploadModal"
                                 >
                                     <i class="bi bi-cloud-arrow-up"></i>
                                 </button>
@@ -39,7 +36,7 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <template v-if="!internetPackages.data.length">
+                        <template v-if="!data.data.length">
                             <div class="text-muted mb-4">
                                 Packages not found
                             </div>
@@ -47,14 +44,13 @@
                             <button
                                 type="button"
                                 class="btn btn-light btn-sm"
-                                data-toggle="modal"
-                                data-target="#uploadPackagesModal"
+                                @click="openUploadModal"
                             >
                                 Upload Packages
                             </button>
                         </template>
 
-                        <template v-if="internetPackages.data.length">
+                        <template v-if="data.data.length">
                             <table class="table table-striped table-sm">
                                 <thead>
                                     <tr>
@@ -62,17 +58,19 @@
                                         <th scope="col">Area ENG</th>
                                         <th scope="col">Data ENG</th>
                                         <th scope="col">Price USD</th>
-<!--                                        <th scope="col">GTT Price USD</th>-->
+                                        <th scope="col">GTT Price USD</th>
                                         <th scope="col">Days</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(internetPackage, key) in internetPackages.data">
-                                        <th scope="row">{{ key + 1 }}</th>
+                                    <tr v-for="(internetPackage, key) in data.data">
+                                        <th scope="row">
+                                            {{(key + 1) + (data.per_page * (data.current_page - 1))}}
+                                        </th>
                                         <td>{{ internetPackage.area_eng }}</td>
                                         <td>{{ internetPackage.data_eng }}</td>
                                         <td>{{ internetPackage.price_usd }} $</td>
-<!--                                        <td>{{ internetPackage.gtt_price_usd }} $</td>-->
+                                        <td>{{ internetPackage.gtt_price_usd }} $</td>
                                         <td>{{ internetPackage.days }}</td>
                                     </tr>
                                 </tbody>
@@ -81,33 +79,10 @@
                     </div>
                 </div>
 
-                <div
-                    v-if="internetPackages.data.length"
-                    class="row"
-                >
-                    <nav>
-                        <ul class="pagination justify-content-end">
-<!--                            <li class="page-item disabled">-->
-<!--                                <a class="page-link" href="#" aria-label="Previous">-->
-<!--                                    <span aria-hidden="true">&laquo;</span>-->
-<!--                                </a>-->
-<!--                            </li>-->
-                            <li
-                                v-for="(page, key) in internetPackages.last_page"
-                                class="page-item"
-                            >
-                                <a class="page-link" @click="setPage(key + 1)">
-                                    {{ key + 1 }}
-                                </a>
-                            </li>
-<!--                            <li class="page-item">-->
-<!--                                <a class="page-link" href="#" aria-label="Next">-->
-<!--                                    <span aria-hidden="true">&raquo;</span>-->
-<!--                                </a>-->
-<!--                            </li>-->
-                        </ul>
-                    </nav>
-                </div>
+                <pagination
+                    :data="data"
+                    load-event="inventory-internet-packages.load"
+                />
             </div>
         </template>
     </div>
@@ -115,47 +90,53 @@
 
 <script>
     import UploadPackagesModal from "./modals/UploadPackagesModal";
+    import Pagination from "../../../../components/admin/pagination";
 
     export default {
         name: "InternetPackageIndex",
 
         components: {
+            Pagination,
             UploadPackagesModal,
         },
 
         data () {
             return {
-                internetPackages: [],
+                data: [],
                 loading: false,
-                page: 1,
             }
         },
 
         created() {
-            this.$root.$on('internet-packages.load', this.loadData);
+            this.$root.$on('inventory-internet-packages.load', this.loadData);
 
             this.loadData();
         },
 
         beforeDestroy() {
-            this.$root.$off('internet-packages.load', this.loadData);
+            this.$root.$off('inventory-internet-packages.load', this.loadData);
         },
 
         methods: {
-            loadData() {
+            loadData(data) {
                 this.loading = true;
+                let params = {};
 
-                axios.get(`/internet-packages?page=${this.page}`)
+                if (data && data.params && data.params.page) {
+                    params.page = data.params.page
+                }
+
+                axios.get(`/internet-packages`, {
+                    params
+                })
                     .then(({data}) => {
-                        this.internetPackages = data;
+                        this.data = data;
                         this.loading = false;
                     });
             },
 
-            setPage(page) {
-                this.page = page;
-
-                this.loadData();
+            openUploadModal() {
+                this.$root.$emit('modal::show::UploadPackagesModal');
             }
         }
     }

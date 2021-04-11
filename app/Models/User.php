@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User\UserAddress;
+use App\Models\User\UserSim;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function address()
     {
         return $this->hasOne(UserAddress::class, 'user_id');
+    }
+
+    public function sims()
+    {
+        return $this->hasOne(UserSim::class, 'user_id');
     }
 }

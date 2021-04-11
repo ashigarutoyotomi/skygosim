@@ -12,13 +12,15 @@ import DealerCreate from "../pages/Admin/Dealer/Form/Create";
 import DealerEdit from "../pages/Admin/Dealer/Form/Edit";
 import DealerAddressCreate from '../pages/Admin/Dealer/Form/CreateAddress';
 
-import InternetPackageIndex from "../pages/Admin/InternetPackage/Index";
+import InternetPackageIndex from "../pages/Admin/Inventory/InternetPackage/Index";
 
 import InventoryPhysicalSims from "../pages/Admin/Inventory/Sims/PhysicalSims";
 import InventoryESims from "../pages/Admin/Inventory/Sims/ESims";
 
 import SimOrdersIndex from "../pages/Admin/SimOrders/Index";
 import ShowPhysicalSimOrder from "../pages/Admin/SimOrders/ShowPhysicalSim";
+
+import SettingsIndex from "../pages/Admin/Settings/Index";
 
 export const routes = [
     {
@@ -124,5 +126,11 @@ export const routes = [
         path: '/sim-orders/:simOrderId/show',
         props: true,
         component: ShowPhysicalSimOrder
+    },
+
+    {
+        name: 'settings',
+        path: '/settings',
+        component: SettingsIndex
     },
 ];

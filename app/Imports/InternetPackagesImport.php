@@ -33,6 +33,11 @@ class InternetPackagesImport implements ToCollection
             $activeInternetPackages = InternetPackage::whereNull('expired_at')->get();
 
             foreach ($data as $item) {
+                $price = $item['price_usd'];
+                $percentage = (new SettingsGateway)->getInternetPackagesPricePercentage();
+                $percentPrice = ((int)$price * (int)$percentage) / 100;
+                $item['gtt_price_usd'] = $price + $percentPrice;
+
                 InternetPackage::create($item);
             }
 

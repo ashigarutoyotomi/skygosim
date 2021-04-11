@@ -12,7 +12,9 @@ use App\Gateways\User\UserGateway;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InternetPackage\PurchaseInternetPackageRequest;
 use App\Models\InternetPackage;
+use App\Models\Sim\Sim;
 use App\Models\User;
+use App\Models\User\UserInternetPackage;
 
 class PackagesPageController extends Controller
 {
@@ -28,6 +30,9 @@ class PackagesPageController extends Controller
     public function checkout(PurchaseInternetPackageRequest $request)
     {
         $user = User::where('email', $request->get('email_address'))->first();
+        $sim = Sim::where('iccid', $request->get('iccid'))->first();
+        $internetPackage = InternetPackage::where('package_id', $request->get('package_id'))
+            ->first();
 
         if (!$user) {
             $userData = new CreateUserData([
@@ -78,6 +83,13 @@ class PackagesPageController extends Controller
 //
 //            dump($statusCode);
 //            dd($content);
+
+        $userInternetPackage = UserInternetPackage::create([
+            'user_id' => $user->id,
+            'sim_id' => $sim->id,
+            'internet_package_id' => $internetPackage->id,
+            'bought_price' => $request->input('amount'),
+        ]);
 
         return $payment;
 //        } catch (\Exception $e) {

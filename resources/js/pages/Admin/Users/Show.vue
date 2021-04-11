@@ -14,7 +14,9 @@
                     <div class="row">
                         <div class="col-12">
                             <dl class="row">
-                                <h5 class=""><u>Info</u></h5>
+                                <h6 class="">
+                                    <u><small>Info</small></u>
+                                </h6>
 
                                 <dt class="col-sm-3">
                                     Full name
@@ -38,7 +40,9 @@
                                 </dd>
 
                                 <template v-if="data.address">
-                                    <h5 class="mt-4"><u>Address</u></h5>
+                                    <h6 class="mt-4">
+                                        <u><small>Address</small></u>
+                                    </h6>
 
                                     <dt class="col-sm-3">
                                         Street
@@ -74,6 +78,14 @@
                 </div>
             </section>
 
+            <user-sims
+                :user-id="userId"
+            />
+
+            <user-internet-packages
+                :user-id="userId"
+            />
+
             <sim-orders-index
                 :user-id="userId"
             />
@@ -84,11 +96,15 @@
 <script>
     import { USER_ROLES } from "./constants";
     import SimOrdersIndex from "../SimOrders/Index";
+    import UserSims from "./Sims/UserSims";
+    import UserInternetPackages from "./InternetPackages/UserInternetPackages";
 
     export default {
         name: "UsersShow",
 
         components: {
+            UserInternetPackages,
+            UserSims,
             SimOrdersIndex
         },
 

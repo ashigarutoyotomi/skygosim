@@ -1,7 +1,5 @@
 <template>
-    <div id="inventory-e-sims">
-
-        <upload-physical-sims-modal />
+    <div id="user-sims" class="mb-4">
 
         <template v-if="loading">
             <div class="row">
@@ -12,26 +10,12 @@
         </template>
 
         <template v-if="!loading">
-            <div class="internet-packages bg-white shadow-sm rounded-lg py-4 px-4">
+            <div class="internet-packages bg-white shadow-sm rounded-3 py-4 px-4">
                 <div class="row">
                     <div class="col-4">
                         <div class="mb-4">
-                            <h5>E-SIMs ({{data ? data.total : 0}})</h5>
+                            <h5>User SIMs ({{data ? data.total : 0}})</h5>
                         </div>
-                    </div>
-                    <div class="col-8">
-                        <ul class="internet-packages__actions-list">
-                            <li>
-                                <button
-                                    type="button"
-                                    class="btn btn-light btn-sm"
-                                    title="Upload new packages"
-                                    @click="openUploadModal"
-                                >
-                                    <i class="bi bi-cloud-arrow-up"></i>
-                                </button>
-                            </li>
-                        </ul>
                     </div>
                 </div>
 
@@ -39,16 +23,8 @@
                     <div class="col-12">
                         <template v-if="!data.data.length">
                             <div class="text-muted mb-4">
-                                E-SIMs not found
+                                User SIMs not found
                             </div>
-
-                            <button
-                                type="button"
-                                class="btn btn-light btn-sm"
-                                @click="openUploadModal"
-                            >
-                                Upload E-SIMs
-                            </button>
                         </template>
 
                         <template v-if="data.data.length">
@@ -68,11 +44,11 @@
                                     <th scope="row">
                                         {{(key + 1) + (data.per_page * (data.current_page - 1))}}
                                     </th>
-                                    <td>{{ item.imsi }}</td>
-                                    <td>{{ simTypes[item.sim_type].label }}</td>
-                                    <td>{{ item.iccid }}</td>
-                                    <td>{{ item.pin_2 }}</td>
-                                    <td>{{ item.puk_1 }}</td>
+                                    <td>{{ item.sim.imsi }}</td>
+                                    <td>{{ simTypes[item.sim.sim_type].label }}</td>
+                                    <td>{{ item.sim.iccid }}</td>
+                                    <td>{{ item.sim.pin_2 }}</td>
+                                    <td>{{ item.sim.puk_1 }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -83,7 +59,7 @@
                 <template v-if="data.data.length">
                     <pagination
                         :data="data"
-                        load-event="inventory-e-sims.load"
+                        load-event="user-sims.load"
                     />
                 </template>
             </div>
@@ -92,14 +68,19 @@
 </template>
 
 <script>
-    import {SIM_TYPES} from "./constants";
-    import UploadPhysicalSimsModal from "./modals/UploadPhysicalSimsModal";
+    import { SIM_TYPES } from "../../Inventory/Sims/constants";
     import Pagination from "../../../../components/admin/pagination";
 
     export default {
-        name: "InventoryESims",
+        name: "UserSims",
+        components: {Pagination},
 
-        components: {Pagination, UploadPhysicalSimsModal},
+        props: {
+            userId: {
+                type: String,
+                default: () => null,
+            }
+        },
 
         data () {
             return {
@@ -110,13 +91,13 @@
         },
 
         created() {
-            this.$root.$on('inventory-e-sims.load', this.loadData);
+            this.$root.$on('user-sims.load', this.loadData);
 
             this.loadData();
         },
 
         beforeDestroy() {
-            this.$root.$off('inventory-e-sims.load', this.loadData);
+            this.$root.$off('user-sims.load', this.loadData);
         },
 
         methods: {
@@ -128,17 +109,13 @@
                     params.page = data.params.page
                 }
 
-                axios.get('/sims/e-sims', {
+                axios.get(`/users/${this.userId}/sims`, {
                     params
                 })
                     .then(({data}) => {
                         this.data = data;
                         this.loading = false;
                     });
-            },
-
-            openUploadModal() {
-                this.$root.$emit('modal::show::UploadPhysicalSimsModal');
             },
         }
     }

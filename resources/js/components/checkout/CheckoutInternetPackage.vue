@@ -7,7 +7,7 @@
                         name="checkout"
                         class="checkout woocommerce-checkout"
                         novalidate="novalidate"
-                        @click.prevent="processPayment"
+                        @submit.prevent="processPayment"
                     >
                         <div class="col2-set" id="customer_details">
                             <div class="col-1">
@@ -250,9 +250,9 @@
                                         Price
                                     </td>
                                     <td class="product-total">
-                                            <span class="woocommerce-Price-amount amount">
-                                                <span class="woocommerce-Price-currencySymbol">$</span>{{ checkoutData.price }}
-                                            </span>
+                                        <span class="woocommerce-Price-amount amount">
+                                            <span class="woocommerce-Price-currencySymbol">$</span>{{ checkoutData.price }}
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr class="cart_item">
@@ -260,9 +260,9 @@
                                         Payment method
                                     </td>
                                     <td class="product-total">
-                                            <span class="woocommerce-Price-amount amount">
-                                                VISA
-                                            </span>
+                                        <span class="woocommerce-Price-amount amount">
+                                            VISA
+                                        </span>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -271,11 +271,21 @@
                             <div id="payment" class="woocommerce-checkout-payment">
                                 <div class="form-row place-order">
                                     <button
+                                        v-if="!loading"
                                         type="submit"
                                         class="btn btn-outline-maincolor small-button"
                                         name="woocommerce_checkout_place_order"
                                     >
                                         <span>Pay Now</span>
+                                    </button>
+
+                                    <button
+                                        v-if="loading"
+                                        type="button"
+                                        class="btn btn-maincolor"
+                                        disabled
+                                    >
+                                        <span>Loading...</span>
                                     </button>
                                 </div>
                             </div>
@@ -321,6 +331,7 @@ export default {
                 city: '',
                 email_address: '',
                 zip_code: '',
+                package_id: null,
             },
             loading: false,
             errors: {},
@@ -339,6 +350,7 @@ export default {
 
     methods: {
         async processPayment() {
+            this.loading = true;
             const {paymentMethod, error} = await this.stripe.createPaymentMethod(
                 'card', this.cardElement, {
                     billing_details: {
@@ -356,19 +368,25 @@ export default {
 
             if (error) {
                 this.stripeCardError = error;
+                this.loading = false;
             } else {
                 this.form.payment_method_id = paymentMethod.id;
-                this.form.amount = Math.ceil(this.checkoutData.price);
+                this.form.amount = this.checkoutData.price;
                 this.form.package_id = this.checkoutData.package_id;
 
                 axios.post('/packages/checkout', this.form)
                     .then(response => {
                         if (response) {
+                            this.loading = false;
                             // window.location.href = '/checkout/result'
                         }
                     })
                     .catch(e => {
-                        this.errors = e.response.data.errors;
+                        this.loading = false;
+
+                        if (e.response.status === 422) {
+                            this.errors = e.response.data.errors;
+                        }
                     });
             }
         },

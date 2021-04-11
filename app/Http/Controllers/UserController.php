@@ -6,8 +6,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Users\CreateUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
+use App\Models\InternetPackage;
 use App\Models\Sim\SimOrder;
 use App\Models\User;
+use App\Models\User\UserSim;
 
 class UserController extends Controller
 {
@@ -21,7 +23,10 @@ class UserController extends Controller
 
     public function show($user_id)
     {
-        return User::with('address')
+        return User::with([
+            'address',
+            'sims.sim'
+        ])
             ->find($user_id);
     }
 
@@ -77,5 +82,24 @@ class UserController extends Controller
     {
         return SimOrder::with('user', 'sim')
             ->where('user_id', $user_id)->paginate(20);
+    }
+
+    public function getSims($user_id)
+    {
+        $userSims = UserSim::with('sim')
+            ->where('user_id', $user_id)
+            ->paginate(20);
+
+        return $userSims;
+    }
+
+    public function getInternetPackages($user_id)
+    {
+        $internetPackages = InternetPackage::select('internet_packages.*')
+            ->leftJoin('user_internet_packages as uip', 'uip.internet_package_id', 'internet_packages.id')
+            ->where('uip.user_id', $user_id)
+            ->paginate(20);
+
+        return $internetPackages;
     }
 }

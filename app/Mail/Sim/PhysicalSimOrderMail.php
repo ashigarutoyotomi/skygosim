@@ -38,7 +38,7 @@ class PhysicalSimOrderMail extends Mailable
      */
     public function build()
     {
-        return $this->from('info@skygo.com')
-            ->view('emails.sim.physical-sim-order');
+        return $this->view('emails.sim.physical-sim-order')
+            ->subject("Phyical SIM purchase");
     }
 }

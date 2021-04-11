@@ -28,7 +28,6 @@ class PurchaseInternetPackageRequest extends FormRequest
             'payment_method_id' => 'required',
             'iccid' => 'required',
             'amount' => 'required',
-            'cart' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
             'state' => 'required',
@@ -36,6 +35,7 @@ class PurchaseInternetPackageRequest extends FormRequest
             'city' => 'required',
             'email_address' => 'required',
             'zip_code' => 'required',
+            'package_id' => 'required',
         ];
     }
 }

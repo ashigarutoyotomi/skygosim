@@ -11,6 +11,7 @@ use App\Http\Controllers\Pages\HowToPageController;
 use App\Http\Controllers\Pages\PackagesPageController;
 use App\Http\Controllers\Pages\SimPageController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Sim\SimController;
 use App\Http\Controllers\Sim\SimOrderController;
 use App\Http\Controllers\UserController;
@@ -73,6 +74,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/users/{user_id}/show', [UserController::class, 'show']);
     Route::get('/users/{user_id}/edit', [UserController::class, 'edit']);
     Route::get('/users/{user_id}/orders', [UserController::class, 'orders']);
+    Route::get('/users/{user_id}/sims', [UserController::class, 'getSims']);
+    Route::get('/users/{user_id}/internet-packages', [UserController::class, 'getInternetPackages']);
 
     Route::post('/users/create', [UserController::class, 'store']);
     Route::post('/users/{user_id}/update', [UserController::class, 'update']);
@@ -101,4 +104,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/sim-orders/{sim_order_id}/show', [SimOrderController::class, 'showPhysicalSim']);
     Route::post('/sim-orders/{sim_order_id}/add-physical-sim', [SimOrderController::class, 'addPhysicalSim']);
     Route::put('/sim-orders/{sim_order_id}/finish', [SimOrderController::class, 'finish']);
+
+    Route::get('/settings', [SettingsController::class, 'index']);
 });

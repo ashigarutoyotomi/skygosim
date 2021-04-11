@@ -75,7 +75,7 @@
                                 <div class="price-wrap d-flex">
                                     <span class="plan-sign small-text">usd</span>
                                     <span class="plan-price color-main3">
-                                        {{ internetPackage.price_usd }}
+                                        {{ internetPackage.gtt_price_usd }}
                                     </span>
                                 </div>
                                 <div class="plan-button">
@@ -132,7 +132,7 @@
             },
 
             chooseCountry(country) {
-                this.selectedCountry = _.orderBy(country, 'price_usd');
+                this.selectedCountry = _.orderBy(country, 'gtt_price_usd');
             },
 
             purchase(internetPackage) {
@@ -141,7 +141,7 @@
                     'title': internetPackage.data_eng,
                     'des': internetPackage.destination_eng,
                     'days': internetPackage.days,
-                    'price': internetPackage.price_usd,
+                    'price': internetPackage.gtt_price_usd,
                     'package_id': internetPackage.package_id
                 };
 

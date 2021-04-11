@@ -9,7 +9,9 @@ use App\Http\Requests\InternetPackage\PurchaseInternetPackageRequest;
 use App\Http\Requests\InternetPackage\UploadInternetPackagesFileRequest;
 use App\Imports\InternetPackagesImport;
 use App\Models\InternetPackage;
+use App\Models\Sim\Sim;
 use App\Models\User;
+use App\Models\User\UserInternetPackage;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -41,6 +43,8 @@ class InternetPackageController extends Controller
     public function purchase(PurchaseInternetPackageRequest $request)
     {
         $user = User::where('email', $request->input('email_address'))->first();
+        $sim = Sim::where('iccid', $request->get('iccid'))->first();
+        $internetPackage = InternetPackage::find($request->get('package_id'));
 
 //        try {
             $payment = $user->charge(
@@ -49,7 +53,6 @@ class InternetPackageController extends Controller
             );
 
             $payment = $payment->asStripePaymentIntent();
-//            dd($payment);
 
 //            $endpoint = "http://112.74.196.154:18091/sim/v1/payOrder/test";
 //            $client = new \GuzzleHttp\Client();
@@ -63,9 +66,15 @@ class InternetPackageController extends Controller
 //
 //            $statusCode = $response->getStatusCode();
 //            $content = $response->getBody();
-//
-//            dump($statusCode);
-//            dd($content);
+
+            $userInternetPackage = UserInternetPackage::create([
+                'user_id' => $user->id,
+                'sim_id' => $sim->id,
+                'internet_package_id' => $internetPackage->id,
+                'bought_price' => $request->input('amount'),
+            ]);
+
+            dd($userInternetPackage);
 
             return $payment;
 //        } catch (\Exception $e) {

@@ -41,7 +41,7 @@ class ESimOrderMail extends Mailable
      */
     public function build()
     {
-        return $this->from('info@skygo.com')
-            ->view('emails.sim.e-sim-order');
+        return $this->view('emails.sim.e-sim-order')
+            ->subject("E-SIM purchase");
     }
 }
