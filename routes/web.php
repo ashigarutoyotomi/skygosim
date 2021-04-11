@@ -98,7 +98,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/sims/physical', [SimController::class, 'getPhysicalSims']);
     Route::get('/sims/physical/available', [SimController::class, 'getAvailablePhysicalSims']);
     Route::get('/sims/e-sims', [SimController::class, 'getESims']);
-    Route::get('/sims/upload-file', [SimController::class, 'uploadSimsFromFile']);
+    Route::post('/sims/upload-file', [SimController::class, 'uploadSimsFromFile']);
 
     Route::get('/sim-orders', [SimOrderController::class, 'index']);
     Route::get('/sim-orders/{sim_order_id}/show', [SimOrderController::class, 'showPhysicalSim']);

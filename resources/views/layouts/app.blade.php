@@ -106,10 +106,27 @@
                                                 @endguest
                                             </ul>
                                         </nav>
+
+                                        <!--hidding includes on small devices. They are duplicated in topline-->
+                                        <ul class="top-includes d-none d-xl-block search-icon">
+
+                                            <li>
+                                                <!--modal search-->
+                                                <span>
+												<a href="#" class="search_modal_button">
+													<i class="fa fa-search"></i>
+												</a>
+											</span>
+
+                                            </li>
+
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <span class="toggle_menu"><span></span></span>
                     </header>
                 </div>
 

@@ -138,12 +138,6 @@
             openUploadModal() {
                 this.$root.$emit('modal::show::UploadPhysicalSimsModal');
             },
-
-            setPage(page) {
-                this.page = page;
-
-                this.loadData();
-            }
         }
     }
 </script>

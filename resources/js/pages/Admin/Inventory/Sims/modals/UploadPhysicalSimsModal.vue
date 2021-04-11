@@ -109,7 +109,7 @@
                 const formData = new FormData();
                 formData.append('file', this.form.file);
 
-                axios.post('/sim-cards/upload_sim_cards', formData)
+                axios.post('/sims/upload-file', formData)
                     .then(({data}) => {
                         this.loading = false;
 
