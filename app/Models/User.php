@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Sim\SimOrder;
 use App\Models\User\UserAddress;
+use App\Models\User\UserInternetPackage;
 use App\Models\User\UserSim;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -58,6 +60,16 @@ class User extends Authenticatable
 
     public function sims()
     {
-        return $this->hasOne(UserSim::class, 'user_id');
+        return $this->hasMany(UserSim::class, 'user_id');
+    }
+
+    public function internet_packages()
+    {
+        return $this->hasMany(UserInternetPackage::class, 'user_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(SimOrder::class, 'user_id');
     }
 }

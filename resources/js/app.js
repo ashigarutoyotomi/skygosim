@@ -46,6 +46,8 @@ Vue.component('HomeIndex', require('./pages/Home/Index').default);
 
 Vue.component('AddSimIndex', require('./components/AddSim/Index').default);
 
+Vue.component('ProfileIndex', require('./pages/Profile/ProfileIndex').default);
+
 Vue.component('CheckoutInternetPackage', require('./components/checkout/CheckoutInternetPackage.vue').default);
 Vue.component('CheckoutESimForm', require('./components/checkout/CheckoutESim.vue').default);
 Vue.component('CheckoutPhysicalSimForm', require('./components/checkout/CheckoutPhysicalSim.vue').default);

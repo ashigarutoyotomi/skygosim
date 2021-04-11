@@ -6,61 +6,101 @@
                 <div class="row align-items-center">
                     <div class="col-xl-2 col-lg-4 col-md-5 col-11">
                         <a href="/" class="logo">
-                            <span class="logo-text py-20"><strong>Sky</strong>Go</span>
+                            <img class="py-20" src="/images/skygo_logo.png" alt="">
                         </a>
                     </div>
-                    <div class="col-xl-9 col-lg-8 col-md-7 col-1">
+                    <div class="col-xl-10 col-lg-8 col-md-7 col-1">
                         <div class="nav-wrap">
 
                             <!-- main nav start -->
                             <nav class="top-nav">
                                 <ul class="nav sf-menu">
-                                    <li class="active">
+                                    <li class="">
                                         <a href="/">Home</a>
                                     </li>
 
-                                    <li>
-                                        <a href="/internet">Internet</a>
+                                    <li class="">
+                                        <a href="/add-sim">Add Sim</a>
+                                    </li>
+
+                                    <li class="">
+                                        <a href="/packages">Packages</a>
+                                    </li>
+
+                                    <li class="">
+                                        <a href="/how-to">How To</a>
+                                    </li>
+
+                                    <li class="">
+                                        <a href="/faq">FAQ</a>
                                     </li>
 
                                     <li>
                                         <a href="#">|</a>
                                     </li>
 
-                                    <li>
-                                        <a href="/login">Log In</a>
-                                    </li>
+                                    <template
+                                        v-if="!user"
+                                    >
+                                        <li class="">
+                                            <a href="/login">Log In</a>
+                                        </li>
 
-                                    <li>
-                                        <a href="/register">Register</a>
-                                    </li>
+                                        <li class="">
+                                            <a href="/register">Register</a>
+                                        </li>
+                                    </template>
+
+                                    <template
+                                        v-if="user"
+                                    >
+                                        <li>
+                                            <a href="#">{{ user.first_name }} {{ user.last_name }}</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="/profile">
+                                                        Profile
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" @click="logout">
+                                                        Logout
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </template>
                                 </ul>
                             </nav>
-                            <!-- eof main nav -->
-
-                            <!--hidding includes on small devices. They are duplicated in topline-->
-                            <ul class="top-includes d-none d-xl-block search-icon">
-                                <li>
-                                    <!--modal search-->
-                                    <span>
-                                        <a class="search_modal_button">
-                                            <i class="fa fa-search"></i>
-                                        </a>
-                                    </span>
-                                </li>
-                            </ul>
-
                         </div>
                     </div>
                 </div>
             </div>
+
+            <span class="toggle_menu"><span></span></span>
         </header>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Navbar"
+        name: "Navbar",
+
+        props: {
+            user: {
+                type: Object,
+                default: () => null,
+            }
+        },
+
+        methods: {
+            logout() {
+                axios.post('/logout')
+                    .then(() => {
+                        window.location.href = '/';
+                    });
+            }
+        }
     }
 </script>
 

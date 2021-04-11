@@ -9,6 +9,7 @@ use App\Http\Controllers\Pages\FaqPageController;
 use App\Http\Controllers\Pages\HomePageController;
 use App\Http\Controllers\Pages\HowToPageController;
 use App\Http\Controllers\Pages\PackagesPageController;
+use App\Http\Controllers\Pages\ProfilePageController;
 use App\Http\Controllers\Pages\SimPageController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\Settings\SettingsController;
@@ -62,6 +63,9 @@ Route::get('/checkout/e-sim', [PagesController::class, 'checkoutESim']);
 Route::get('/checkout/result', [PagesController::class, 'checkoutResult']);
 
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfilePageController::class, 'index']);
+});
 
 
 Route::middleware(['auth', 'admin'])->group(function () {

@@ -340,7 +340,7 @@ export default {
                     .then(response => {
                         if (response) {
                             this.loading = false;
-                            // window.location.href = '/checkout/result'
+                            window.location.href = '/checkout/result'
                         }
                     })
                     .catch(e => {
