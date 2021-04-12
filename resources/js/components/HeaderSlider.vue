@@ -11,13 +11,21 @@
                                 <div class="intro_layers_wrapper">
                                     <div class="intro_layers">
                                         <div class="intro_layer" data-animation="fadeInRight">
-                                            <h1 class="intro_featured_word">Prepare<br>for<br>High Speed<br> Internet</h1>
+                                            <h1 class="intro_featured_word">
+                                                GLOBAL DATA
+                                                <br>
+                                                For
+                                                <br>
+                                                SIM And
+                                                <br>
+                                                eSIM
+                                            </h1>
                                             <h5 class="intro_before_featured_word intro-absolute text-uppercase fw-200">
                                                 Best global SIM Provider
                                             </h5>
                                         </div>
                                         <div class="intro_layer" data-animation="fadeInUp">
-                                            <p class="text-uppercase intro_after_featured_word">Check our Internet Plans</p>
+                                            <p class="text-uppercase intro_after_featured_word">Add your sim</p>
                                         </div>
 
                                         <a
@@ -41,7 +49,15 @@
                                 <div class="intro_layers_wrapper">
                                     <div class="intro_layers">
                                         <div class="intro_layer" data-animation="fadeInRight">
-                                            <h1 class="slide2 intro_featured_word">Internet<br>for<br>Institution<br>& SME</h1>
+                                            <h1 class="slide2 intro_featured_word">
+                                                PREPARE
+                                                <br>
+                                                For
+                                                <br>
+                                                HIGH-SPEED
+                                                <br>
+                                                INTERNET
+                                            </h1>
                                             <h5 class="fw-300 text-uppercase intro_before_featured_word intro-absolute">
                                                 Leased Line Internet<br> with A+ Category
                                             </h5>
@@ -81,7 +97,15 @@
                                 <div class="intro_layers_wrapper">
                                     <div class="intro_layers">
                                         <div class="intro_layer" data-animation="fadeInRight">
-                                            <h1 class="slide2 intro_featured_word">Don’t<br>Suffer<br>The<br>Buffer</h1>
+                                            <h1 class="slide2 intro_featured_word">
+                                                Mobile Data
+                                                <br>
+                                                Around
+                                                <br>
+                                                the
+                                                <br>
+                                                world Worldwide Data Plans
+                                            </h1>
                                             <h5 class="intro-absolute fw-300 text-uppercase intro_before_featured_word">
                                                 Speeds Up to 1 Gbps<br> with Unlimited Data
                                             </h5>

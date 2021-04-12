@@ -28,7 +28,16 @@
                                     </li>
 
                                     <li class="">
-                                        <a href="/how-to">How To</a>
+                                        <a href="#">How To</a>
+                                        <ul>
+                                            <li class="">
+                                                <a href="/how-to">How to</a>
+                                            </li>
+
+                                            <li class="">
+                                                <a href="/how-to-add-e-sim">How to add E-SIM</a>
+                                            </li>
+                                        </ul>
                                     </li>
 
                                     <li class="">

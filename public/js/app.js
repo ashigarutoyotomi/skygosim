@@ -2464,6 +2464,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "HeaderSlider"
 });
@@ -2636,6 +2660,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8384,137 +8417,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _components_HeaderSlider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/HeaderSlider */ "./resources/js/components/HeaderSlider.vue");
 /* harmony import */ var _components_InternetPackages__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/InternetPackages */ "./resources/js/components/InternetPackages.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -53582,13 +53484,21 @@ var staticRenderFns = [
                             },
                             [
                               _c("h1", { staticClass: "intro_featured_word" }, [
-                                _vm._v("Prepare"),
+                                _vm._v(
+                                  "\n                                                GLOBAL DATA\n                                                "
+                                ),
                                 _c("br"),
-                                _vm._v("for"),
+                                _vm._v(
+                                  "\n                                                For\n                                                "
+                                ),
                                 _c("br"),
-                                _vm._v("High Speed"),
+                                _vm._v(
+                                  "\n                                                SIM And\n                                                "
+                                ),
                                 _c("br"),
-                                _vm._v(" Internet")
+                                _vm._v(
+                                  "\n                                                eSIM\n                                            "
+                                )
                               ]),
                               _vm._v(" "),
                               _c(
@@ -53619,7 +53529,7 @@ var staticRenderFns = [
                                   staticClass:
                                     "text-uppercase intro_after_featured_word"
                                 },
-                                [_vm._v("Check our Internet Plans")]
+                                [_vm._v("Add your sim")]
                               )
                             ]
                           ),
@@ -53658,13 +53568,21 @@ var staticRenderFns = [
                                 "h1",
                                 { staticClass: "slide2 intro_featured_word" },
                                 [
-                                  _vm._v("Internet"),
+                                  _vm._v(
+                                    "\n                                                PREPARE\n                                                "
+                                  ),
                                   _c("br"),
-                                  _vm._v("for"),
+                                  _vm._v(
+                                    "\n                                                For\n                                                "
+                                  ),
                                   _c("br"),
-                                  _vm._v("Institution"),
+                                  _vm._v(
+                                    "\n                                                HIGH-SPEED\n                                                "
+                                  ),
                                   _c("br"),
-                                  _vm._v("& SME")
+                                  _vm._v(
+                                    "\n                                                INTERNET\n                                            "
+                                  )
                                 ]
                               ),
                               _vm._v(" "),
@@ -53764,13 +53682,21 @@ var staticRenderFns = [
                                 "h1",
                                 { staticClass: "slide2 intro_featured_word" },
                                 [
-                                  _vm._v("Don’t"),
+                                  _vm._v(
+                                    "\n                                                Mobile Data\n                                                "
+                                  ),
                                   _c("br"),
-                                  _vm._v("Suffer"),
+                                  _vm._v(
+                                    "\n                                                Around\n                                                "
+                                  ),
                                   _c("br"),
-                                  _vm._v("The"),
+                                  _vm._v(
+                                    "\n                                                the\n                                                "
+                                  ),
                                   _c("br"),
-                                  _vm._v("Buffer")
+                                  _vm._v(
+                                    "\n                                                world Worldwide Data Plans\n                                            "
+                                  )
                                 ]
                               ),
                               _vm._v(" "),
@@ -54249,7 +54175,19 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", {}, [
-      _c("a", { attrs: { href: "/how-to" } }, [_vm._v("How To")])
+      _c("a", { attrs: { href: "#" } }, [_vm._v("How To")]),
+      _vm._v(" "),
+      _c("ul", [
+        _c("li", {}, [
+          _c("a", { attrs: { href: "/how-to" } }, [_vm._v("How to")])
+        ]),
+        _vm._v(" "),
+        _c("li", {}, [
+          _c("a", { attrs: { href: "/how-to-add-e-sim" } }, [
+            _vm._v("How to add E-SIM")
+          ])
+        ])
+      ])
     ])
   },
   function() {
@@ -62947,13 +62885,7 @@ var render = function() {
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3),
-      _vm._v(" "),
-      _c("internet-packages", {
-        attrs: { "internet-packages": _vm.internetPackages }
-      })
+      _vm._m(2)
     ],
     1
   )
@@ -62967,7 +62899,7 @@ var staticRenderFns = [
       "section",
       {
         staticClass:
-          "order-sim ls s-pt-75 s-pb-80 s-pb-lg-100 about-section text-center text-lg-left"
+          "ls s-pt-75 s-pb-80 s-pb-lg-100 about-section text-center text-lg-left"
       },
       [
         _c("div", { staticClass: "d-none d-lg-block divider-10" }),
@@ -62975,35 +62907,22 @@ var staticRenderFns = [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "row align-items-center" }, [
             _c("div", { staticClass: "col-12 col-lg-6 order-2 order-lg-1" }, [
-              _c("div", { staticClass: "about-image" }, [
-                _c("img", {
-                  attrs: { src: "/images/about-image.png", alt: "" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12 col-lg-6 order-1 order-lg-2" }, [
               _c("div", { staticClass: "d-none d-lg-block divider-20" }),
               _vm._v(" "),
               _c("div", { staticClass: "item-content" }, [
-                _c("h3", [_vm._v("No SIM? No ICCID?")]),
+                _c("h3", [_vm._v("eSIM Instant Connections")]),
                 _vm._v(" "),
-                _c("h6", { staticClass: "fw-500 font-italic" }, [
+                _c("p", [
                   _vm._v(
-                    "\n                            Choose between a physical SIM and e-sim\n                        "
+                    "\n                            A contactless solution to a physical SIM card, you can now install SkyGo’s eSIM on your device to access seamless worldwide data coverage.\n                            "
+                  ),
+                  _c("br"),
+                  _vm._v(
+                    "\n                            You'll never be confused by a plethora of SIM cards again when you can manage your data and plans directly on your own device.\n                        "
                   )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "d-none d-lg-block divider-20" }),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-maincolor",
-                    attrs: { href: "/physical-sim/order" }
-                  },
-                  [_c("span", [_vm._v("Phisical SIM")])]
-                ),
                 _vm._v(" "),
                 _c(
                   "a",
@@ -63014,6 +62933,14 @@ var staticRenderFns = [
                   [_c("span", [_vm._v("E-SIM")])]
                 )
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12 col-lg-6 order-1 order-lg-2" }, [
+              _c("div", {}, [
+                _c("img", {
+                  attrs: { src: "/images/cellular-connectivity.svg", alt: "" }
+                })
+              ])
             ])
           ])
         ])
@@ -63028,126 +62955,17 @@ var staticRenderFns = [
       "section",
       {
         staticClass:
-          "how-add-sim ds s-pt-80 s-pb-20 s-pt-lg-130 s-pb-lg-70 s-pt-xl-160 s-pb-xl-100 c-gutter-60 c-mb-50"
+          "ls s-pt-40 s-pb-50 s-pt-lg-120 s-pb-lg-90 s-pt-xl-160 s-pb-xl-130 c-mb-30 service-page2"
       },
       [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-lg-8 offset-lg-2" }, [
               _c("h3", { staticClass: "text-center" }, [
-                _vm._v("Already have a SIM? "),
-                _c("br"),
-                _vm._v(" Do you know your ICCID?")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-6 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-1.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Add SIM\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-6 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-2.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Select a desired region\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-6 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-3.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Select a desired package\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-6 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-4.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Checkout\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-none d-lg-block divider-small" })
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "section",
-      {
-        staticClass:
-          "how-physical-sim ls s-pt-40 s-pb-50 s-pt-lg-120 s-pb-lg-90 s-pt-xl-160 s-pb-xl-130 c-mb-30 service-page2"
-      },
-      [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-8 offset-lg-2" }, [
-              _c("h3", { staticClass: "text-center" }, [_vm._v("Physical SIM")])
+                _vm._v("Mobile Data Around the world")
+              ]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Worldwide Data Plans")])
             ])
           ]),
           _vm._v(" "),
@@ -63163,7 +62981,13 @@ var staticRenderFns = [
                   _vm._v(" "),
                   _c("h5", [
                     _vm._v(
-                      "\n                            Purchase physical SIM\n                        "
+                      "\n                            One world. One SIM. One operator.\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "\n                            With SkyGo Global SIM, you can travel without roaming fees or changing SIM cards. This is What the future of mobile looks like. There is no contract required, just purchase the package plan you need and you are ready to go.\n                        "
                     )
                   ])
                 ]
@@ -63181,7 +63005,13 @@ var staticRenderFns = [
                   _vm._v(" "),
                   _c("h5", [
                     _vm._v(
-                      "\n                            Cost of physical SIM  $2\n                        "
+                      "\n                            The Future is Digital\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "\n                            No more long contracts, no more expensive roaming fees.\n                            150+ countries included. Install the digital SkyGo e-SIM for only $1 to get started.\n                        "
                     )
                   ])
                 ]
@@ -63199,43 +63029,13 @@ var staticRenderFns = [
                   _vm._v(" "),
                   _c("h5", [
                     _vm._v(
-                      "\n                            Cost of shipping  $5\n                        "
+                      "\n                            No packaging or waste\n                        "
                     )
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4 col-12" }, [
-              _c(
-                "div",
-                { staticClass: "icon-box rounded text-center hero-bg" },
-                [
-                  _c("a", { attrs: { href: "service-single.html" } }, [
-                    _c("img", { attrs: { src: "/images/icon-3.png", alt: "" } })
                   ]),
                   _vm._v(" "),
-                  _c("h5", [
+                  _c("p", [
                     _vm._v(
-                      "\n                            Enter your shipping details\n                        "
-                    )
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4 col-12" }, [
-              _c(
-                "div",
-                { staticClass: "icon-box rounded text-center hero-bg" },
-                [
-                  _c("a", { attrs: { href: "service-single.html" } }, [
-                    _c("img", { attrs: { src: "/images/icon-1.png", alt: "" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Checkout\n                        "
+                      "\n                            eSIM aren't just easier -- they're greener too! Everything is electronic, so you can travel light and leave no trace.\n                        "
                     )
                   ])
                 ]
@@ -63254,171 +63054,40 @@ var staticRenderFns = [
       "section",
       {
         staticClass:
-          "how-e-sim ds s-pt-80 s-pb-20 s-pt-lg-130 s-pb-lg-70 s-pt-xl-160 s-pb-xl-100 c-gutter-60 c-mb-50"
+          "ls s-pt-75 s-pb-80 s-pb-lg-100 about-section text-center text-lg-left"
       },
       [
+        _c("div", { staticClass: "d-none d-lg-block divider-10" }),
+        _vm._v(" "),
         _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-lg-8 offset-lg-2", attrs: { id: "price" } },
-              [_c("h3", { staticClass: "text-center" }, [_vm._v("E-SIM")])]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-4 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-1.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Purchase e-sim\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
+          _c("div", { staticClass: "row align-items-center" }, [
+            _c("div", { staticClass: "col-12 col-lg-6 order-2 order-lg-1" }, [
+              _c("div", {}, [
+                _c("img", {
+                  attrs: { src: "/images/mobile-apps.svg", alt: "" }
+                })
+              ])
+            ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-4 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-2.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            We will send a QR code to your e-mail\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-4 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-3.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            On your phone  “Add new cellular plan”\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-4 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-4.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Scan the QR code\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-4 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-5.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Check your ICCID\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-4 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-5.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Come back to our website\n                            "
-                    ),
-                    _c("a", { attrs: { href: "/" } }, [_vm._v("link")]),
-                    _vm._v(
-                      "\n                            enter your ICCID\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-xl-12 col-md-6 animate",
-                attrs: { "data-animation": "fadeInUp" }
-              },
-              [
-                _c("div", { staticClass: "icon-box text-center" }, [
-                  _c("div", { staticClass: "image-styled" }, [
-                    _c("img", { attrs: { alt: "", src: "/images/icon-5.png" } })
-                  ]),
-                  _vm._v(" "),
-                  _c("h5", [
-                    _vm._v(
-                      "\n                            Continue shopping packages\n                        "
-                    )
-                  ])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "d-none d-lg-block divider-small" })
+            _c("div", { staticClass: "col-12 col-lg-6 order-1 order-lg-2" }, [
+              _c("div", { staticClass: "d-none d-lg-block divider-20" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "item-content" }, [
+                _c("h3", [_vm._v("No tools required")]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "\n                            No tools required, no physical SIM to manage\n                            When you're traveling, the last thing you need to worry about is where you left your SIM card.\n                            "
+                  ),
+                  _c("br"),
+                  _vm._v(
+                    "\n                            Keep your carrier SIM in place, leave your tools at home, and roam freely with your Dual SIM device.\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-none d-lg-block divider-20" })
+              ])
+            ])
           ])
         ])
       ]

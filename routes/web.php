@@ -55,6 +55,7 @@ Route::get('/physical-sim/order', [SimPageController::class, 'orderPhysicalSim']
 Route::post('/physical-sim/checkout', [SimPageController::class, 'checkoutPhysicalSim']);
 
 Route::get('/how-to', [HowToPageController::class, 'index']);
+Route::get('/how-to-add-e-sim', [HowToPageController::class, 'howToAddESim']);
 
 Route::get('/faq', [FaqPageController::class, 'index']);
 
