@@ -14,7 +14,9 @@ class PagesController extends Controller
     {
         $user = Auth::user();
 
-        $user->load('address');
+        if ($user) {
+            $user->load('address');
+        }
 
         return view('checkouts.checkout', [
             'type' => 'buyInternetPackage',
