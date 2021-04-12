@@ -59,41 +59,37 @@ class PackagesPageController extends Controller
             (new UserAddressAction)->create($userAddressData);
         }
 
-//        try {
-        $payment = $user->charge(
-            $request->input('amount') * 100,
-            $request->input('payment_method_id'),
-        );
+        try {
+            $payment = $user->charge(
+                $request->input('amount') * 100,
+                $request->input('payment_method_id'),
+            );
 
-        $payment = $payment->asStripePaymentIntent();
-//            dd($payment);
+            $payment = $payment->asStripePaymentIntent();
 
-//            $endpoint = "http://112.74.196.154:18091/sim/v1/payOrder/test";
-//            $client = new \GuzzleHttp\Client();
-//
-//            $response = $client->request('POST', $endpoint, ['query' => [
-//                'iccid' => '89852340003821789113',
-//                'packageId' => $request->input('package_id'),
-//                'currency' => 'USD',
-//                'ourOrderID' => 'orderID89852340003821789113'
-//            ]]);
-//
-//            $statusCode = $response->getStatusCode();
-//            $content = $response->getBody();
-//
-//            dump($statusCode);
-//            dd($content);
+            $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
+            $client = new \GuzzleHttp\Client();
 
-        $userInternetPackage = UserInternetPackage::create([
-            'user_id' => $user->id,
-            'sim_id' => $sim->id,
-            'internet_package_id' => $internetPackage->id,
-            'bought_price' => $request->input('amount'),
-        ]);
+            $response = $client->request('POST', $endpoint, ['query' => [
+                'iccid' => $request->get('iccid'),
+                'packageId' => $request->input('package_id'),
+                'currency' => 'USD',
+                'ourOrderID' => 'skygosimorderid' . $request->input('package_id'),
+            ]]);
 
-        return $payment;
-//        } catch (\Exception $e) {
-//            return response()->json(['message' => $e->getMessage()], 500);
-//        }
+            $statusCode = $response->getStatusCode();
+            $content = $response->getBody();
+
+            $userInternetPackage = UserInternetPackage::create([
+                'user_id' => $user->id,
+                'sim_id' => $sim->id,
+                'internet_package_id' => $internetPackage->id,
+                'bought_price' => $request->input('amount'),
+            ]);
+
+            return $payment;
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
     }
 }
