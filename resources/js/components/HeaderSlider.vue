@@ -98,17 +98,14 @@
                                     <div class="intro_layers">
                                         <div class="intro_layer" data-animation="fadeInRight">
                                             <h1 class="slide2 intro_featured_word">
-                                                Mobile Data
+                                                World
                                                 <br>
-                                                Around
+                                                wide
                                                 <br>
-                                                the
+                                                Data
                                                 <br>
-                                                world Worldwide Data Plans
+                                                Plans
                                             </h1>
-                                            <h5 class="intro-absolute fw-300 text-uppercase intro_before_featured_word">
-                                                Speeds Up to 1 Gbps<br> with Unlimited Data
-                                            </h5>
                                         </div>
                                         <div class="intro_layer" data-animation="fadeInUp">
                                             <p class="text-uppercase intro_after_featured_word">Check Testimonials</p>

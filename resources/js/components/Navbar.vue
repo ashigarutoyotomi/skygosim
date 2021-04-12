@@ -113,6 +113,12 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+    .header_absolute.header_layout_1 .ls.affix-top .sf-menu > li > a {
+        color: #000;
+    }
 
+    .page_header_wrapper {
+        background: #fff !important;
+    }
 </style>

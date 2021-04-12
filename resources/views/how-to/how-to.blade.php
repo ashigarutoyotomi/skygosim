@@ -114,9 +114,7 @@
             <div class="row">
                 <div class="col-md-4 col-12">
                     <div class="icon-box rounded text-center hero-bg">
-                        <a href="service-single.html">
-                            <img src="/images/icon-4.png" alt="">
-                        </a>
+                        <img src="/images/icon-4.png" alt="">
                         <h5>
                             Purchase physical SIM
                         </h5>
@@ -124,9 +122,7 @@
                 </div>
                 <div class="col-md-4 col-12">
                     <div class="icon-box rounded text-center hero-bg">
-                        <a href="service-single.html">
-                            <img src="/images/icon-1.png" alt="">
-                        </a>
+                        <img src="/images/icon-1.png" alt="">
                         <h5>
                             Cost of physical SIM  $2
                         </h5>
@@ -134,9 +130,7 @@
                 </div>
                 <div class="col-md-4 col-12">
                     <div class="icon-box rounded text-center hero-bg">
-                        <a href="service-single.html">
-                            <img src="/images/icon-2.png" alt="">
-                        </a>
+                        <img src="/images/icon-2.png" alt="">
                         <h5>
                             Cost of shipping  $5
                         </h5>
@@ -144,9 +138,7 @@
                 </div>
                 <div class="col-md-4 col-12">
                     <div class="icon-box rounded text-center hero-bg">
-                        <a href="service-single.html">
-                            <img src="/images/icon-3.png" alt="">
-                        </a>
+                        <img src="/images/icon-3.png" alt="">
                         <h5>
                             Enter your shipping details
                         </h5>
@@ -154,9 +146,7 @@
                 </div>
                 <div class="col-md-4 col-12">
                     <div class="icon-box rounded text-center hero-bg">
-                        <a href="service-single.html">
-                            <img src="/images/icon-1.png" alt="">
-                        </a>
+                        <img src="/images/icon-1.png" alt="">
                         <h5>
                             Checkout
                         </h5>

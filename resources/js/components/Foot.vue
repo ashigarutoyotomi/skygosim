@@ -56,17 +56,10 @@
                 </div>
                 <div class="col-md-6 col-xl-3 order-xl-4 order-md-2 animate" data-animation="fadeInUp">
                     <div class="widget widget_icons_list">
-                        <h4 class="widget-title">Call Us</h4>
-                        <p>23-456-7890</p>
+                        <h4 class="widget-title">Contact Us</h4>
                         <a href="#" class="small-text">
                             <i class="fa fa-envelope-o color-main fs-14"></i>
-                            email us
-                        </a>
-                        <h4 class="widget-title">Visit Us</h4>
-                        <p>246 Benson St., Ashwaubenon</p>
-                        <a href="#" class="small-text">
-                            <i class="fa fa-map-marker color-main3 fs-14"></i>
-                            Get Direction
+                            info@skygosim.com
                         </a>
                     </div>
                     <div class="divider-45 d-none d-md-block d-xlz-none"></div>

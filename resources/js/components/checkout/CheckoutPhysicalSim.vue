@@ -207,18 +207,30 @@
                                     </td>
                                     <td class="product-total">
                                         <span class="woocommerce-Price-amount amount">
-                                            1
+                                            <span class="woocommerce-Price-currencySymbol">$</span>
+                                            2
                                         </span>
                                     </td>
                                 </tr>
                                 <tr class="cart_item">
                                     <td class="product-name">
-                                        Price
+                                        Shipping
                                     </td>
                                     <td class="product-total">
                                         <span class="woocommerce-Price-amount amount">
                                             <span class="woocommerce-Price-currencySymbol">$</span>
-                                            {{ form.amount }}
+                                            5
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-name">
+                                        Total
+                                    </td>
+                                    <td class="product-total">
+                                        <span class="woocommerce-Price-amount amount">
+                                            <span class="woocommerce-Price-currencySymbol">$</span>
+                                            7
                                         </span>
                                     </td>
                                 </tr>
