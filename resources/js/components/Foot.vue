@@ -46,10 +46,10 @@
                         <h4 class="widget-title">Buy Sim</h4>
                         <ul>
                             <li class="cat-item">
-                                <a href="blog-right.html">Physical SIM</a>
+                                <a href="/physical-sim/order">Physical SIM</a>
                             </li>
                             <li class="cat-item">
-                                <a href="blog-right.html">E-SIM</a>
+                                <a href="/e-sim/order">E-SIM</a>
                             </li>
                         </ul>
                     </div>

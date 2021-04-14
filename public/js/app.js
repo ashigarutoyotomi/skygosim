@@ -53868,13 +53868,13 @@ var staticRenderFns = [
                   _vm._v(" "),
                   _c("ul", [
                     _c("li", { staticClass: "cat-item" }, [
-                      _c("a", { attrs: { href: "blog-right.html" } }, [
+                      _c("a", { attrs: { href: "/physical-sim/order" } }, [
                         _vm._v("Physical SIM")
                       ])
                     ]),
                     _vm._v(" "),
                     _c("li", { staticClass: "cat-item" }, [
-                      _c("a", { attrs: { href: "blog-right.html" } }, [
+                      _c("a", { attrs: { href: "/e-sim/order" } }, [
                         _vm._v("E-SIM")
                       ])
                     ])
