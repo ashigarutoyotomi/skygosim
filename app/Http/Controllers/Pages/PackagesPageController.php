@@ -67,18 +67,18 @@ class PackagesPageController extends Controller
 
             $payment = $payment->asStripePaymentIntent();
 
-            $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
-            $client = new \GuzzleHttp\Client();
+//            $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
+//            $client = new \GuzzleHttp\Client();
+//
+//            $response = $client->request('POST', $endpoint, ['query' => [
+//                'iccid' => $request->get('iccid'),
+//                'packageId' => $request->input('package_id'),
+//                'currency' => 'USD',
+//                'ourOrderID' => 'skygosimorderid' . $request->input('package_id'),
+//            ]]);
 
-            $response = $client->request('POST', $endpoint, ['query' => [
-                'iccid' => $request->get('iccid'),
-                'packageId' => $request->input('package_id'),
-                'currency' => 'USD',
-                'ourOrderID' => 'skygosimorderid' . $request->input('package_id'),
-            ]]);
-
-            $statusCode = $response->getStatusCode();
-            $content = $response->getBody();
+//            $statusCode = $response->getStatusCode();
+//            $content = $response->getBody();
 
             $userInternetPackage = UserInternetPackage::create([
                 'user_id' => $user->id,

@@ -12,6 +12,7 @@ use App\Http\Controllers\Pages\PackagesPageController;
 use App\Http\Controllers\Pages\ProfilePageController;
 use App\Http\Controllers\Pages\SimPageController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\Purchases\PurchasesInternetPackagesController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Sim\SimController;
 use App\Http\Controllers\Sim\SimOrderController;
@@ -109,6 +110,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/sim-orders/{sim_order_id}/show', [SimOrderController::class, 'showPhysicalSim']);
     Route::post('/sim-orders/{sim_order_id}/add-physical-sim', [SimOrderController::class, 'addPhysicalSim']);
     Route::put('/sim-orders/{sim_order_id}/finish', [SimOrderController::class, 'finish']);
+
+    Route::get('/purchases/internet-packages', [PurchasesInternetPackagesController::class, 'index']);
+    Route::get('/purchases/internet-packages/{id}/show', [PurchasesInternetPackagesController::class, 'show']);
 
     Route::get('/settings', [SettingsController::class, 'index']);
 });

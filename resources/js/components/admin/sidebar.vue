@@ -12,6 +12,31 @@
             <li class="nav-item">
                 <a
                     class="nav-link"
+                    :class="{'active': isActiveRoute(['purchases_internet_packages', 'purchases_internet_package_show'])}"
+                    data-bs-toggle="collapse"
+                    href="#collapsePurchases"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapsePurchases"
+                >
+                    Purchases
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <ul class="collapse pl-4" id="collapsePurchases">
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            :class="{'active': isActiveRoute(['purchases_internet_packages'])}"
+                            to="/purchases/internet-packages"
+                        >Internet packages</router-link>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a
+                    class="nav-link"
                     :class="{'active': isActiveRoute(['sim_orders_physical', 'sim_orders_e_sim'])}"
                     data-bs-toggle="collapse"
                     href="#collapseOrders"

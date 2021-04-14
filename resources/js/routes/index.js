@@ -12,13 +12,15 @@ import DealerCreate from "../pages/Admin/Dealer/Form/Create";
 import DealerEdit from "../pages/Admin/Dealer/Form/Edit";
 import DealerAddressCreate from '../pages/Admin/Dealer/Form/CreateAddress';
 
-import InternetPackageIndex from "../pages/Admin/Inventory/InternetPackage/Index";
-
+import InventoryInternetPackageIndex from "../pages/Admin/Inventory/InternetPackage/Index";
 import InventoryPhysicalSims from "../pages/Admin/Inventory/Sims/PhysicalSims";
 import InventoryESims from "../pages/Admin/Inventory/Sims/ESims";
 
 import SimOrdersIndex from "../pages/Admin/SimOrders/Index";
 import ShowPhysicalSimOrder from "../pages/Admin/SimOrders/ShowPhysicalSim";
+
+import PurchasesInternetPackages from "../pages/Admin/Purchases/InternetPackages/InternetPackages";
+import ShowPurchasesInternetPackages from "../pages/Admin/Purchases/InternetPackages/ShowInternetPackage";
 
 import SettingsIndex from "../pages/Admin/Settings/Index";
 
@@ -91,7 +93,7 @@ export const routes = [
     {
         name: 'internet_packages',
         path: '/internet-packages',
-        component: InternetPackageIndex
+        component: InventoryInternetPackageIndex
     },
 
     // Inventory
@@ -126,6 +128,19 @@ export const routes = [
         path: '/sim-orders/:simOrderId/show',
         props: true,
         component: ShowPhysicalSimOrder
+    },
+
+    {
+        name: 'purchases_internet_packages',
+        path: '/purchases/internet-packages',
+        component: PurchasesInternetPackages
+    },
+
+    {
+        name: 'purchases_internet_package_show',
+        path: '/purchases/internet-packages/:dataId/show',
+        props: true,
+        component: ShowPurchasesInternetPackages
     },
 
     {
