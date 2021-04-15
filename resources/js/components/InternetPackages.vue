@@ -21,9 +21,9 @@
                         v-for="(internetPackage, area) in internetPackages"
                     >
                         <div class="col-lg-3 col-sm-6">
-                            <div class="vertical-item rounded rounded-image-top hero-bg content-padding padding-small text-center">
+                            <div class="vertical-item rounded rounded-image-top hero-bg content-padding padding-small text-center h-full">
                                 <div class="item-media">
-                                    <img :src="`/images/regions/${getImgNameByArea(area)}.jpg`" alt="">
+                                    <img :src="`/images/regions/${getImgNameByArea(internetPackage[0].area_eng)}.jpg`" alt="">
                                     <div class="media-links">
                                         <a
                                             class="abs-link"
@@ -52,9 +52,20 @@
                 </div>
             </template>
 
-            <template v-if="internetPackages && selectedCountry.length">
+            <template v-if="internetPackages && sortedPackages.length">
+                <div class="row mb-4">
+                    <div class="col">
+                        <button
+                            type="button"
+                            class="btn btn-white"
+                            @click="backToAreas"
+                        >
+                            <span>Back</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="row">
-                    <template v-for="internetPackage in selectedCountry">
+                    <template v-for="internetPackage in sortedPackages">
                         <div class="col-lg-4 col-sm-6">
                             <div class="pricing-plan hero-bg rounded">
                                 <div :class="`plan-name text-uppercase bg-maincolor${getRandomInt(1, 3)}`">
@@ -64,6 +75,9 @@
                                 </div>
                                 <div class="plan-features">
                                     <ul class="list-bordered">
+                                        <li>
+                                            {{ internetPackage.destination_eng }}
+                                        </li>
                                         <li>
                                             {{ internetPackage.data_eng }}
                                         </li>
@@ -115,6 +129,16 @@
             }
         },
 
+        computed: {
+            sortedPackages() {
+                if (this.selectedCountry.length) {
+                    return _.orderBy(this.selectedCountry, 'days', 'asc');
+                }
+
+                return [];
+            }
+        },
+
         methods: {
             getRandomInt(min, max) {
                 min = Math.ceil(min);
@@ -148,6 +172,10 @@
                 localStorage.setItem('checkout', JSON.stringify(checkoutData));
 
                 window.location.href = '/checkout'
+            },
+
+            backToAreas() {
+                this.selectedCountry = [];
             }
         }
     }
@@ -155,6 +183,10 @@
 
 <style lang="scss">
     #internet-packages {
+        .h-full {
+            height: 100%;
+        }
+
         .item-media {
             img {
                 object-fit: cover;
@@ -167,6 +199,14 @@
 
             h5 {
                 font-size: 18px;
+            }
+
+            .service-title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3; /* number of lines to show */
+                -webkit-box-orient: vertical;
             }
         }
     }

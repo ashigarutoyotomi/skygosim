@@ -2593,6 +2593,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "InternetPackages",
   props: {
@@ -2607,6 +2621,15 @@ __webpack_require__.r(__webpack_exports__);
     return {
       selectedCountry: []
     };
+  },
+  computed: {
+    sortedPackages: function sortedPackages() {
+      if (this.selectedCountry.length) {
+        return _.orderBy(this.selectedCountry, 'days', 'asc');
+      }
+
+      return [];
+    }
   },
   methods: {
     getRandomInt: function getRandomInt(min, max) {
@@ -2633,6 +2656,9 @@ __webpack_require__.r(__webpack_exports__);
       };
       localStorage.setItem('checkout', JSON.stringify(checkoutData));
       window.location.href = '/checkout';
+    },
+    backToAreas: function backToAreas() {
+      this.selectedCountry = [];
     }
   }
 });
@@ -9767,7 +9793,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#internet-packages .item-media img {\n  -o-object-fit: cover;\n     object-fit: cover;\n  height: 190px;\n}\n#internet-packages .item-content {\n  padding: 20px 10px;\n}\n#internet-packages .item-content h5 {\n  font-size: 18px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#internet-packages .h-full {\n  height: 100%;\n}\n#internet-packages .item-media img {\n  -o-object-fit: cover;\n     object-fit: cover;\n  height: 190px;\n}\n#internet-packages .item-content {\n  padding: 20px 10px;\n}\n#internet-packages .item-content h5 {\n  font-size: 18px;\n}\n#internet-packages .item-content .service-title {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  /* number of lines to show */\n  -webkit-box-orient: vertical;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -54365,7 +54391,7 @@ var render = function() {
                             "div",
                             {
                               staticClass:
-                                "vertical-item rounded rounded-image-top hero-bg content-padding padding-small text-center"
+                                "vertical-item rounded rounded-image-top hero-bg content-padding padding-small text-center h-full"
                             },
                             [
                               _c("div", { staticClass: "item-media" }, [
@@ -54373,7 +54399,9 @@ var render = function() {
                                   attrs: {
                                     src:
                                       "/images/regions/" +
-                                      _vm.getImgNameByArea(area) +
+                                      _vm.getImgNameByArea(
+                                        internetPackage[0].area_eng
+                                      ) +
                                       ".jpg",
                                     alt: ""
                                   }
@@ -54443,13 +54471,27 @@ var render = function() {
               ]
             : _vm._e(),
           _vm._v(" "),
-          _vm.internetPackages && _vm.selectedCountry.length
+          _vm.internetPackages && _vm.sortedPackages.length
             ? [
+                _c("div", { staticClass: "row mb-4" }, [
+                  _c("div", { staticClass: "col" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-white",
+                        attrs: { type: "button" },
+                        on: { click: _vm.backToAreas }
+                      },
+                      [_c("span", [_vm._v("Back")])]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "row" },
                   [
-                    _vm._l(_vm.selectedCountry, function(internetPackage) {
+                    _vm._l(_vm.sortedPackages, function(internetPackage) {
                       return [
                         _c("div", { staticClass: "col-lg-4 col-sm-6" }, [
                           _c(
@@ -54476,6 +54518,16 @@ var render = function() {
                               _vm._v(" "),
                               _c("div", { staticClass: "plan-features" }, [
                                 _c("ul", { staticClass: "list-bordered" }, [
+                                  _c("li", [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(
+                                          internetPackage.destination_eng
+                                        ) +
+                                        "\n                                    "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
                                   _c("li", [
                                     _vm._v(
                                       "\n                                        " +
@@ -63952,62 +64004,6 @@ var staticRenderFns = [
       "section",
       {
         staticClass:
-          "ls s-pt-75 s-pb-80 s-pb-lg-100 about-section text-center text-lg-left"
-      },
-      [
-        _c("div", { staticClass: "d-none d-lg-block divider-10" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row align-items-center" }, [
-            _c("div", { staticClass: "col-12 col-lg-6 order-2 order-lg-1" }, [
-              _c("div", { staticClass: "d-none d-lg-block divider-20" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "item-content" }, [
-                _c("h3", [_vm._v("eSIM Instant Connections")]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "\n                            A contactless solution to a physical SIM card, you can now install SkyGo’s eSIM on your device to access seamless worldwide data coverage.\n                            "
-                  ),
-                  _c("br"),
-                  _vm._v(
-                    "\n                            You'll never be confused by a plethora of SIM cards again when you can manage your data and plans directly on your own device.\n                        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "d-none d-lg-block divider-20" }),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-maincolor2",
-                    attrs: { href: "/e-sim/order" }
-                  },
-                  [_c("span", [_vm._v("E-SIM")])]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12 col-lg-6 order-1 order-lg-2" }, [
-              _c("div", {}, [
-                _c("img", {
-                  attrs: { src: "/images/cellular-connectivity.svg", alt: "" }
-                })
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "section",
-      {
-        staticClass:
           "order-sim ls s-pt-75 s-pb-80 s-pb-lg-100 about-section text-center text-lg-left"
       },
       [
@@ -64068,6 +64064,62 @@ var staticRenderFns = [
                   },
                   [_c("span", [_vm._v("E-SIM")])]
                 )
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "section",
+      {
+        staticClass:
+          "ls s-pt-75 s-pb-80 s-pb-lg-100 about-section text-center text-lg-left"
+      },
+      [
+        _c("div", { staticClass: "d-none d-lg-block divider-10" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row align-items-center" }, [
+            _c("div", { staticClass: "col-12 col-lg-6 order-2 order-lg-1" }, [
+              _c("div", { staticClass: "d-none d-lg-block divider-20" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "item-content" }, [
+                _c("h3", [_vm._v("eSIM Instant Connections")]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "\n                            A contactless solution to a physical SIM card, you can now install SkyGo’s eSIM on your device to access seamless worldwide data coverage.\n                            "
+                  ),
+                  _c("br"),
+                  _vm._v(
+                    "\n                            You'll never be confused by a plethora of SIM cards again when you can manage your data and plans directly on your own device.\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "d-none d-lg-block divider-20" }),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-maincolor2",
+                    attrs: { href: "/e-sim/order" }
+                  },
+                  [_c("span", [_vm._v("E-SIM")])]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-12 col-lg-6 order-1 order-lg-2" }, [
+              _c("div", {}, [
+                _c("img", {
+                  attrs: { src: "/images/cellular-connectivity.svg", alt: "" }
+                })
               ])
             ])
           ])

@@ -20,10 +20,10 @@ class PackagesPageController extends Controller
 {
     public function index()
     {
-        $internetPackages = InternetPackage::orderBy('area_eng')->get();
+        $internetPackages = InternetPackage::orderBy('destination_eng')->get();
 
         return view('internet', [
-            'internetPackages' => $internetPackages->groupBy('area_eng'),
+            'internetPackages' => $internetPackages->groupBy('destination_eng'),
         ]);
     }
 
