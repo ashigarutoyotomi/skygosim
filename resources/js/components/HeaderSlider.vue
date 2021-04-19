@@ -59,7 +59,7 @@
                                                 INTERNET
                                             </h1>
                                             <h5 class="fw-300 text-uppercase intro_before_featured_word intro-absolute">
-                                                Leased Line Internet<br> with A+ Category
+                                                KEEP YOURSELF <br> CONNECTED ANYWHERE
                                             </h5>
                                         </div>
                                         <div class="intro_layer" data-animation="fadeInUp">

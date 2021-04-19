@@ -2,7 +2,7 @@
 
 @section('content')
     <header-comp
-        title="Internet"
+        title="Packages"
     ></header-comp>
 
     <internet-packages

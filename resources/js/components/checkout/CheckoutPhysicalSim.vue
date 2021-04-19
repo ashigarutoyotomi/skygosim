@@ -234,16 +234,16 @@
                                         </span>
                                     </td>
                                 </tr>
-                                <tr class="cart_item">
-                                    <td class="product-name">
-                                        Payment method
-                                    </td>
-                                    <td class="product-total">
-                                        <span class="woocommerce-Price-amount amount">
-                                            VISA
-                                        </span>
-                                    </td>
-                                </tr>
+<!--                                <tr class="cart_item">-->
+<!--                                    <td class="product-name">-->
+<!--                                        Payment method-->
+<!--                                    </td>-->
+<!--                                    <td class="product-total">-->
+<!--                                        <span class="woocommerce-Price-amount amount">-->
+<!--                                            VISA-->
+<!--                                        </span>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
                                 </tbody>
                             </table>
 

@@ -20,9 +20,9 @@
                 <div class="col-12 col-lg-6 order-1 order-lg-2">
                     <div class="d-none d-lg-block divider-20"></div>
                     <div class="item-content">
-                        <h3>No SIM? No ICCID?</h3>
+                        <h4>Don't have SKYGO SIM yet?</h4>
                         <h6 class="fw-500 font-italic">
-                            Choose between a physical SIM and e-sim
+                            ORDER NOW, do you want a physical SIM? or an eSIM?
                         </h6>
 
                         <div class="d-none d-lg-block divider-20"></div>
@@ -31,7 +31,7 @@
                             href="/checkout/physical-sim"
                             class="btn btn-maincolor"
                         >
-                            <span>Phisical SIM</span>
+                            <span>Physical SIM</span>
                         </a>
                         <a
                             href="/checkout/e-sim"

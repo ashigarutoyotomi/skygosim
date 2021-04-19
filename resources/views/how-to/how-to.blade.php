@@ -21,9 +21,9 @@
                         <h3>One world. One SIM. One operator.</h3>
                         <h4>With SkyGo Global SIM, you can travel without roaming fees or changing SIM cards.</h4>
                         <p>What the future of mobile looks like. There is no contract required, just purchase the package plan you need and you are ready to go.</p>
-                        <h4>No SIM? No ICCID?</h4>
+                        <h4>Don't have SKYGO SIM yet?</h4>
                         <h6 class="fw-500 font-italic">
-                            Choose between a physical SIM and e-sim
+                            ORDER NOW, do you want a physical SIM? or an eSIM?
                         </h6>
 
                         <div class="d-none d-lg-block divider-20"></div>
@@ -32,7 +32,7 @@
                             href="/physical-sim/order"
                             class="btn btn-maincolor"
                         >
-                            <span>Phisical SIM</span>
+                            <span>Physical SIM</span>
                         </a>
                         <a
                             href="/e-sim/order"

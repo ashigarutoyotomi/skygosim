@@ -54169,11 +54169,11 @@ var staticRenderFns = [
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                                Leased Line Internet"
+                                    "\n                                                KEEP YOURSELF "
                                   ),
                                   _c("br"),
                                   _vm._v(
-                                    " with A+ Category\n                                            "
+                                    " CONNECTED ANYWHERE\n                                            "
                                   )
                                 ]
                               )
@@ -55508,9 +55508,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.first_name[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -55565,9 +55565,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.last_name[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -55622,9 +55622,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.email_address[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -55681,9 +55681,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.street_address[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -55738,9 +55738,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.city[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -55796,9 +55796,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.state[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -55853,9 +55853,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.zip_code[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -55874,9 +55874,9 @@ var render = function() {
                             { staticClass: "invalid-feedback d-block" },
                             [
                               _vm._v(
-                                "\n                                " +
+                                "\n                                    " +
                                   _vm._s(_vm.stripeCardError.message) +
-                                  "\n                            "
+                                  "\n                                "
                               )
                             ]
                           )
@@ -55911,7 +55911,7 @@ var render = function() {
                           _c("tr", { staticClass: "cart_item" }, [
                             _c("td", { staticClass: "product-name" }, [
                               _vm._v(
-                                "\n                                    Price\n                                "
+                                "\n                                        Price\n                                    "
                               )
                             ]),
                             _vm._v(" "),
@@ -55931,16 +55931,14 @@ var render = function() {
                                     [_vm._v("$")]
                                   ),
                                   _vm._v(
-                                    "\n                                        " +
+                                    "\n                                            " +
                                       _vm._s(_vm.form.amount) +
-                                      "\n                                    "
+                                      "\n                                        "
                                   )
                                 ]
                               )
                             ])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(10)
+                          ])
                         ])
                       ]
                     ),
@@ -56000,7 +55998,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "first_name" } }, [
       _vm._v(
-        "\n                                        First name\n                                        "
+        "\n                                            First name\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56013,7 +56011,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "last_name" } }, [
       _vm._v(
-        "\n                                        Last name\n                                        "
+        "\n                                            Last name\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56026,7 +56024,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_email" } }, [
       _vm._v(
-        "\n                                        Email address\n                                        "
+        "\n                                            Email address\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56039,7 +56037,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_address_1" } }, [
       _vm._v(
-        "\n                                        Street address\n                                        "
+        "\n                                            Street address\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56052,7 +56050,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_city" } }, [
       _vm._v(
-        "\n                                        City\n                                        "
+        "\n                                            City\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56065,7 +56063,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_state" } }, [
       _vm._v(
-        "\n                                        State\n                                        "
+        "\n                                            State\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56078,7 +56076,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_postcode" } }, [
       _vm._v(
-        "\n                                        Postcode / ZIP Code\n                                        "
+        "\n                                            Postcode / ZIP Code\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56114,34 +56112,14 @@ var staticRenderFns = [
     return _c("tr", { staticClass: "cart_item" }, [
       _c("td", { staticClass: "product-name" }, [
         _vm._v(
-          "\n                                    E-SIM\n                                "
+          "\n                                        E-SIM\n                                    "
         )
       ]),
       _vm._v(" "),
       _c("td", { staticClass: "product-total" }, [
         _c("span", { staticClass: "woocommerce-Price-amount amount" }, [
           _vm._v(
-            "\n                                        1\n                                    "
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", { staticClass: "cart_item" }, [
-      _c("td", { staticClass: "product-name" }, [
-        _vm._v(
-          "\n                                    Payment method\n                                "
-        )
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "product-total" }, [
-        _c("span", { staticClass: "woocommerce-Price-amount amount" }, [
-          _vm._v(
-            "\n                                        VISA\n                                    "
+            "\n                                            1\n                                        "
           )
         ])
       ])
@@ -56261,9 +56239,9 @@ var render = function() {
                               { staticClass: "invalid-feedback d-block" },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                            " +
                                     _vm._s(_vm.errors.iccid[0]) +
-                                    "\n                                    "
+                                    "\n                                        "
                                 )
                               ]
                             )
@@ -56325,9 +56303,9 @@ var render = function() {
                               { staticClass: "invalid-feedback d-block" },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                            " +
                                     _vm._s(_vm.errors.first_name[0]) +
-                                    "\n                                    "
+                                    "\n                                        "
                                 )
                               ]
                             )
@@ -56388,9 +56366,9 @@ var render = function() {
                               { staticClass: "invalid-feedback d-block" },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                            " +
                                     _vm._s(_vm.errors.last_name[0]) +
-                                    "\n                                    "
+                                    "\n                                        "
                                 )
                               ]
                             )
@@ -56453,9 +56431,9 @@ var render = function() {
                               { staticClass: "invalid-feedback d-block" },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                            " +
                                     _vm._s(_vm.errors.street_address[0]) +
-                                    "\n                                    "
+                                    "\n                                        "
                                 )
                               ]
                             )
@@ -56518,9 +56496,9 @@ var render = function() {
                               { staticClass: "invalid-feedback d-block" },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                            " +
                                     _vm._s(_vm.errors.city[0]) +
-                                    "\n                                    "
+                                    "\n                                        "
                                 )
                               ]
                             )
@@ -56584,9 +56562,9 @@ var render = function() {
                               { staticClass: "invalid-feedback d-block" },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                            " +
                                     _vm._s(_vm.errors.state[0]) +
-                                    "\n                                    "
+                                    "\n                                        "
                                 )
                               ]
                             )
@@ -56649,9 +56627,9 @@ var render = function() {
                               { staticClass: "invalid-feedback d-block" },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                            " +
                                     _vm._s(_vm.errors.zip_code[0]) +
-                                    "\n                                    "
+                                    "\n                                        "
                                 )
                               ]
                             )
@@ -56712,9 +56690,9 @@ var render = function() {
                               { staticClass: "invalid-feedback d-block" },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                            " +
                                     _vm._s(_vm.errors.email_address[0]) +
-                                    "\n                                    "
+                                    "\n                                        "
                                 )
                               ]
                             )
@@ -56733,9 +56711,9 @@ var render = function() {
                             { staticClass: "invalid-feedback d-block" },
                             [
                               _vm._v(
-                                "\n                                " +
+                                "\n                                    " +
                                   _vm._s(_vm.stripeCardError.message) +
-                                  "\n                            "
+                                  "\n                                "
                               )
                             ]
                           )
@@ -56770,7 +56748,7 @@ var render = function() {
                           _c("tr", { staticClass: "cart_item" }, [
                             _c("td", { staticClass: "product-name" }, [
                               _vm._v(
-                                "\n                                    Area\n                                "
+                                "\n                                        Area\n                                    "
                               )
                             ]),
                             _vm._v(" "),
@@ -56782,9 +56760,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                            " +
+                                    "\n                                                " +
                                       _vm._s(_vm.checkoutData.area) +
-                                      "\n                                        "
+                                      "\n                                            "
                                   )
                                 ]
                               )
@@ -56794,7 +56772,7 @@ var render = function() {
                           _c("tr", { staticClass: "cart_item" }, [
                             _c("td", { staticClass: "product-name" }, [
                               _vm._v(
-                                "\n                                    Days\n                                "
+                                "\n                                        Days\n                                    "
                               )
                             ]),
                             _vm._v(" "),
@@ -56806,9 +56784,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                            " +
+                                    "\n                                                " +
                                       _vm._s(_vm.checkoutData.days) +
-                                      "\n                                        "
+                                      "\n                                            "
                                   )
                                 ]
                               )
@@ -56818,7 +56796,7 @@ var render = function() {
                           _c("tr", { staticClass: "cart_item" }, [
                             _c("td", { staticClass: "product-name" }, [
                               _vm._v(
-                                "\n                                    Price\n                                "
+                                "\n                                        Price\n                                    "
                               )
                             ]),
                             _vm._v(" "),
@@ -56839,14 +56817,12 @@ var render = function() {
                                   ),
                                   _vm._v(
                                     _vm._s(_vm.checkoutData.price) +
-                                      "\n                                    "
+                                      "\n                                        "
                                   )
                                 ]
                               )
                             ])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(10)
+                          ])
                         ])
                       ]
                     ),
@@ -56906,7 +56882,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "iccid" } }, [
       _vm._v(
-        "\n                                        ICCID\n                                        "
+        "\n                                            ICCID\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56919,7 +56895,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_first_name" } }, [
       _vm._v(
-        "\n                                        First name\n                                        "
+        "\n                                            First name\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56932,7 +56908,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_last_name" } }, [
       _vm._v(
-        "\n                                        Last name\n                                        "
+        "\n                                            Last name\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56945,7 +56921,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_address_1" } }, [
       _vm._v(
-        "\n                                        Street address\n                                        "
+        "\n                                            Street address\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56958,7 +56934,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_city" } }, [
       _vm._v(
-        "\n                                        City\n                                        "
+        "\n                                            City\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56971,7 +56947,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_state" } }, [
       _vm._v(
-        "\n                                        State\n                                        "
+        "\n                                            State\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56984,7 +56960,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_postcode" } }, [
       _vm._v(
-        "\n                                        Postcode / ZIP Code\n                                        "
+        "\n                                            Postcode / ZIP Code\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -56997,7 +56973,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_email" } }, [
       _vm._v(
-        "\n                                        Email address\n                                        "
+        "\n                                            Email address\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -57023,26 +56999,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "product-name" }, [_vm._v("Package")]),
         _vm._v(" "),
         _c("th", { staticClass: "product-total" }, [_vm._v("#")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", { staticClass: "cart_item" }, [
-      _c("td", { staticClass: "product-name" }, [
-        _vm._v(
-          "\n                                    Payment method\n                                "
-        )
-      ]),
-      _vm._v(" "),
-      _c("td", { staticClass: "product-total" }, [
-        _c("span", { staticClass: "woocommerce-Price-amount amount" }, [
-          _vm._v(
-            "\n                                        VISA\n                                    "
-          )
-        ])
       ])
     ])
   }
@@ -57150,9 +57106,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.first_name[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -57207,9 +57163,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.last_name[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -57264,9 +57220,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.email_address[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -57323,9 +57279,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.street_address[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -57380,9 +57336,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.city[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -57438,9 +57394,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.state[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -57495,9 +57451,9 @@ var render = function() {
                                   { staticClass: "invalid-feedback d-block" },
                                   [
                                     _vm._v(
-                                      "\n                                        " +
+                                      "\n                                            " +
                                         _vm._s(_vm.errors.zip_code[0]) +
-                                        "\n                                    "
+                                        "\n                                        "
                                     )
                                   ]
                                 )
@@ -57516,9 +57472,9 @@ var render = function() {
                             { staticClass: "invalid-feedback d-block" },
                             [
                               _vm._v(
-                                "\n                                " +
+                                "\n                                    " +
                                   _vm._s(_vm.stripeCardError.message) +
-                                  "\n                            "
+                                  "\n                                "
                               )
                             ]
                           )
@@ -57595,7 +57551,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "first_name" } }, [
       _vm._v(
-        "\n                                        First name\n                                        "
+        "\n                                            First name\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -57608,7 +57564,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "last_name" } }, [
       _vm._v(
-        "\n                                        Last name\n                                        "
+        "\n                                            Last name\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -57621,7 +57577,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_email" } }, [
       _vm._v(
-        "\n                                        Email address\n                                        "
+        "\n                                            Email address\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -57634,7 +57590,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_address_1" } }, [
       _vm._v(
-        "\n                                        Street address\n                                        "
+        "\n                                            Street address\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -57647,7 +57603,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_city" } }, [
       _vm._v(
-        "\n                                        City\n                                        "
+        "\n                                            City\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -57660,7 +57616,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_state" } }, [
       _vm._v(
-        "\n                                        State\n                                        "
+        "\n                                            State\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -57673,7 +57629,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "billing_postcode" } }, [
       _vm._v(
-        "\n                                        Postcode / ZIP Code\n                                        "
+        "\n                                            Postcode / ZIP Code\n                                            "
       ),
       _c("abbr", { staticClass: "required", attrs: { title: "required" } }, [
         _vm._v("*")
@@ -57710,7 +57666,7 @@ var staticRenderFns = [
           _c("tr", { staticClass: "cart_item" }, [
             _c("td", { staticClass: "product-name" }, [
               _vm._v(
-                "\n                                    Physical SIM\n                                "
+                "\n                                        Physical SIM\n                                    "
               )
             ]),
             _vm._v(" "),
@@ -57722,7 +57678,7 @@ var staticRenderFns = [
                   [_vm._v("$")]
                 ),
                 _vm._v(
-                  "\n                                        2\n                                    "
+                  "\n                                            2\n                                        "
                 )
               ])
             ])
@@ -57731,7 +57687,7 @@ var staticRenderFns = [
           _c("tr", { staticClass: "cart_item" }, [
             _c("td", { staticClass: "product-name" }, [
               _vm._v(
-                "\n                                    Shipping\n                                "
+                "\n                                        Shipping\n                                    "
               )
             ]),
             _vm._v(" "),
@@ -57743,7 +57699,7 @@ var staticRenderFns = [
                   [_vm._v("$")]
                 ),
                 _vm._v(
-                  "\n                                        5\n                                    "
+                  "\n                                            5\n                                        "
                 )
               ])
             ])
@@ -57752,7 +57708,7 @@ var staticRenderFns = [
           _c("tr", { staticClass: "cart_item" }, [
             _c("td", { staticClass: "product-name" }, [
               _vm._v(
-                "\n                                    Total\n                                "
+                "\n                                        Total\n                                    "
               )
             ]),
             _vm._v(" "),
@@ -57764,23 +57720,7 @@ var staticRenderFns = [
                   [_vm._v("$")]
                 ),
                 _vm._v(
-                  "\n                                        7\n                                    "
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tr", { staticClass: "cart_item" }, [
-            _c("td", { staticClass: "product-name" }, [
-              _vm._v(
-                "\n                                    Payment method\n                                "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "product-total" }, [
-              _c("span", { staticClass: "woocommerce-Price-amount amount" }, [
-                _vm._v(
-                  "\n                                        VISA\n                                    "
+                  "\n                                            7\n                                        "
                 )
               ])
             ])
@@ -64037,11 +63977,11 @@ var staticRenderFns = [
                   )
                 ]),
                 _vm._v(" "),
-                _c("h4", [_vm._v("No SIM? No ICCID?")]),
+                _c("h4", [_vm._v("Don't have SKYGO SIM yet?")]),
                 _vm._v(" "),
                 _c("h6", { staticClass: "fw-500 font-italic" }, [
                   _vm._v(
-                    "\n                            Choose between a physical SIM and e-sim\n                        "
+                    "\n                            ORDER NOW, do you want a physical SIM? or an eSIM?\n                        "
                   )
                 ]),
                 _vm._v(" "),
@@ -64053,7 +63993,7 @@ var staticRenderFns = [
                     staticClass: "btn btn-maincolor",
                     attrs: { href: "/physical-sim/order" }
                   },
-                  [_c("span", [_vm._v("Phisical SIM")])]
+                  [_c("span", [_vm._v("Physical SIM")])]
                 ),
                 _vm._v(" "),
                 _c(
