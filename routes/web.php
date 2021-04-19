@@ -1,5 +1,7 @@
 <?php
 
+use App\DTO\User\CreateUserData;
+use App\Gateways\User\UserGateway;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\InternetPackageController;
@@ -17,7 +19,10 @@ use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Sim\SimController;
 use App\Http\Controllers\Sim\SimOrderController;
 use App\Http\Controllers\UserController;
+use App\Mail\UserCreatedMail;
+use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,13 +38,27 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/clear-cache', function() {
-    Artisan::call('cache:clear');
-    Artisan::call('route:clear');
-    Artisan::call('config:clear');
-    Artisan::call('view:clear');
-    return "Cache is cleared";
-});
+//Route::get('/clear-cache', function() {
+//    Artisan::call('cache:clear');
+//    Artisan::call('route:clear');
+//    Artisan::call('config:clear');
+//    Artisan::call('view:clear');
+//    return "Cache is cleared";
+//});
+//
+//
+//Route::get('/test-mailgun', function() {
+//    $userData = new CreateUserData([
+//        'first_name' => 'First Name',
+//        'last_name' => 'Last Name',
+//        'email' => 'Email',
+//        'password' => (new UserGateway)->getRandomPassword(),
+//        'role' => User::USER_ROLE_USER,
+//        'send_to_email' => true,
+//    ]);
+//
+//    Mail::to('amanzhol.fvfy@gmail.com')->send(new UserCreatedMail($userData));
+//});
 
 Route::get('/', [HomePageController::class, 'index']);
 

@@ -21,7 +21,7 @@ class UserAction
             'role' => $userData->role,
         ]);
 
-        if ($userData->send_to_email) {
+        if ($userData->send_to_email && $user && $user->email) {
             Mail::to($user->email)->send(new UserCreatedMail($userData));
         }
 

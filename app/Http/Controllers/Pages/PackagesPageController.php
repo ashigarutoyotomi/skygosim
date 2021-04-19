@@ -90,7 +90,8 @@ class PackagesPageController extends Controller
             return [
                 'payment' => $payment,
                 'statusCode' => $statusCode,
-                'content' => $content
+                'content' => $content,
+                'response' => $response
             ];
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
