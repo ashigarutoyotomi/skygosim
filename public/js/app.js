@@ -3947,8 +3947,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.form.package_id = _this.checkoutData.package_id;
                   axios.post('/packages/checkout', _this.form).then(function (response) {
                     if (response) {
-                      _this.loading = false;
-                      window.location.href = '/checkout/result';
+                      _this.loading = false; // window.location.href = '/checkout/result'
                     }
                   })["catch"](function (e) {
                     _this.loading = false;
