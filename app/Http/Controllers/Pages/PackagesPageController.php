@@ -87,7 +87,11 @@ class PackagesPageController extends Controller
                 'bought_price' => $request->input('amount'),
             ]);
 
-            return $payment;
+            return [
+                'payment' => $payment,
+                'statusCode' => $statusCode,
+                'content' => $content
+            ];
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
