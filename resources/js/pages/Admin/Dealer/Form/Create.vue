@@ -125,7 +125,7 @@
                     formData.append(key, this.form[key]);
                 }
 
-                axios.post('/dealers/create', formData)
+                axios.post('/dealers/store', formData)
                     .then(res => {
                         if (res) {
                             this.$router.push('/dealers');

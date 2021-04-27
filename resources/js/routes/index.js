@@ -22,6 +22,21 @@ import ShowPhysicalSimOrder from "../pages/Admin/SimOrders/ShowPhysicalSim";
 import PurchasesInternetPackages from "../pages/Admin/Purchases/InternetPackages/InternetPackages";
 import ShowPurchasesInternetPackages from "../pages/Admin/Purchases/InternetPackages/ShowInternetPackage";
 
+import PagesApnIndex from "../pages/Admin/Pages/Apn/Index";
+import PagesApnShow from "../pages/Admin/Pages/Apn/Show";
+import PagesApnCreate from "../pages/Admin/Pages/Apn/Create";
+import PagesApnEdit from "../pages/Admin/Pages/Apn/Edit";
+
+import RegionsIndex from "../pages/Admin/Region/Index";
+import RegionsCreate from "../pages/Admin/Region/Create";
+import RegionsShow from "../pages/Admin/Region/Show";
+import RegionsEdit from "../pages/Admin/Region/Edit";
+
+import CountriesIndex from "../pages/Admin/Countries/Index";
+import CountriesCreate from "../pages/Admin/Countries/Create";
+import CountriesShow from "../pages/Admin/Countries/Show";
+import CountriesEdit from "../pages/Admin/Countries/Edit";
+
 import SettingsIndex from "../pages/Admin/Settings/Index";
 
 export const routes = [
@@ -143,6 +158,88 @@ export const routes = [
         component: ShowPurchasesInternetPackages
     },
 
+    // Pages APNs
+    {
+        name: 'pages_apns',
+        path: '/pages/apns',
+        component: PagesApnIndex
+    },
+
+    {
+        name: 'pages_apns_create',
+        path: '/pages/apns/create',
+        component: PagesApnCreate
+    },
+
+    {
+        name: 'pages_apns_edit',
+        path: '/pages/apns/:apnId/edit',
+        props: true,
+        component: PagesApnEdit
+    },
+
+    {
+        name: 'pages_apns_show',
+        path: '/pages/apns/:apnId/show',
+        props: true,
+        component: PagesApnShow
+    },
+
+    //Regions
+    {
+        name: 'regions',
+        path: '/regions',
+        component: RegionsIndex
+    },
+
+    {
+        name: 'regions_create',
+        path: '/regions/create',
+        component: RegionsCreate
+    },
+
+    {
+        name: 'regions_show',
+        path: '/regions/:regionId/show',
+        props: true,
+        component: RegionsShow
+    },
+
+    {
+        name: 'regions_edit',
+        path: '/regions/:regionId/edit',
+        props: true,
+        component: RegionsEdit
+    },
+
+    //Countries
+    {
+        name: 'countries',
+        path: '/countries',
+        component: CountriesIndex
+    },
+
+    {
+        name: 'countries_create',
+        path: '/countries/create',
+        component: CountriesCreate
+    },
+
+    {
+        name: 'countries_show',
+        path: '/countries/:countryId/show',
+        props: true,
+        component: CountriesShow
+    },
+
+    {
+        name: 'countries_edit',
+        path: '/countries/:countryId/edit',
+        props: true,
+        component: CountriesEdit
+    },
+
+    //Settings
     {
         name: 'settings',
         path: '/settings',

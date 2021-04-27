@@ -85,6 +85,47 @@
             <li class="nav-item">
                 <a
                     class="nav-link"
+                    :class="{'active': isActiveRoute(['pages_apns'])}"
+                    data-bs-toggle="collapse"
+                    href="#collapsePages"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapsePages"
+                >
+                    Pages
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <ul class="collapse pl-4" id="collapsePages">
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            :class="{'active': isActiveRoute(['pages_apns'])}"
+                            to="/pages/apns"
+                        >APNs</router-link>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    :class="{'active': isActiveRoute(['regions', 'regions_create', 'regions_show', 'regions_edit'])}"
+                    to="/regions"
+                >Regions</router-link>
+            </li>
+
+            <li class="nav-item">
+                <router-link
+                    class="nav-link"
+                    :class="{'active': isActiveRoute(['countries'])}"
+                    to="/countries"
+                >Countries</router-link>
+            </li>
+
+            <li class="nav-item">
+                <a
+                    class="nav-link"
                     :class="{'active': isActiveRoute([
                             'internet_packages',
                             'inventory_sims_physical',

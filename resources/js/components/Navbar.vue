@@ -28,6 +28,10 @@
                                     </li>
 
                                     <li class="">
+                                        <a href="/apns">APN</a>
+                                    </li>
+
+                                    <li class="">
                                         <a href="#">How To</a>
                                         <ul>
                                             <li class="">

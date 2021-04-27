@@ -2,6 +2,8 @@
 
 use App\DTO\User\CreateUserData;
 use App\Gateways\User\UserGateway;
+use App\Http\Controllers\Apn\ApnController;
+use App\Http\Controllers\Countries\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\InternetPackageController;
@@ -14,7 +16,9 @@ use App\Http\Controllers\Pages\PackagesPageController;
 use App\Http\Controllers\Pages\ProfilePageController;
 use App\Http\Controllers\Pages\SimPageController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PagesController\ApnPageController;
 use App\Http\Controllers\Purchases\PurchasesInternetPackagesController;
+use App\Http\Controllers\Region\RegionController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Sim\SimController;
 use App\Http\Controllers\Sim\SimOrderController;
@@ -79,6 +83,8 @@ Route::get('/how-to-add-e-sim', [HowToPageController::class, 'howToAddESim']);
 
 Route::get('/faq', [FaqPageController::class, 'index']);
 
+Route::get('/apns', [ApnPageController::class, 'index']);
+
 Route::get('/checkout', [PagesController::class, 'checkout']);
 Route::get('/checkout/e-sim', [PagesController::class, 'checkoutESim']);
 Route::get('/checkout/result', [PagesController::class, 'checkoutResult']);
@@ -132,6 +138,29 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/purchases/internet-packages', [PurchasesInternetPackagesController::class, 'index']);
     Route::get('/purchases/internet-packages/{id}/show', [PurchasesInternetPackagesController::class, 'show']);
+
+    // Pages APNs
+    Route::get('/pages/apns', [ApnController::class, 'index']);
+    Route::get('/pages/apns/{apn_id}/show', [ApnController::class, 'show']);
+    Route::get('/pages/apns/{apn_id}/edit', [ApnController::class, 'edit']);
+    Route::post('/pages/apns/store', [ApnController::class, 'store']);
+    Route::post('/pages/apns/{apn_id}/update', [ApnController::class, 'update']);
+
+    // Regions
+    Route::get('/regions', [RegionController::class, 'index']);
+    Route::get('/regions/all', [RegionController::class, 'all']);
+    Route::get('/regions/{region_id}/show', [RegionController::class, 'show']);
+    Route::get('/regions/{region_id}/edit', [RegionController::class, 'edit']);
+    Route::post('/regions/store', [RegionController::class, 'store']);
+    Route::post('/regions/{region_id}/update', [RegionController::class, 'update']);
+
+    // Countries
+    Route::get('/countries', [CountriesController::class, 'index']);
+    Route::get('/countries/all', [CountriesController::class, 'all']);
+    Route::get('/countries/{country_id}/show', [CountriesController::class, 'show']);
+    Route::get('/countries/{country_id}/edit', [CountriesController::class, 'edit']);
+    Route::post('/countries/store', [CountriesController::class, 'store']);
+    Route::post('/countries/{country_id}/update', [CountriesController::class, 'update']);
 
     Route::get('/settings', [SettingsController::class, 'index']);
 });
