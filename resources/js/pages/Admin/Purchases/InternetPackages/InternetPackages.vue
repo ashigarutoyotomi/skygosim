@@ -9,6 +9,11 @@
         </template>
 
         <template v-if="!loading">
+            <purchases-internet-packages-filters
+                v-if="filters.show"
+                @close="closeFilters"
+            />
+
             <div class="internet-packages bg-white shadow-sm rounded-3 py-4 px-4">
                 <div class="row">
                     <div class="col-4">
@@ -19,9 +24,38 @@
                     <div class="col-8">
                         <ul class="internet-packages__actions-list">
                             <li>
-
+                                <a
+                                    class="btn btn-sm btn-light"
+                                    href="/purchases/internet-packages/download-excel"
+                                >
+                                    <i class="bi bi-file-earmark-arrow-down"></i>
+                                </a>
                             </li>
+<!--                            <li>-->
+<!--                                <button-->
+<!--                                    type="button"-->
+<!--                                    class="btn btn-light btn-sm"-->
+<!--                                    @click="showFilters"-->
+<!--                                >-->
+<!--                                    <i class="bi bi-funnel"></i>-->
+<!--                                </button>-->
+<!--                            </li>-->
                         </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                id="search"
+                                placeholder="Search: name, iccid, package id, price"
+                                v-model="search.keywords"
+                                @input="debounceQuerySearch"
+                            >
+                        </div>
                     </div>
                 </div>
 
@@ -53,7 +87,7 @@
                                     </th>
                                     <td>
                                         <template v-if="internetPackage.sim.dealer">
-                                            {{ internetPackage.sim.dealer.first_name }} {{ internetPackage.sim.dealer.first_name }}
+                                            {{ internetPackage.sim.dealer.first_name }} {{ internetPackage.sim.dealer.last_name }}
                                         </template>
 
                                         <template v-else>
@@ -92,11 +126,14 @@
 <script>
     import Pagination from "../../../../components/admin/pagination";
     import moment from "moment";
+    import PurchasesInternetPackagesFilters from "./modules/Filters";
+    import _ from 'lodash';
 
     export default {
         name: "PurchasesInternetPackages",
 
         components: {
+            PurchasesInternetPackagesFilters,
             Pagination
         },
 
@@ -104,6 +141,12 @@
             return {
                 data: [],
                 loading: false,
+                filters: {
+                    show: false
+                },
+                search: {
+                    keywords: ''
+                },
             }
         },
 
@@ -126,6 +169,8 @@
                     params.page = data.params.page
                 }
 
+                params.keywords = this.search.keywords;
+
                 axios.get(`/purchases/internet-packages`, {
                     params
                 })
@@ -141,7 +186,22 @@
 
             moment(date) {
                 return moment(date);
-            }
+            },
+
+            showFilters() {
+                this.filters.show = true;
+            },
+
+            closeFilters() {
+                this.filters.show = false;
+            },
+
+            /**
+             * Поиск с задержкой
+             */
+            debounceQuerySearch: _.debounce(function() {
+                this.loadData();
+            }, 500),
         }
     }
 </script>

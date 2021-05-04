@@ -83,7 +83,7 @@ Route::get('/how-to-add-e-sim', [HowToPageController::class, 'howToAddESim']);
 
 Route::get('/faq', [FaqPageController::class, 'index']);
 
-Route::get('/apns', [ApnPageController::class, 'index']);
+Route::get('/apn', [ApnPageController::class, 'index']);
 
 Route::get('/checkout', [PagesController::class, 'checkout']);
 Route::get('/checkout/e-sim', [PagesController::class, 'checkoutESim']);
@@ -138,6 +138,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/purchases/internet-packages', [PurchasesInternetPackagesController::class, 'index']);
     Route::get('/purchases/internet-packages/{id}/show', [PurchasesInternetPackagesController::class, 'show']);
+    Route::get('/purchases/internet-packages/download-excel', [PurchasesInternetPackagesController::class, 'downloadExcel']);
 
     // Pages APNs
     Route::get('/pages/apns', [ApnController::class, 'index']);

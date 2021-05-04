@@ -28,7 +28,7 @@
                                     </li>
 
                                     <li class="">
-                                        <a href="/apns">APN</a>
+                                        <a href="/apn">APN</a>
                                     </li>
 
                                     <li class="">
