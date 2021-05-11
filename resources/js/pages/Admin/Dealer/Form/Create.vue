@@ -1,6 +1,6 @@
 <template>
     <div id="dealers-create">
-        <div class="section bg-white shadow-sm rounded-lg py-4 px-4">
+        <div class="section bg-white shadow-sm rounded-3 py-4 px-4">
             <div class="row">
                 <div class="col-12">
                     <form autocomplete="off" @submit.prevent="submit">
@@ -84,7 +84,21 @@
                                 {{ errors.confirm_password[0] }}
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <template v-if="!loading">
+                            <button type="submit" class="btn btn-success">Create Dealer</button>
+                        </template>
+
+                        <template v-if="loading">
+                            <button
+                                type="button"
+                                class="btn btn-success"
+                                disabled
+                            >
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Creating...
+                            </button>
+                        </template>
                     </form>
                 </div>
             </div>
@@ -104,6 +118,7 @@
 
         data() {
             return {
+                loading: false,
                 userRoles: USER_ROLES,
                 form: {
                     first_name: '',
@@ -119,6 +134,7 @@
 
         methods: {
             submit() {
+                this.loading = true;
                 let formData = new FormData();
 
                 for ( let key in this.form ) {
@@ -127,13 +143,33 @@
 
                 axios.post('/dealers/store', formData)
                     .then(res => {
+                        this.loading = false;
+
                         if (res) {
+                            this.$toast.open({
+                                message: 'Dealer created successfully',
+                                type: 'success',
+                                position: 'bottom-left'
+                            });
+
                             this.$router.push('/dealers');
                             this.$root.$emit('dealers.load');
                         }
                     })
                     .catch(e => {
-                        this.errors = e.response.data.errors;
+                        this.loading = false;
+
+                        if (e.response ) {
+                            if (e.response.status === 422) {
+                                this.errors = e.response.data.errors;
+                            } else {
+                                this.$toast.open({
+                                    message: e.response.data.message,
+                                    type: 'error',
+                                    position: 'bottom-left'
+                                });
+                            }
+                        }
                     });
             }
         }

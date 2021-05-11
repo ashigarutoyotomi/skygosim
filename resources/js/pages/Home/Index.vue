@@ -160,23 +160,12 @@
 
 <script>
     import HeaderSlider from "../../components/HeaderSlider";
-    import InternetPackages from "../../components/InternetPackages";
 
     export default {
         name: "HomeIndex",
 
         components: {
             HeaderSlider,
-            InternetPackages
-        },
-
-        props: {
-            internetPackages: {
-                type: Object,
-                default() {
-                    return null;
-                }
-            }
         },
     }
 </script>

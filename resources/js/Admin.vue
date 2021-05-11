@@ -28,5 +28,15 @@
 </script>
 
 <style lang="scss">
+    .index {
+        &__actions-list {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
 
+            li {
+                margin: 0 0 0 .5rem;
+            }
+        }
+    }
 </style>

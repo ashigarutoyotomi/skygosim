@@ -230,9 +230,9 @@
                                         Area
                                     </td>
                                     <td class="product-total">
-                                            <span class="woocommerce-Price-amount amount">
-                                                {{ checkoutData.area }}
-                                            </span>
+                                        <span class="woocommerce-Price-amount amount">
+                                            {{ checkoutData.area }}
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr class="cart_item">
@@ -240,9 +240,9 @@
                                         Days
                                     </td>
                                     <td class="product-total">
-                                            <span class="woocommerce-Price-amount amount">
-                                                {{ checkoutData.days }}
-                                            </span>
+                                        <span class="woocommerce-Price-amount amount">
+                                            {{ checkoutData.days }}
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr class="cart_item">
@@ -255,16 +255,6 @@
                                         </span>
                                     </td>
                                 </tr>
-<!--                                <tr class="cart_item">-->
-<!--                                    <td class="product-name">-->
-<!--                                        Payment method-->
-<!--                                    </td>-->
-<!--                                    <td class="product-total">-->
-<!--                                        <span class="woocommerce-Price-amount amount">-->
-<!--                                            VISA-->
-<!--                                        </span>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
                                 </tbody>
                             </table>
 

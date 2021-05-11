@@ -11,7 +11,7 @@
         <template
             v-if="!loading"
         >
-            <div class="section bg-white shadow-sm rounded-lg py-4 px-4">
+            <div class="section bg-white shadow-sm rounded-3 py-4 px-4">
                 <div class="row">
                     <div class="col-12">
                         <form autocomplete="off" @submit.prevent="submit">
@@ -96,7 +96,21 @@
                                     {{ errors.confirm_password[0] }}
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+
+                            <template v-if="!loading">
+                                <button type="submit" class="btn btn-success">Update Dealer</button>
+                            </template>
+
+                            <template v-if="loading">
+                                <button
+                                    type="button"
+                                    class="btn btn-success"
+                                    disabled
+                                >
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Updating...
+                                </button>
+                            </template>
                         </form>
                     </div>
                 </div>
@@ -158,21 +172,41 @@
             },
 
             submit() {
+                this.loading = true;
                 let formData = new FormData();
 
                 for ( let key in this.form ) {
                     formData.append(key, this.form[key]);
                 }
 
-                axios.post(`/users/${this.userId}/update`, formData)
+                axios.post(`/dealers/${this.userId}/update`, formData)
                     .then(res => {
+                        this.loading = false;
                         if (res) {
-                            this.$router.push('/users');
-                            this.$root.$emit('users.load');
+                            this.$toast.open({
+                                message: 'Dealer updated successfully',
+                                type: 'success',
+                                position: 'bottom-left'
+                            });
+
+                            this.$router.push('/dealers');
+                            this.$root.$emit('dealers.load');
                         }
                     })
                     .catch(e => {
-                        this.errors = e.response.data.errors;
+                        this.loading = false;
+
+                        if (e.response ) {
+                            if (e.response.status === 422) {
+                                this.errors = e.response.data.errors;
+                            } else {
+                                this.$toast.open({
+                                    message: e.response.data.message,
+                                    type: 'error',
+                                    position: 'bottom-left'
+                                });
+                            }
+                        }
                     });
             }
         }

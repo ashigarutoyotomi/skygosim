@@ -89,7 +89,7 @@
                                 <div class="price-wrap d-flex">
                                     <span class="plan-sign small-text">usd</span>
                                     <span class="plan-price color-main3">
-                                        {{ internetPackage.gtt_price_usd }}
+                                        {{ internetPackage.gtt_price }}
                                     </span>
                                 </div>
                                 <div class="plan-button">
@@ -165,7 +165,7 @@
                     'title': internetPackage.data_eng,
                     'des': internetPackage.destination_eng,
                     'days': internetPackage.days,
-                    'price': internetPackage.gtt_price_usd,
+                    'price': internetPackage.gtt_price,
                     'package_id': internetPackage.package_id
                 };
 

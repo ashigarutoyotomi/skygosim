@@ -4,10 +4,15 @@
 namespace App\Http\Controllers\Dealer;
 
 
+use App\Domains\Dealer\Actions\DealerAction;
+use App\Domains\Dealer\DTO\DealerDTO\CreateDealerData;
+use App\Domains\Dealer\DTO\DealerDTO\UpdateDealerData;
+use App\Domains\Dealer\Gateways\DealerGateway;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dealer\CreateDealerRequest;
 use App\Http\Requests\Dealer\DealerSetPhysicalSimsByRangeRequest;
+use App\Http\Requests\Dealer\UpdateDealerRequest;
 use App\Http\Requests\Users\CreateUserAddressRequest;
-use App\Http\Requests\Users\CreateUserRequest;
 use App\Models\Sim\Sim;
 use App\Models\Sim\SimOrder;
 use App\Models\User;
@@ -16,12 +21,16 @@ class DealerController extends Controller
 {
     public function index()
     {
-        $users = User::where([
-            'role' => User::USER_ROLE_DEALER,
-        ])
-            ->orderBy('first_name')->paginate(20);
+        $dealerGateway = new DealerGateway;
 
-        return $users;
+        return $dealerGateway->getPaginatedDealers();
+    }
+
+    public function all()
+    {
+        $dealerGateway = new DealerGateway;
+
+        return $dealerGateway->getAllDealersWithFullName();
     }
 
     public function getPhysicalSims($dealer_id)
@@ -49,17 +58,30 @@ class DealerController extends Controller
         return $orders;
     }
 
-    public function store(CreateUserRequest $request)
+    public function store(CreateDealerRequest $request)
     {
-        $user = User::create([
+        $userData = new CreateDealerData([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password')),
-            'role' => (int)$request->get('role')
+            'role' => User::USER_ROLE_DEALER,
         ]);
 
-        return $user;
+        return (new DealerAction)->create($userData);
+    }
+
+    public function update($dealer_id, UpdateDealerRequest $request)
+    {
+        $dealerData = new UpdateDealerData([
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'email' => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
+            'dealer_id' => (int)$dealer_id,
+        ]);
+
+        return (new DealerAction)->update($dealerData);
     }
 
     public function storeAddress(CreateUserAddressRequest $request)

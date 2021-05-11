@@ -1,13 +1,31 @@
-export const SECTIONS = {
-    'internet_packages': {
-        tag: 'internet_packages',
-        label: 'Internet packages',
+export const SETTING_SECTIONS = {
+    'prices': {
+        tag: 'prices',
+        label: 'Prices',
     },
 }
 
-export const SETTING_TYPES = {
+export const SETTINGS = {
     1: {
         id: 1,
-        label: 'Internet package price percentage',
+        label: 'Package prices percentage %',
+    },
+    2: {
+        id: 2,
+        label: 'Physical sim order price',
+    },
+    3: {
+        id: 3,
+        label: 'Physical sim shipping price',
+    },
+    4: {
+        id: 4,
+        label: 'E-SIM order price',
+    },
+}
+
+export const SETTINGS_TYPE = {
+    'number': {
+        tag: 'number',
     },
 }

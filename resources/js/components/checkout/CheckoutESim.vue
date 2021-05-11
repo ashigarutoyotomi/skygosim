@@ -217,21 +217,10 @@
                                     </td>
                                     <td class="product-total">
                                         <span class="woocommerce-Price-amount amount">
-                                            <span class="woocommerce-Price-currencySymbol">$</span>
-                                            {{ form.amount }}
+                                            <span class="woocommerce-Price-currencySymbol">$</span>{{orderPrice}}
                                         </span>
                                     </td>
                                 </tr>
-<!--                                <tr class="cart_item">-->
-<!--                                    <td class="product-name">-->
-<!--                                        Payment method-->
-<!--                                    </td>-->
-<!--                                    <td class="product-total">-->
-<!--                                        <span class="woocommerce-Price-amount amount">-->
-<!--                                            VISA-->
-<!--                                        </span>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
                                 </tbody>
                             </table>
 
@@ -277,7 +266,14 @@ export default {
             default() {
                 return null;
             }
-        }
+        },
+
+        orderPrice: {
+            type: Number,
+            default() {
+                return 0;
+            }
+        },
     },
 
     data() {
@@ -335,6 +331,7 @@ export default {
                 this.loading = false;
             } else {
                 this.form.payment_method_id = paymentMethod.id;
+                this.form.amount = this.orderPrice;
 
                 axios.post('/e-sim/checkout', this.form)
                     .then(response => {

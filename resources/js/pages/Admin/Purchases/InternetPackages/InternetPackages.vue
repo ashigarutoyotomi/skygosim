@@ -11,10 +11,11 @@
         <template v-if="!loading">
             <purchases-internet-packages-filters
                 v-if="filters.show"
+                @applied="applyFilters"
                 @close="closeFilters"
             />
 
-            <div class="internet-packages bg-white shadow-sm rounded-3 py-4 px-4">
+            <div class="index bg-white shadow-sm rounded-3 py-4 px-4">
                 <div class="row">
                     <div class="col-4">
                         <div class="mb-4">
@@ -22,7 +23,7 @@
                         </div>
                     </div>
                     <div class="col-8">
-                        <ul class="internet-packages__actions-list">
+                        <ul class="index__actions-list">
                             <li>
                                 <a
                                     class="btn btn-sm btn-light"
@@ -31,15 +32,15 @@
                                     <i class="bi bi-file-earmark-arrow-down"></i>
                                 </a>
                             </li>
-<!--                            <li>-->
-<!--                                <button-->
-<!--                                    type="button"-->
-<!--                                    class="btn btn-light btn-sm"-->
-<!--                                    @click="showFilters"-->
-<!--                                >-->
-<!--                                    <i class="bi bi-funnel"></i>-->
-<!--                                </button>-->
-<!--                            </li>-->
+                            <li class="ml-2">
+                                <button
+                                    type="button"
+                                    class="btn btn-light btn-sm"
+                                    @click="showFilters"
+                                >
+                                    <i class="bi bi-funnel"></i>
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -170,6 +171,7 @@
                 }
 
                 params.keywords = this.search.keywords;
+                params.filters = this.filters;
 
                 axios.get(`/purchases/internet-packages`, {
                     params
@@ -202,6 +204,19 @@
             debounceQuerySearch: _.debounce(function() {
                 this.loadData();
             }, 500),
+
+            /**
+             * Устанавливаем фильтры, обновляем данные
+             */
+            applyFilters(filters) {
+                for (let key in filters) {
+                    this.filters[key] = filters[key];
+                }
+
+                Vue.nextTick(() => {
+                    this.loadData();
+                });
+            },
         }
     }
 </script>

@@ -19,7 +19,7 @@ class Settings extends Model
 
     const ID_INTERNET_PACKAGE_PRICE_PERCENTAGE = 1; // PACKAGE PRICE PERCENTAGE
 
-    const SECTION_INTERNET_PACKAGES = 'internet_packages';
+    const SECTION_PRICES = 'prices';
 
     const TYPE_NUMBER = 'number';
 }

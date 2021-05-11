@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <home-index
-        :internet-packages="{{$internetPackages}}"
-    ></home-index>
+    <home-index></home-index>
 @endsection

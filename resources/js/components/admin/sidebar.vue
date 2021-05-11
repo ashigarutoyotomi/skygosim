@@ -169,11 +169,39 @@
             </li>
 
             <li class="nav-item">
-                <router-link
+                <a
                     class="nav-link"
-                    :class="{'active': isActiveRoute(['settings'])}"
-                    to="/settings"
-                >Settings</router-link>
+                    :class="{'active': isActiveRoute([
+                            'settings_main',
+                            'settings_prices'
+                        ])}"
+                    data-bs-toggle="collapse"
+                    href="#collapseSettings"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseSettings"
+                >
+                    Settings
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+
+                <ul class="collapse pl-4" id="collapseSettings">
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            :class="{'active': isActiveRoute(['settings_main'])}"
+                            to="/settings/main"
+                        >Main</router-link>
+                    </li>
+
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            :class="{'active': isActiveRoute(['settings_prices'])}"
+                            to="/settings/prices"
+                        >Prices</router-link>
+                    </li>
+                </ul>
             </li>
         </ul>
     </nav>

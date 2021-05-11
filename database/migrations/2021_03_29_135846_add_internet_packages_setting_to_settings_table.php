@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Settings;
+use App\Domains\Settings\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +14,11 @@ class AddInternetPackagesSettingToSettingsTable extends Migration
      */
     public function up()
     {
-        Settings::insert([
-            'id' => Settings::ID_INTERNET_PACKAGE_PRICE_PERCENTAGE,
-            'section' => Settings::SECTION_INTERNET_PACKAGES,
+        Setting::insert([
+            'id' => Setting::ID_INTERNET_PACKAGE_PRICE_PERCENTAGE,
+            'section' => Setting::SECTION_PRICES,
             'title' => 'Internet package price percentage',
-            'type' => Settings::TYPE_NUMBER,
+            'type' => Setting::TYPE_NUMBER,
             'value' => '20',
         ]);
     }
@@ -30,6 +30,6 @@ class AddInternetPackagesSettingToSettingsTable extends Migration
      */
     public function down()
     {
-        Settings::find(Settings::ID_INTERNET_PACKAGE_PRICE_PERCENTAGE)->delete();
+        Setting::find(Setting::ID_INTERNET_PACKAGE_PRICE_PERCENTAGE)->delete();
     }
 }

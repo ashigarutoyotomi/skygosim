@@ -6,12 +6,13 @@ namespace App\Http\Controllers\Pages;
 
 use App\Actions\User\UserAction;
 use App\Actions\User\UserAddressAction;
+use App\Domains\InternetPackages\Gateways\InternetPackageGateway;
+use App\Domains\InternetPackages\Models\InternetPackage;
 use App\DTO\User\CreateUserAddressData;
 use App\DTO\User\CreateUserData;
 use App\Gateways\User\UserGateway;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InternetPackage\PurchaseInternetPackageRequest;
-use App\Models\InternetPackage;
 use App\Models\Sim\Sim;
 use App\Models\User;
 use App\Models\User\UserInternetPackage;
@@ -20,7 +21,10 @@ class PackagesPageController extends Controller
 {
     public function index()
     {
-        $internetPackages = InternetPackage::orderBy('destination_eng')->get();
+        $internetPackagesGateway = new InternetPackageGateway;
+        $internetPackages = $internetPackagesGateway
+            ->toggleGTTPrice(true)
+            ->getAllInternetPackages();
 
         return view('internet', [
             'internetPackages' => $internetPackages->groupBy('destination_eng'),

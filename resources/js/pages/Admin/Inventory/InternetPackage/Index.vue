@@ -70,7 +70,7 @@
                                         <td>{{ internetPackage.area_eng }}</td>
                                         <td>{{ internetPackage.data_eng }}</td>
                                         <td>{{ internetPackage.price_usd }} $</td>
-                                        <td>{{ internetPackage.gtt_price_usd }} $</td>
+                                        <td>{{ internetPackage.gtt_price }} $</td>
                                         <td>{{ internetPackage.days }}</td>
                                     </tr>
                                 </tbody>

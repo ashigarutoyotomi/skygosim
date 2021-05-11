@@ -207,8 +207,7 @@
                                     </td>
                                     <td class="product-total">
                                         <span class="woocommerce-Price-amount amount">
-                                            <span class="woocommerce-Price-currencySymbol">$</span>
-                                            2
+                                            <span class="woocommerce-Price-currencySymbol">$</span>{{orderPrice}}
                                         </span>
                                     </td>
                                 </tr>
@@ -218,8 +217,7 @@
                                     </td>
                                     <td class="product-total">
                                         <span class="woocommerce-Price-amount amount">
-                                            <span class="woocommerce-Price-currencySymbol">$</span>
-                                            5
+                                            <span class="woocommerce-Price-currencySymbol">$</span>{{shippingPrice}}
                                         </span>
                                     </td>
                                 </tr>
@@ -229,21 +227,10 @@
                                     </td>
                                     <td class="product-total">
                                         <span class="woocommerce-Price-amount amount">
-                                            <span class="woocommerce-Price-currencySymbol">$</span>
-                                            7
+                                            <span class="woocommerce-Price-currencySymbol">$</span>{{orderPrice + shippingPrice}}
                                         </span>
                                     </td>
                                 </tr>
-<!--                                <tr class="cart_item">-->
-<!--                                    <td class="product-name">-->
-<!--                                        Payment method-->
-<!--                                    </td>-->
-<!--                                    <td class="product-total">-->
-<!--                                        <span class="woocommerce-Price-amount amount">-->
-<!--                                            VISA-->
-<!--                                        </span>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
                                 </tbody>
                             </table>
 
@@ -289,6 +276,18 @@
                 default() {
                     return null;
                 }
+            },
+            orderPrice: {
+                type: Number,
+                default() {
+                    return 0;
+                }
+            },
+            shippingPrice: {
+                type: Number,
+                default() {
+                    return 0;
+                }
             }
         },
 
@@ -299,7 +298,7 @@
                 stripeKey: process.env.MIX_STRIPE_KEY,
                 form: {
                     payment_method_id: null,
-                    amount: 7,
+                    amount: 0,
                     cart: '',
                     first_name: '',
                     last_name: '',
@@ -347,7 +346,7 @@
                     this.loading = false;
                 } else {
                     this.form.payment_method_id = paymentMethod.id;
-                    this.form.amount = 10;
+                    this.form.amount = this.orderPrice + this.shippingPrice;
 
                     axios.post('/physical-sim/checkout', this.form)
                         .then(response => {

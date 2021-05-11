@@ -1,14 +1,11 @@
 <?php
 
-use App\DTO\User\CreateUserData;
-use App\Gateways\User\UserGateway;
 use App\Http\Controllers\Apn\ApnController;
 use App\Http\Controllers\Countries\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dealer\DealerController;
-use App\Http\Controllers\InternetPackageController;
+use App\Http\Controllers\InternetPackage\InternetPackageController;
 use App\Http\Controllers\Pages\AddSimPageController;
-use App\Http\Controllers\Pages\CheckoutPageController;
 use App\Http\Controllers\Pages\FaqPageController;
 use App\Http\Controllers\Pages\HomePageController;
 use App\Http\Controllers\Pages\HowToPageController;
@@ -23,10 +20,6 @@ use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Sim\SimController;
 use App\Http\Controllers\Sim\SimOrderController;
 use App\Http\Controllers\UserController;
-use App\Mail\UserCreatedMail;
-use App\Models\User;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -114,10 +107,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Dealers
     Route::get('/dealers', [DealerController::class, 'index']);
+    Route::get('/dealers/all', [DealerController::class, 'all']);
     Route::get('/dealers/{dealer_id}/physical-sims', [DealerController::class, 'getPhysicalSims']);
     Route::get('/dealers/{dealer_id}/physical-sim-orders', [DealerController::class, 'getPhysicalSimOrders']);
 
-    Route::post('/dealers/create', [DealerController::class, 'store']);
+    Route::post('/dealers/store', [DealerController::class, 'store']);
+    Route::post('/dealers/{dealer_id}/update', [DealerController::class, 'update']);
     Route::post('/dealers/address/create', [DealerController::class, 'storeAddress']);
     Route::post('/dealers/set-physical-sims', [DealerController::class, 'setPhysicalSims']);
 
@@ -164,4 +159,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/countries/{country_id}/update', [CountriesController::class, 'update']);
 
     Route::get('/settings', [SettingsController::class, 'index']);
+    Route::get('/settings/prices', [SettingsController::class, 'pricesSettings']);
+
+    Route::post('/settings/prices/store', [SettingsController::class, 'pricesSettingsStore']);
 });

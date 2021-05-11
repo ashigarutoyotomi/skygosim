@@ -38,6 +38,7 @@ import CountriesShow from "../pages/Admin/Countries/Show";
 import CountriesEdit from "../pages/Admin/Countries/Edit";
 
 import SettingsIndex from "../pages/Admin/Settings/Index";
+import SettingsPrices from "../pages/Admin/Settings/Prices";
 
 export const routes = [
     {
@@ -241,8 +242,13 @@ export const routes = [
 
     //Settings
     {
-        name: 'settings',
-        path: '/settings',
+        name: 'settings_main',
+        path: '/settings/main',
         component: SettingsIndex
+    },
+    {
+        name: 'settings_prices',
+        path: '/settings/prices',
+        component: SettingsPrices
     },
 ];

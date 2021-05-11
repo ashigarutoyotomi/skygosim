@@ -4,28 +4,21 @@
 namespace App\Http\Controllers\InternetPackage;
 
 
+use App\Domains\InternetPackages\Gateways\InternetPackageGateway;
+use App\Domains\InternetPackages\Imports\InternetPackagesImport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InternetPackage\UploadInternetPackagesFileRequest;
-use App\Imports\InternetPackagesImport;
-use App\Models\InternetPackage\InternetPackage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class InternetPackageController extends Controller
 {
     public function index()
     {
-        $internetPackages = InternetPackage::whereNull('expired_at')
-            ->orderBy('area_eng')
-            ->paginate(20);
+        $internetPackagesGateway = new InternetPackageGateway;
 
-//        $internetPackagesPricePercent = (int)(new SettingsGateway)->getInternetPackagesPricePercentage();
-//
-//        foreach ($internetPackages as $internetPackage) {
-//            $internetPackage->gtt_price_usd = (int)$internetPackage->price_usd
-//                + (((int)$internetPackage->price_usd * $internetPackagesPricePercent) / 100);
-//        }
-
-        return $internetPackages;
+        return $internetPackagesGateway
+            ->toggleGTTPrice(true)
+            ->getPaginatedInternetPackages();
     }
 
     public function uploadPackages(UploadInternetPackagesFileRequest $request)

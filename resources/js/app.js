@@ -29,7 +29,10 @@ Vue.use(VModal);
 
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
-Vue.component('v-select', vSelect)
+Vue.component('v-select', vSelect);
+
+import DatePicker from 'v-calendar/lib/components/date-picker.umd';
+Vue.component('date-picker', DatePicker);
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))

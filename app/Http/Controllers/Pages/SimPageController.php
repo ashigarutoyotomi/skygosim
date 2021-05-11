@@ -8,6 +8,8 @@ use App\Actions\Sim\SimOrderAction;
 use App\Actions\Sim\SimOrderAddressAction;
 use App\Actions\User\UserAction;
 use App\Actions\User\UserAddressAction;
+use App\Domains\Settings\Gateways\SettingGateway;
+use App\Domains\Settings\Models\Setting;
 use App\DTO\Sim\CreateSimOrderAddressData;
 use App\DTO\Sim\CreateSimOrderData;
 use App\DTO\User\CreateUserAddressData;
@@ -30,6 +32,8 @@ class SimPageController extends Controller
     public function orderPhysicalSim()
     {
         $user = Auth::user();
+        $orderPrice = (new SettingGateway)->getSettingValueById(Setting::ID_PHYSICAL_SIM_ORDER_PRICE);
+        $shippingPrice = (new SettingGateway)->getSettingValueById(Setting::ID_PHYSICAL_SIM_SHIPPING_PRICE);
 
         if ($user) {
             $user->load('address');
@@ -37,12 +41,15 @@ class SimPageController extends Controller
 
         return view('checkouts.physical-sim', [
             'user' => $user,
+            'orderPrice' => $orderPrice,
+            'shippingPrice' => $shippingPrice,
         ]);
     }
 
     public function orderESim()
     {
         $user = Auth::user();
+        $orderPrice = (new SettingGateway)->getSettingValueById(Setting::ID_E_SIM_ORDER_PRICE);
 
         if ($user) {
             $user->load('address');
@@ -50,6 +57,7 @@ class SimPageController extends Controller
 
         return view('checkouts.e-sim', [
             'user' => $user,
+            'orderPrice' => $orderPrice,
         ]);
     }
 

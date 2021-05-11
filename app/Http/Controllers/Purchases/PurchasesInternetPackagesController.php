@@ -8,6 +8,7 @@ use App\Exports\PurchasesInternetPackagesExport;
 use App\Helpers\StringHelper;
 use App\Http\Controllers\Controller;
 use App\Models\User\UserInternetPackage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -20,6 +21,27 @@ class PurchasesInternetPackagesController extends Controller
             'sim.dealer',
             'internet_package'
         ]);
+
+        $filters = json_decode($request->get('filters'), true);
+
+        if ($filters) {
+            if (array_key_exists('date_from', $filters) && $filters['date_from']) {
+                $date = Carbon::parse($filters['date_from'])->toDateTimeString();
+                $packagesQuery->where('created_at', '>=', $date);
+            }
+
+            if (array_key_exists('date_to', $filters) && $filters['date_to']) {
+                $date = Carbon::parse($filters['date_to'])
+                    ->toDateTimeString();
+                $packagesQuery->where('created_at', '<=', $date);
+            }
+
+            if (array_key_exists('dealer_id', $filters) && $filters['dealer_id']) {
+                $packagesQuery->whereHas('sim.dealer', function ($query) use ($filters) {
+                    $query->where('id', $filters['dealer_id']);
+                });
+            }
+        }
 
         $keywords = $request->get('keywords');
 

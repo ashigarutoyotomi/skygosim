@@ -1,0 +1,53 @@
+<?php
+
+
+namespace App\Domains\InternetPackages\Imports;
+
+
+use App\Domains\InternetPackages\Models\InternetPackage;
+use App\Domains\Settings\Gateways\SettingGateway;
+use App\Domains\Settings\Models\Setting;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
+
+class InternetPackagesImport implements ToCollection
+{
+    public function collection(Collection $rows)
+    {
+        $rowTitles = $rows[0];
+        $data = [];
+
+        foreach ($rows as $key => $row) {
+            if ($key > 0) {
+                $rowData = [];
+
+                foreach ($row as $columnKey => $column) {
+                    $rowData[$rowTitles[$columnKey]] = $column;
+                }
+
+                $data[] = $rowData;
+            }
+        }
+
+        if (count($data)) {
+            $activeInternetPackages = InternetPackage::whereNull('expired_at')->get();
+
+            foreach ($data as $item) {
+                $price = $item['price_usd'];
+                $percentage = (new SettingGateway)->getSettingValueById(Setting::ID_INTERNET_PACKAGE_PRICE_PERCENTAGE);
+                $percentPrice = ((int)$price * (int)$percentage) / 100;
+                $item['gtt_price_usd'] = $price + $percentPrice;
+
+                InternetPackage::create($item);
+            }
+
+            if ($activeInternetPackages->count()) {
+                foreach ($activeInternetPackages as $activeInternetPackage) {
+                    $activeInternetPackage->expired_at = Carbon::now();
+                    $activeInternetPackage->save();
+                }
+            }
+        }
+    }
+}
