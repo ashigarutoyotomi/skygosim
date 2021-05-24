@@ -5,7 +5,10 @@ use App\Http\Controllers\Countries\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dealer\DealerController;
 use App\Http\Controllers\InternetPackage\InternetPackageController;
+use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Pages\AddSimPageController;
+use App\Http\Controllers\Pages\CartPageController;
+use App\Http\Controllers\Pages\CheckoutPageController;
 use App\Http\Controllers\Pages\FaqPageController;
 use App\Http\Controllers\Pages\HomePageController;
 use App\Http\Controllers\Pages\HowToPageController;
@@ -19,7 +22,8 @@ use App\Http\Controllers\Region\RegionController;
 use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Sim\SimController;
 use App\Http\Controllers\Sim\SimOrderController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\UserCartController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +64,7 @@ Auth::routes();
 Route::get('/', [HomePageController::class, 'index']);
 
 Route::get('/packages', [PackagesPageController::class, 'index']);
+Route::get('/packages/getAllPackages', [PackagesPageController::class, 'getAllPackages']);
 Route::post('/packages/checkout', [PackagesPageController::class, 'checkout']);
 
 Route::get('/add-sim', [AddSimPageController::class, 'index']);
@@ -84,7 +89,21 @@ Route::get('/checkout/result', [PagesController::class, 'checkoutResult']);
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/me', [UserController::class, 'me']);
+
+    Route::get('/cart', [CartPageController::class, 'index']);
+
+    Route::get('/user-cart', [UserCartController::class, 'index']);
+    Route::get('/user-cart/counts', [UserCartController::class, 'userCartCounts']);
+
+    Route::get('/order/{order_id}/checkout', [CheckoutPageController::class, 'checkoutOrder']);
+
+    Route::post('/order/purchase', [CheckoutPageController::class, 'purchase']);
+    Route::post('/order/store', [OrderController::class, 'store']);
+
     Route::get('/profile', [ProfilePageController::class, 'index']);
+
+    Route::post('/packages/add-to-cart', [PackagesPageController::class, 'addToCart']);
 });
 
 

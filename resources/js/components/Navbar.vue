@@ -1,6 +1,5 @@
 <template>
-    <div class="header_absolute header_layout_1">
-        <!-- header with two Bootstrap columns - left for logo and right for navigation and includes (search, social icons, additional links and buttons etc -->
+    <div id="navbar" class="header_absolute header_layout_1">
         <header class="page_header ls justify-nav-end">
             <div class="container-fluid">
                 <div class="row align-items-center">
@@ -82,6 +81,14 @@
                                                 </li>
                                             </ul>
                                         </li>
+                                        <li>
+                                            <a href="/cart">
+                                                <i class="color-main2 fa fa-shopping-cart" aria-hidden="true"></i>
+                                                <span class="cart-badge">
+                                                    {{ cartCounts }}
+                                                </span>
+                                            </a>
+                                        </li>
                                     </template>
                                 </ul>
                             </nav>
@@ -106,11 +113,28 @@
             }
         },
 
+        data() {
+            return {
+                cartCounts: 0,
+            }
+        },
+
+        created() {
+            this.loadUserCartCounts();
+        },
+
         methods: {
             logout() {
                 axios.post('/logout')
                     .then(() => {
                         window.location.href = '/';
+                    });
+            },
+
+            loadUserCartCounts() {
+                axios.get('/user-cart/counts')
+                    .then(({data}) => {
+                        this.cartCounts = data;
                     });
             }
         }
@@ -118,6 +142,15 @@
 </script>
 
 <style lang="scss">
+    #navbar {
+        .cart-badge {
+            border-radius: 100%;
+            padding: 3px 3px;
+            color: #5b83cd;
+            margin-left: -10px;
+        }
+    }
+
     .header_absolute.header_layout_1 .ls.affix-top .sf-menu > li > a {
         color: #000;
     }

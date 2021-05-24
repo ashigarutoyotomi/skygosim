@@ -8,27 +8,35 @@ use App\Actions\User\UserAction;
 use App\Actions\User\UserAddressAction;
 use App\Domains\InternetPackages\Gateways\InternetPackageGateway;
 use App\Domains\InternetPackages\Models\InternetPackage;
+use App\Domains\User\Actions\UserCartAction;
+use App\Domains\User\DTO\UserCartDTO\CreateUserCartData;
+use App\Domains\User\Models\UserCart;
 use App\DTO\User\CreateUserAddressData;
 use App\DTO\User\CreateUserData;
 use App\Gateways\User\UserGateway;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InternetPackage\PurchaseInternetPackageRequest;
+use App\Http\Requests\Users\AddToCartInternetPackageRequest;
 use App\Models\Sim\Sim;
 use App\Models\User;
 use App\Models\User\UserInternetPackage;
+use Illuminate\Support\Facades\Auth;
 
 class PackagesPageController extends Controller
 {
     public function index()
+    {
+        return view('internet-packages.internet');
+    }
+
+    public function getAllPackages()
     {
         $internetPackagesGateway = new InternetPackageGateway;
         $internetPackages = $internetPackagesGateway
             ->toggleGTTPrice(true)
             ->getAllInternetPackages();
 
-        return view('internet', [
-            'internetPackages' => $internetPackages->groupBy('destination_eng'),
-        ]);
+        return $internetPackages->groupBy('destination_eng');
     }
 
     public function checkout(PurchaseInternetPackageRequest $request)
@@ -51,7 +59,7 @@ class PackagesPageController extends Controller
             $user = (new UserAction)->create($userData);
         }
 
-        if (!$user->address) {
+        if ($user && !$user->address) {
             $userAddressData = new CreateUserAddressData([
                 'user_id' => $user->id,
                 'street' => $request->get('street_address'),
@@ -84,12 +92,14 @@ class PackagesPageController extends Controller
             $statusCode = $response->getStatusCode();
             $content = $response->getBody();
 
-            $userInternetPackage = UserInternetPackage::create([
-                'user_id' => $user->id,
-                'sim_id' => $sim->id,
-                'internet_package_id' => $internetPackage->id,
-                'bought_price' => $request->input('amount'),
-            ]);
+            if ($user && $sim && $internetPackage) {
+                $userInternetPackage = UserInternetPackage::create([
+                    'user_id' => $user->id,
+                    'sim_id' => $sim->id,
+                    'internet_package_id' => $internetPackage->id,
+                    'bought_price' => $request->input('amount'),
+                ]);
+            }
 
             return [
                 'payment' => $payment,
@@ -100,5 +110,21 @@ class PackagesPageController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
+    }
+
+    public function addToCart(AddToCartInternetPackageRequest $request)
+    {
+        $userCartData = new CreateUserCartData([
+            'user_id' => (int)$request->user_id,
+            'item_type' => UserCart::ITEM_TYPE_INTERNET_PACKAGE,
+            'item_id' => (int)$request->internet_package_id,
+            'sim_id' => (int)$request->sim_id,
+            'quantity' => 1,
+            'currency' => UserCart::CURRENCY_USD,
+            'price' => (float)$request->price,
+            'status' => UserCart::CART_STATUS_NEW,
+        ]);
+
+        return (new UserCartAction)->create($userCartData);
     }
 }

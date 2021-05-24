@@ -53,6 +53,12 @@ Vue.component('ProfileIndex', require('./pages/Profile/ProfileIndex').default);
 
 Vue.component('ApnIndex', require('./pages/Apn/Index').default);
 
+Vue.component('InternetPackagesIndex', require('./pages/InternetPackage/Index').default);
+
+Vue.component('CartIndex', require('./pages/Cart/Index').default);
+
+Vue.component('CheckoutIndex', require('./pages/Checkout/Index').default);
+
 Vue.component('CheckoutInternetPackage', require('./components/checkout/CheckoutInternetPackage.vue').default);
 Vue.component('CheckoutESimForm', require('./components/checkout/CheckoutESim.vue').default);
 Vue.component('CheckoutPhysicalSimForm', require('./components/checkout/CheckoutPhysicalSim.vue').default);

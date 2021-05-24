@@ -92,12 +92,13 @@
                                         {{ internetPackage.gtt_price }}
                                     </span>
                                 </div>
+
                                 <div class="plan-button">
                                     <button
                                         :class="`btn btn-maincolor${getRandomInt(1, 3)}`"
                                         @click="purchase(internetPackage)"
                                     >
-                                        <span>Purchase</span>
+                                        <span>Add to card</span>
                                     </button>
                                 </div>
                             </div>
@@ -115,6 +116,13 @@
         name: "InternetPackages",
 
         props: {
+            user: {
+                type: Object,
+                default() {
+                    return null;
+                }
+            },
+
             internetPackages: {
                 type: Object,
                 default() {
@@ -156,22 +164,28 @@
             },
 
             chooseCountry(country) {
-                this.selectedCountry = _.orderBy(country, 'gtt_price_usd');
+                this.selectedCountry = _.orderBy(country, 'gtt_price');
             },
 
             purchase(internetPackage) {
-                let checkoutData = {
-                    'area': internetPackage.area_eng,
-                    'title': internetPackage.data_eng,
-                    'des': internetPackage.destination_eng,
-                    'days': internetPackage.days,
-                    'price': internetPackage.gtt_price,
-                    'package_id': internetPackage.package_id
-                };
+                if (this.user && this.user.sims.length) {
+                    let checkoutData = {
+                        'area': internetPackage.area_eng,
+                        'title': internetPackage.data_eng,
+                        'des': internetPackage.destination_eng,
+                        'days': internetPackage.days,
+                        'price': internetPackage.gtt_price,
+                        'package_id': internetPackage.package_id
+                    };
 
-                localStorage.setItem('checkout', JSON.stringify(checkoutData));
+                    localStorage.setItem('checkout', JSON.stringify(checkoutData));
 
-                window.location.href = '/checkout'
+                    window.location.href = '/checkout'
+                } else if (this.user && !this.user.sims.length) {
+                    window.location.href = '/add-sim'
+                } else {
+                    window.location.href = '/login'
+                }
             },
 
             backToAreas() {
