@@ -2809,7 +2809,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    this.$root.$on('user-cart-counts.update', this.loadUserCartCounts);
     this.loadUserCartCounts();
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.$root.$off('user-cart-counts.update', this.loadUserCartCounts);
   },
   methods: {
     logout: function logout() {
@@ -11029,6 +11033,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CartIndex",
   data: function data() {
@@ -11070,6 +11078,17 @@ __webpack_require__.r(__webpack_exports__);
 
         if (data) {
           window.location.href = "/order/".concat(data.id, "/checkout");
+        }
+      });
+    },
+    removeItem: function removeItem(itemId) {
+      var _this2 = this;
+
+      axios["delete"]("/user-cart/".concat(itemId, "/delete")).then(function (_ref3) {
+        var data = _ref3.data;
+
+        if (data) {
+          _this2.loadCart();
         }
       });
     }
@@ -11996,6 +12015,8 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('price', this.price);
       axios.post('/packages/add-to-cart', formData).then(function (_ref) {
         var data = _ref.data;
+
+        _this.$root.$emit('user-cart-counts.update');
 
         _this.closeModal();
       })["catch"](function (e) {
@@ -13301,7 +13322,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#SelectSimModal {\n  z-index: 2000;\n}\n.vm--container {\n  z-index: 2001;\n}\n.vm--container .btn {\n  height: 40px;\n  width: 100%;\n}\n.vm--container .error-message {\n  color: red;\n  font-size: 0.8rem;\n  font-style: itelic;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#SelectSimModal {\n  z-index: 2000;\n}\n.vm--container {\n  z-index: 2001;\n}\n.vm--container .btn {\n  height: 40px;\n  width: 100%;\n}\n.vm--container .error-message {\n  color: red;\n  font-size: 0.8rem;\n  font-style: italic;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -92537,7 +92558,21 @@ var render = function() {
                         _vm._l(_vm.items, function(item) {
                           return [
                             _c("tr", { staticClass: "cart_item" }, [
-                              _vm._m(1, true),
+                              _c("td", { staticClass: "product-remove" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "remove",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.removeItem(item.id)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("×")]
+                                )
+                              ]),
                               _vm._v(" "),
                               _c("td", { staticClass: "product-thumbnail" }),
                               _vm._v(" "),
@@ -92685,26 +92720,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "product-subtotal" }, [_vm._v("Total")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "product-remove" }, [
-      _c(
-        "a",
-        {
-          staticClass: "remove",
-          attrs: {
-            href: "#",
-            "aria-label": "Remove this item",
-            "data-product_id": "73",
-            "data-product_sku": ""
-          }
-        },
-        [_vm._v("×")]
-      )
     ])
   }
 ]

@@ -96,6 +96,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user-cart', [UserCartController::class, 'index']);
     Route::get('/user-cart/counts', [UserCartController::class, 'userCartCounts']);
 
+    Route::delete('/user-cart/{user_cart_id}/delete', [UserCartController::class, 'delete']);
+
     Route::get('/order/{order_id}/checkout', [CheckoutPageController::class, 'checkoutOrder']);
 
     Route::post('/order/purchase', [CheckoutPageController::class, 'purchase']);

@@ -24,7 +24,11 @@
                                 <template v-for="item in items">
                                     <tr class="cart_item">
                                         <td class="product-remove">
-                                            <a href="#" class="remove" aria-label="Remove this item" data-product_id="73" data-product_sku="">×</a>
+                                            <a
+                                                href="#"
+                                                class="remove"
+                                                @click="removeItem(item.id)"
+                                            >×</a>
                                         </td>
 
                                         <td class="product-thumbnail">
@@ -133,6 +137,15 @@
                             window.location.href = `/order/${data.id}/checkout`;
                         }
                     });
+            },
+
+            removeItem(itemId) {
+                axios.delete(`/user-cart/${itemId}/delete`)
+                    .then(({data}) => {
+                        if (data) {
+                            this.loadCart();
+                        }
+                    })
             }
         }
     }

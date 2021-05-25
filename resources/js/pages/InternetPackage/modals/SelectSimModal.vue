@@ -92,6 +92,7 @@
 
                 axios.post('/packages/add-to-cart', formData)
                     .then(({data}) => {
+                        this.$root.$emit('user-cart-counts.update');
                         this.closeModal();
                     })
                     .catch(e => {
@@ -124,7 +125,7 @@
         .error-message {
             color: red;
             font-size: .8rem;
-            font-style: itelic;
+            font-style: italic;
         }
     }
 </style>

@@ -36,4 +36,15 @@ class UserCartController extends Controller
         return UserCart::where('status', UserCart::CART_STATUS_NEW)
             ->where('user_id', $user->id)->count();
     }
+
+    public function delete($user_cart_id)
+    {
+        $userCart = UserCart::find($user_cart_id);
+
+        if ($userCart) {
+            $userCart->delete();
+        }
+
+        return $userCart;
+    }
 }

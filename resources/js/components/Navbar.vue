@@ -120,7 +120,12 @@
         },
 
         created() {
+            this.$root.$on('user-cart-counts.update', this.loadUserCartCounts);
             this.loadUserCartCounts();
+        },
+
+        beforeDestroy() {
+            this.$root.$off('user-cart-counts.update', this.loadUserCartCounts);
         },
 
         methods: {
