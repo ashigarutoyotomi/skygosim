@@ -4,10 +4,12 @@
 namespace App\Http\Controllers\Sim;
 
 
+use App\Domains\Sim\Gateways\SimGateway;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SimCard\UploadSimCardsFileRequest;
 use App\Imports\SimImport;
 use App\Models\Sim\Sim;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SimController extends Controller
@@ -66,5 +68,17 @@ class SimController extends Controller
             ->get();
 
         return $sims;
+    }
+
+    public function getAvailableSims(Request $request)
+    {
+        $keywords = $request->get('keywords');
+        $filters = json_decode($request->get('filters'), true);
+
+        $simGateway = (new SimGateway())
+            ->setFilters($filters)
+            ->setKeywords($keywords);
+
+        return $simGateway->getAvailableSims();
     }
 }

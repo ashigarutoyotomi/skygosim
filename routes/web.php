@@ -113,6 +113,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
+    Route::get('/dashboard/load-data', [DashboardController::class, 'loadData']);
+    Route::get('/dashboard/internet-packages-card/load-data', [DashboardController::class, 'internetPackagesCardLoadData']);
 
     // Users
     Route::get('/users', [UserController::class, 'index']);
@@ -139,9 +141,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Internet Packages
     Route::get('/internet-packages', [InternetPackageController::class, 'index']);
+    Route::get('/internet-packages/get-available-packages', [InternetPackageController::class, 'getAvailablePackages']);
     Route::post('/internet-packages/upload_packages', [InternetPackageController::class, 'uploadPackages']);
+    Route::post('/internet-packages/activate-packages', [InternetPackageController::class, 'activatePackages']);
 
     // Sims
+    Route::get('/sims/get-available-sims', [SimController::class, 'getAvailableSims']);
     Route::get('/sims/physical', [SimController::class, 'getPhysicalSims']);
     Route::get('/sims/physical/available', [SimController::class, 'getAvailablePhysicalSims']);
     Route::get('/sims/e-sims', [SimController::class, 'getESims']);
@@ -152,6 +157,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/sim-orders/{sim_order_id}/add-physical-sim', [SimOrderController::class, 'addPhysicalSim']);
     Route::put('/sim-orders/{sim_order_id}/finish', [SimOrderController::class, 'finish']);
 
+    // Purchases
     Route::get('/purchases/internet-packages', [PurchasesInternetPackagesController::class, 'index']);
     Route::get('/purchases/internet-packages/{id}/show', [PurchasesInternetPackagesController::class, 'show']);
     Route::get('/purchases/internet-packages/download-excel', [PurchasesInternetPackagesController::class, 'downloadExcel']);
@@ -179,6 +185,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/countries/store', [CountriesController::class, 'store']);
     Route::post('/countries/{country_id}/update', [CountriesController::class, 'update']);
 
+    // Settings
     Route::get('/settings', [SettingsController::class, 'index']);
     Route::get('/settings/prices', [SettingsController::class, 'pricesSettings']);
 

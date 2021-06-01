@@ -107,10 +107,14 @@ class CheckoutPageController extends Controller
                         'internet_package_id' => $package->id,
                         'bought_price' => $request->input('amount'),
                     ]);
+
+                    $cart->status = UserCart::CART_STATUS_FINISHED;
+                    $cart->save();
                 }
             }
 
             $order->status = Order::ORDER_STATUS_DONE;
+            $order->save();
 
             return [
                 'payment' => $payment,

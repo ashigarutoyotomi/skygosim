@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Models\Sim;
+namespace App\Domains\Sim\Models;
 
 
 use App\Models\User;

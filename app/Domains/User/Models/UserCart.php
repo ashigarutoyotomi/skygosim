@@ -30,6 +30,7 @@ class UserCart extends Model
 
     const CART_STATUS_NEW = 1; // New
     const CART_STATUS_ORDER = 2; // In order
+    const CART_STATUS_FINISHED = 3; // Finished
 
     public function sim()
     {

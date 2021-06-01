@@ -4,6 +4,7 @@
 namespace App\Domains\InternetPackages\Gateways;
 
 
+use App\Classes\Helpers\StringHelper;
 use App\Domains\InternetPackages\Models\InternetPackage;
 use App\Domains\Settings\Gateways\SettingGateway;
 use App\Domains\Settings\Models\Setting;
@@ -14,6 +15,7 @@ class InternetPackageGateway
     protected $keywords = '';
     protected $with = null;
     protected $gttPrices = false;
+    protected $limit = null;
 
 
     /**
@@ -25,6 +27,18 @@ class InternetPackageGateway
     public function with($with)
     {
         $this->with = $with;
+        return $this;
+    }
+
+    /**
+     * Set limit.
+     *
+     * @param int $limit
+     * @return $this
+     */
+    public function limit(int $limit)
+    {
+        $this->limit = $limit;
         return $this;
     }
 
@@ -98,5 +112,46 @@ class InternetPackageGateway
         }
 
         return $packages;
+    }
+
+    public function getPackages()
+    {
+        $query = InternetPackage::whereNull('expired_at');
+
+        // Search
+        if (!!$this->keywords) {
+            $query = $this->appendSearch($query);
+        }
+
+        // Limit
+        if (!!$this->limit) {
+            $query->limit($this->limit);
+        }
+
+        return $query->get();
+    }
+
+    /**
+     * Append search
+     * @param $query
+     * @return mixed
+     */
+    private function appendSearch($query)
+    {
+        $keywords = $this->keywords;
+
+        $query->where(function ($q) use ($keywords) {
+            $keywordParts = preg_split('/ /', $keywords, -1, PREG_SPLIT_NO_EMPTY);
+
+            foreach ($keywordParts as $index => $possiblePart) {
+                $like = "%" . StringHelper::escapeLike($possiblePart) . "%";
+                $whereClause = $index == 0 ? 'where' : 'orWhere';
+                $q->$whereClause(function ($q) use ($like) {
+                    $q->where('package_id', 'like', $like);
+                });
+            }
+        });
+
+        return $query;
     }
 }
