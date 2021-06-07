@@ -4,6 +4,9 @@
 namespace App\Http\Controllers\User;
 
 
+use App\Domains\User\Actions\UserAction;
+use App\Domains\User\DTO\UserDTO\CreateUserData;
+use App\Domains\User\Gateways\UserGateway;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\CreateUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
@@ -12,12 +15,26 @@ use App\Models\Sim\SimOrder;
 use App\Models\User;
 use App\Models\User\UserSim;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Spatie\DataTransferObject\DataTransferObjectError;
 
 class UserController extends Controller
 {
     public function me()
     {
         $user = Auth::user();
+
+        if ($user->role === User::USER_ROLE_ADMIN) {
+            return [
+                'user' => $user,
+            ];
+        }
+
+        if ($user->role === User::USER_ROLE_DEALER) {
+            return [
+                'user' => $user,
+            ];
+        }
 
         $user->load([
             'sims.sim'
@@ -28,8 +45,19 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::where('role', '!=', User::USER_ROLE_DEALER)
-            ->orderBy('first_name')->paginate(20);
+        $user = Auth::user();
+        $gateway = new UserGateway;
+        $users = [];
+
+        if ($user->role === User::USER_ROLE_ADMIN) {
+            return $gateway->paginate(20)
+                ->getCustomers();
+        }
+
+        if ($user->role === User::USER_ROLE_DEALER) {
+            return $gateway->paginate(20)
+                ->getCustomersForDealer($user->id);
+        }
 
         return $users;
     }
@@ -45,20 +73,25 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request)
     {
-        $user = User::create([
-            'first_name' => $request->get('first_name'),
-            'last_name' => $request->get('last_name'),
-            'email' => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
-            'role' => (int)$request->get('role')
-        ]);
+        $userData = CreateUserData::fromRequest($request);
 
-        return $user;
+        return (new UserAction)->create($userData);
     }
 
     public function edit($user_id)
     {
-        return User::find($user_id);
+        $user = Auth::user();
+
+        if ($user->role === User::USER_ROLE_ADMIN) {
+            return User::find($user_id);
+        }
+
+        if ($user->role === User::USER_ROLE_DEALER) {
+            return User::where([
+                'id' => $user_id,
+                'creator_id' => $user->id,
+            ])->first();
+        }
     }
 
     public function update($user_id, UpdateUserRequest $request)

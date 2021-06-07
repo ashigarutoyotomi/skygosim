@@ -1,15 +1,15 @@
 <template>
     <div id="users-create">
 
-        <div class="section bg-white shadow-sm rounded-lg py-4 px-4">
+        <div class="section bg-white shadow-sm rounded-3 py-4 px-4">
             <div class="row">
                 <div class="col-12">
                     <form autocomplete="off" @submit.prevent="submit">
                         <div class="mb-3">
-                            <label for="last_name">First Name</label>
+                            <label class="fw-bold text-black-50" for="last_name">First Name</label>
                             <input
                                 type="text"
-                                class="form-control"
+                                class="form-control form-control-sm"
                                 :class="{'is-invalid': errors.first_name}"
                                 id="last_name"
                                 v-model="form.first_name"
@@ -22,10 +22,10 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="first_name">Last Name</label>
+                            <label class="fw-bold text-black-50" for="first_name">Last Name</label>
                             <input
                                 type="text"
-                                class="form-control"
+                                class="form-control form-control-sm"
                                 :class="{'is-invalid': errors.last_name}"
                                 id="first_name"
                                 v-model="form.last_name"
@@ -38,10 +38,10 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="email">Email address</label>
+                            <label class="fw-bold text-black-50" for="email">Email address</label>
                             <input
                                 type="email"
-                                class="form-control"
+                                class="form-control form-control-sm"
                                 :class="{'is-invalid': errors.email}"
                                 id="email"
                                 v-model="form.email"
@@ -54,10 +54,10 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="password">Password</label>
+                            <label class="fw-bold text-black-50" for="password">Password</label>
                             <input
                                 type="password"
-                                class="form-control"
+                                class="form-control form-control-sm"
                                 :class="{'is-invalid': errors.password}"
                                 id="password"
                                 v-model="form.password"
@@ -70,10 +70,10 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="confirm-password">Confirm Password</label>
+                            <label class="fw-bold text-black-50" for="confirm-password">Confirm Password</label>
                             <input
                                 type="password"
-                                class="form-control"
+                                class="form-control form-control-sm"
                                 :class="{'is-invalid': errors.confirm_password}"
                                 id="confirm-password"
                                 v-model="form.confirm_password"
@@ -85,10 +85,10 @@
                                 {{ errors.confirm_password[0] }}
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="role">Role</label>
+                        <div v-if="user.role === userRoles[1].id" class="mb-3">
+                            <label class="fw-bold text-black-50" for="role">Role</label>
                             <select
-                                class="form-control"
+                                class="form-control form-control-sm"
                                 :class="{'is-invalid': errors.role}"
                                 id="role"
                                 v-model="form.role"
@@ -107,16 +107,30 @@
                                 {{ errors.role[0] }}
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <button v-if="!loading" type="submit" class="btn btn-success btn-sm">Create user</button>
+
+                        <template v-if="loading">
+                            <button
+                                type="button"
+                                class="btn btn-success btn-sm"
+                                disabled
+                            >
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Creating...
+                            </button>
+                        </template>
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
     import { USER_ROLES } from "../constants";
+    import {mapGetters} from "vuex";
 
     export default {
         name: "UserCreate",
@@ -136,12 +150,20 @@
                     confirm_password: '',
                     role: USER_ROLES[2].id,
                 },
-                errors: {}
+                errors: {},
+                loading: false,
             }
+        },
+
+        computed: {
+            ...mapGetters({
+                user: 'getUser'
+            }),
         },
 
         methods: {
             submit() {
+                this.loading = true;
                 let formData = new FormData();
 
                 for ( let key in this.form ) {
@@ -150,13 +172,33 @@
 
                 axios.post('/users/create', formData)
                     .then(res => {
+                        this.loading = false;
+
                         if (res) {
+                            this.$toast.open({
+                                message: 'User created successfully',
+                                type: 'success',
+                                position: 'bottom-left'
+                            });
+
                             this.$router.push('/users');
                             this.$root.$emit('users.load');
                         }
                     })
                     .catch(e => {
-                        this.errors = e.response.data.errors;
+                        this.loading = false;
+
+                        if (e.response ) {
+                            if (e.response.status === 422) {
+                                this.errors = e.response.data.errors;
+                            } else {
+                                this.$toast.open({
+                                    message: e.response.data.message,
+                                    type: 'error',
+                                    position: 'bottom-left'
+                                });
+                            }
+                        }
                     });
             }
         }
@@ -164,5 +206,9 @@
 </script>
 
 <style lang="scss">
-
+    #users-create {
+        label {
+            font-size: .8rem;
+        }
+    }
 </style>

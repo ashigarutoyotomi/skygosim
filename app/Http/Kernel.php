@@ -2,7 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CanSeeDashboard;
 use App\Http\Middleware\IsAdminUser;
+use App\Http\Middleware\IsDealerUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -54,7 +56,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'admin' => IsAdminUser::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
@@ -64,5 +65,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'admin' => IsAdminUser::class,
+        'dealer' => IsDealerUser::class,
+        'can_see.dashboard' => CanSeeDashboard::class,
     ];
 }

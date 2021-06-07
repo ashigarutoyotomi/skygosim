@@ -1,7 +1,5 @@
 <template>
-    <admin-layout
-        :user="user"
-    >
+    <admin-layout>
 
         <router-view></router-view>
 

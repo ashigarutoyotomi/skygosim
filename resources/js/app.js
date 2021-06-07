@@ -15,6 +15,7 @@ window.Vue = require('vue').default;
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
+import { store } from "./store/index";
 
 import VueRouter from 'vue-router';
 import { routes } from "./routes";
@@ -77,5 +78,6 @@ const router = new VueRouter({
 
 const app = new Vue({
     router,
+    store,
     el: '#app',
 });

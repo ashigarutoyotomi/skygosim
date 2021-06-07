@@ -1,0 +1,38 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export const store = new Vuex.Store({
+    state: {
+        user: null
+    },
+
+    mutations: {
+        setUser(state, user) {
+            state.user = user;
+        }
+    },
+
+    actions: {
+        loadMe({ commit }) {
+            return new Promise((resolve, reject) => {
+                axios.get('/me')
+                    .then(({data}) => {
+                        commit('setUser', data.user);
+
+                        resolve();
+                    })
+                    .catch(e => {
+                        reject(e);
+                    })
+            });
+        }
+    },
+
+    getters: {
+        getUser: state => {
+            return state.user;
+        }
+    }
+})

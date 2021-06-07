@@ -1,5 +1,7 @@
 <template>
     <div id="users">
+        <confirm-user-delete-modal />
+
         <template v-if="loading">
             <div class="row">
                 <div class="spinner-border mx-auto" style="width: 3rem; height: 3rem;" role="status">
@@ -13,7 +15,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="mb-4">
-                            <h5>Users ({{data ? data.total : 0}})</h5>
+                            <h6 class="">Users ({{data ? data.total : 0}})</h6>
                         </div>
                     </div>
                     <div class="col-8">
@@ -21,7 +23,7 @@
                             <li>
                                 <router-link
                                     to="/users/create"
-                                    class="btn btn-primary btn-sm"
+                                    class="btn btn-light btn-sm"
                                     title="Add new user"
                                 >
                                     Add new
@@ -33,33 +35,34 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <template v-if="!data">
-                            <div class="text-muted mb-4">
+                        <template v-if="!data.data.length">
+                            <p class="fw-light fst-italic text-muted mb-4">
                                 Users not found
-                            </div>
+                            </p>
 
-                            <button
-                                type="button"
+                            <router-link
+                                to="/users/create"
                                 class="btn btn-light btn-sm"
+                                title="Add new user"
                             >
                                 Create new user
-                            </button>
+                            </router-link>
                         </template>
 
-                        <template v-if="data">
+                        <template v-if="data.data.length">
                             <table class="table table-sm">
                                 <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col"></th>
+                                    <th class="fw-bold text-black-50" scope="col">#</th>
+                                    <th class="fw-bold text-black-50" scope="col">Name</th>
+                                    <th class="fw-bold text-black-50" scope="col">Email</th>
+                                    <th class="fw-bold text-black-50" scope="col">Role</th>
+                                    <th class="fw-bold text-black-50" scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-for="(item, key) in data.data">
-                                    <th scope="row">{{ key + 1 }}</th>
+                                    <th class="fw-bold text-black-50" scope="row">{{ key + 1 }}</th>
                                     <td>{{ item.first_name }} {{ item.last_name }}</td>
                                     <td>{{ item.email }}</td>
                                     <td>{{ userRoles[item.role].label }}</td>
@@ -78,7 +81,11 @@
                                         >
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
-                                        <button type="button" class="btn btn-light btn-sm">
+                                        <button
+                                            type="button"
+                                            class="btn btn-light btn-sm"
+                                            @click="remove(item.id)"
+                                        >
                                             <i class="bi bi-trash-fill"></i>
                                         </button>
                                     </td>
@@ -95,11 +102,13 @@
 
 <script>
     import { USER_ROLES } from "./constants";
+    import ConfirmUserDeleteModal from "./modals/ConfirmUserDeleteModal";
 
     export default {
         name: "UsersIndex",
 
         components: {
+            ConfirmUserDeleteModal
 
         },
 
@@ -138,18 +147,23 @@
 
             edit(userId) {
                 this.$router.push('/users/' + userId + '/edit');
+            },
+
+            remove(userId) {
+                this.$root.$emit('modal::show::ConfirmUserDeleteModal', {
+                    userId: userId,
+                });
             }
         }
     }
 </script>
 
 <style lang="scss">
-    .section {
-        &__actions-list {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            list-style: none;
+    #users {
+        .table {
+            th {
+                font-size: .8rem;
+            }
         }
     }
 </style>

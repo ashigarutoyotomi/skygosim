@@ -72,16 +72,15 @@
 </template>
 
 <script>
-
     import InternetPackagesCard from "./modules/InternetPackagesCard";
     import PurchaseInternetPackagesModal from "./modals/PurchaseInternetPackagesModal";
+
     export default {
         name: "DashboardIndex",
 
         components: {
             PurchaseInternetPackagesModal,
             InternetPackagesCard
-
         },
 
         data() {

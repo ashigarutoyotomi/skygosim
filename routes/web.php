@@ -111,22 +111,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
-    Route::get('/dashboard/load-data', [DashboardController::class, 'loadData']);
-    Route::get('/dashboard/internet-packages-card/load-data', [DashboardController::class, 'internetPackagesCardLoadData']);
 
     // Users
-    Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/{user_id}/show', [UserController::class, 'show']);
-    Route::get('/users/{user_id}/edit', [UserController::class, 'edit']);
-    Route::get('/users/{user_id}/orders', [UserController::class, 'orders']);
-    Route::get('/users/{user_id}/sims', [UserController::class, 'getSims']);
-    Route::get('/users/{user_id}/internet-packages', [UserController::class, 'getInternetPackages']);
-
-    Route::post('/users/create', [UserController::class, 'store']);
-    Route::post('/users/{user_id}/update', [UserController::class, 'update']);
-    Route::delete('/users/{user_id}/delete', [UserController::class, 'delete']);
 
     // Dealers
     Route::get('/dealers', [DealerController::class, 'index']);
@@ -190,4 +176,24 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/settings/prices', [SettingsController::class, 'pricesSettings']);
 
     Route::post('/settings/prices/store', [SettingsController::class, 'pricesSettingsStore']);
+});
+
+
+Route::middleware(['auth', 'can_see.dashboard'])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+    Route::get('/dashboard/load-data', [DashboardController::class, 'loadData']);
+    Route::get('/dashboard/internet-packages-card/load-data', [DashboardController::class, 'internetPackagesCardLoadData']);
+
+    // Users
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{user_id}/show', [UserController::class, 'show']);
+    Route::get('/users/{user_id}/edit', [UserController::class, 'edit']);
+    Route::get('/users/{user_id}/orders', [UserController::class, 'orders']);
+    Route::get('/users/{user_id}/sims', [UserController::class, 'getSims']);
+    Route::get('/users/{user_id}/internet-packages', [UserController::class, 'getInternetPackages']);
+    Route::post('/users/create', [UserController::class, 'store']);
+    Route::post('/users/{user_id}/update', [UserController::class, 'update']);
+    Route::delete('/users/{user_id}/delete', [UserController::class, 'delete']);
 });

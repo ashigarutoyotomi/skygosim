@@ -1,12 +1,14 @@
 <?php
 
+
 namespace App\Http\Middleware;
+
 
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdminUser
+class IsDealerUser
 {
     /**
      * Handle an incoming request.
@@ -17,7 +19,7 @@ class IsAdminUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (\Auth::user()->role === User::USER_ROLE_ADMIN) {
+        if (\Auth::user()->role === User::USER_ROLE_DEALER) {
             return $next($request);
         }
 
