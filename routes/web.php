@@ -127,12 +127,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Internet Packages
     Route::get('/internet-packages', [InternetPackageController::class, 'index']);
-    Route::get('/internet-packages/get-available-packages', [InternetPackageController::class, 'getAvailablePackages']);
+//    Route::get('/internet-packages/get-available-packages', [InternetPackageController::class, 'getAvailablePackages']);
     Route::post('/internet-packages/upload_packages', [InternetPackageController::class, 'uploadPackages']);
-    Route::post('/internet-packages/activate-packages', [InternetPackageController::class, 'activatePackages']);
 
     // Sims
-    Route::get('/sims/get-available-sims', [SimController::class, 'getAvailableSims']);
+//    Route::get('/sims/get-available-sims', [SimController::class, 'getAvailableSims']);
     Route::get('/sims/physical', [SimController::class, 'getPhysicalSims']);
     Route::get('/sims/physical/available', [SimController::class, 'getAvailablePhysicalSims']);
     Route::get('/sims/e-sims', [SimController::class, 'getESims']);
@@ -188,6 +187,7 @@ Route::middleware(['auth', 'can_see.dashboard'])->group(function () {
 
     // Users
     Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/widget-load-data', [UserController::class, 'widgetLoadData']);
     Route::get('/users/{user_id}/show', [UserController::class, 'show']);
     Route::get('/users/{user_id}/edit', [UserController::class, 'edit']);
     Route::get('/users/{user_id}/orders', [UserController::class, 'orders']);
@@ -196,4 +196,18 @@ Route::middleware(['auth', 'can_see.dashboard'])->group(function () {
     Route::post('/users/create', [UserController::class, 'store']);
     Route::post('/users/{user_id}/update', [UserController::class, 'update']);
     Route::delete('/users/{user_id}/delete', [UserController::class, 'delete']);
+
+    // Dealers
+    Route::get('/dealers/{dealer_id}/cart/internet-packages', [DealerController::class, 'cartInternetPackages']);
+
+    // Internet Packages
+    Route::get('/internet-packages/orders', [InternetPackageController::class, 'orders']);
+    Route::get('/internet-packages/get-available-packages', [InternetPackageController::class, 'getAvailablePackages']);
+    Route::get('/internet-packages/widget/load-data', [InternetPackageController::class, 'getWidgetData']);
+    Route::post('/internet-packages/activate-packages', [InternetPackageController::class, 'activatePackages']);
+    Route::post('/internet-packages/checkout-packages', [InternetPackageController::class, 'checkoutPackages']);
+    Route::post('/internet-packages/purchase-packages', [InternetPackageController::class, 'purchasePackages']);
+
+    // Sims
+    Route::get('/sims/get-available-sims', [SimController::class, 'getAvailableSims']);
 });

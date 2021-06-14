@@ -15,7 +15,7 @@
                         <sidebar></sidebar>
                     </div>
 
-                    <div class="col-9">
+                    <div class="col-9 col-xxl-10">
                         <slot></slot>
                     </div>
                 </div>

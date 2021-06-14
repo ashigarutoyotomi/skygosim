@@ -65,7 +65,10 @@
 
         <div class="row">
             <div class="col-6">
-                <internet-packages-card />
+                <users-widget-card />
+            </div>
+            <div class="col-6">
+                <internet-packages-widget-card />
             </div>
         </div>
     </div>
@@ -74,11 +77,15 @@
 <script>
     import InternetPackagesCard from "./modules/InternetPackagesCard";
     import PurchaseInternetPackagesModal from "./modals/PurchaseInternetPackagesModal";
+    import UsersWidgetCard from "../Users/modules/UsersWidgetCard";
+    import InternetPackagesWidgetCard from "../InternetPackages/modules/InternetPackagesWidgetCard";
 
     export default {
         name: "DashboardIndex",
 
         components: {
+            InternetPackagesWidgetCard,
+            UsersWidgetCard,
             PurchaseInternetPackagesModal,
             InternetPackagesCard
         },

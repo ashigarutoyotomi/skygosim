@@ -1,3 +1,4 @@
+import { internetPackageRoutes } from "./internet-packages";
 
 import DashboardIndex from "../pages/Admin/Dashboard/Index";
 
@@ -40,13 +41,14 @@ import CountriesEdit from "../pages/Admin/Countries/Edit";
 import SettingsIndex from "../pages/Admin/Settings/Index";
 import SettingsPrices from "../pages/Admin/Settings/Prices";
 
-export const routes = [
+const allRoutes = [
     {
         name: 'home',
         path: '/',
         component: DashboardIndex
     },
 
+    // Users
     {
         name: 'users',
         path: '/users',
@@ -73,6 +75,7 @@ export const routes = [
         component: UsersEdit,
     },
 
+    // Dealers
     {
         name: 'dealers',
         path: '/dealers',
@@ -104,12 +107,6 @@ export const routes = [
         path: '/dealers/:userId/address/create',
         props: true,
         component: DealerAddressCreate,
-    },
-
-    {
-        name: 'internet_packages',
-        path: '/internet-packages',
-        component: InventoryInternetPackageIndex
     },
 
     // Inventory
@@ -252,3 +249,5 @@ export const routes = [
         component: SettingsPrices
     },
 ];
+
+export const routes = [...allRoutes, ...internetPackageRoutes];

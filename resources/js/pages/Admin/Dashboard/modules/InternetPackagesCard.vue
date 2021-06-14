@@ -39,7 +39,7 @@
             <button
                 type="submit"
                 class="btn btn-light btn-sm"
-                @click="openPurchaseInternetPackagesModal"
+                @click="$router.push({name: 'internet_packages_purchase'})"
             >
                 Purchase new
             </button>

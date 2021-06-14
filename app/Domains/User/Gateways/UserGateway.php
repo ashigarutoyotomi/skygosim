@@ -13,6 +13,7 @@ class UserGateway
     protected $with = null;
     protected $paginate = null;
     protected $limit = null;
+    protected $userRole = null;
 
 
     /**
@@ -48,6 +49,18 @@ class UserGateway
     public function paginate(int $paginate)
     {
         $this->paginate = $paginate;
+        return $this;
+    }
+
+    /**
+     * Set user role.
+     *
+     * @param int $paginate
+     * @return $this
+     */
+    public function setRole(int $role)
+    {
+        $this->userRole = $role;
         return $this;
     }
 
@@ -95,6 +108,23 @@ class UserGateway
 
         if ($this->paginate) {
             return $query->paginate($this->paginate);
+        }
+
+        return $query->get();
+    }
+
+    public function getCustomersDataForWidget(?int $dealer_id)
+    {
+        $query = User::where([
+            'role' => User::USER_ROLE_USER,
+        ]);
+
+        if ($this->with) {
+            $query->with($this->with);
+        }
+
+        if ($this->userRole === User::USER_ROLE_DEALER) {
+            $query->where('creator_id', $dealer_id);
         }
 
         return $query->get();

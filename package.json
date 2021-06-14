@@ -27,6 +27,7 @@
     "dependencies": {
         "@stripe/stripe-js": "^1.13.1",
         "moment": "^2.29.1",
+        "read-excel-file": "^5.1.0",
         "v-calendar": "^2.3.0",
         "vue-js-modal": "*",
         "vue-router": "^3.5.1",

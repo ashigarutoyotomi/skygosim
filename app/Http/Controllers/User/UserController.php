@@ -148,4 +148,29 @@ class UserController extends Controller
 
         return $internetPackages;
     }
+
+    public function widgetLoadData()
+    {
+        $user = Auth::user();
+        $gateway = new UserGateway();
+
+        $users = $gateway
+            ->with(['sims', 'internet_packages'])
+            ->setRole($user->role)
+            ->getCustomersDataForWidget($user->id);
+
+        $usersSimsCount = 0;
+        $usersInternetPackagesCount = 0;
+
+        foreach ($users as $userItem) {
+            $usersSimsCount += $userItem->sims->count();
+            $usersInternetPackagesCount += $userItem->internet_packages->count();
+        }
+
+        return [
+            'usersCount' => $users->count(),
+            'usersSimsCount' => $usersSimsCount,
+            'usersInternetPackagesCount' => $usersInternetPackagesCount,
+        ];
+    }
 }

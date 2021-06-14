@@ -8,6 +8,7 @@ use App\Domains\Dealer\Actions\DealerAction;
 use App\Domains\Dealer\DTO\DealerDTO\CreateDealerData;
 use App\Domains\Dealer\DTO\DealerDTO\UpdateDealerData;
 use App\Domains\Dealer\Gateways\DealerGateway;
+use App\Domains\User\Models\UserCart;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dealer\CreateDealerRequest;
 use App\Http\Requests\Dealer\DealerSetPhysicalSimsByRangeRequest;
@@ -112,5 +113,19 @@ class DealerController extends Controller
         }
 
         return true;
+    }
+
+    public function cartInternetPackages($dealer_id)
+    {
+        $cart = UserCart::where([
+            'user_id' => $dealer_id,
+            'item_type' => UserCart::ITEM_TYPE_INTERNET_PACKAGE,
+            'status' => UserCart::CART_STATUS_NEW,
+        ])->get();
+
+        return [
+            'cart' => $cart,
+            'dealerDiscount' => 10,
+        ];
     }
 }
