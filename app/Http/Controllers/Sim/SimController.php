@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SimCard\UploadSimCardsFileRequest;
 use App\Imports\SimImport;
 use App\Models\Sim\Sim;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SimController extends Controller
@@ -23,24 +25,32 @@ class SimController extends Controller
 
     public function getPhysicalSims()
     {
-        $sims = Sim::where([
-            'sim_type' => Sim::SIM_TYPE_PHYSICAL
-        ])
-            ->orderBy('iccid')
-            ->paginate(20);
+        $user = Auth::user();
 
-        return $sims;
+        $query = Sim::where([
+            'sim_type' => Sim::SIM_TYPE_PHYSICAL
+        ])->orderBy('iccid');
+
+        if ($user->role === User::USER_ROLE_DEALER) {
+            $query->where('dealer_id', $user->id);
+        }
+
+        return $query->paginate(20);
     }
 
     public function getESims()
     {
-        $simCards = Sim::where([
-            'sim_type' => Sim::SIM_TYPE_E_SIM
-        ])
-            ->orderBy('iccid')
-            ->paginate(20);
+        $user = Auth::user();
 
-        return $simCards;
+        $query = Sim::where([
+            'sim_type' => Sim::SIM_TYPE_E_SIM
+        ])->orderBy('iccid');
+
+        if ($user->role === User::USER_ROLE_DEALER) {
+            $query->where('dealer_id', $user->id);
+        }
+
+        return $query->paginate(20);
     }
 
     public function uploadSimCards(UploadSimCardsFileRequest $request)

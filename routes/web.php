@@ -131,8 +131,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/internet-packages/upload_packages', [InternetPackageController::class, 'uploadPackages']);
 
     // Sims
-//    Route::get('/sims/get-available-sims', [SimController::class, 'getAvailableSims']);
-    Route::get('/sims/physical', [SimController::class, 'getPhysicalSims']);
     Route::get('/sims/physical/available', [SimController::class, 'getAvailablePhysicalSims']);
     Route::get('/sims/e-sims', [SimController::class, 'getESims']);
     Route::post('/sims/upload-file', [SimController::class, 'uploadSimsFromFile']);
@@ -210,4 +208,6 @@ Route::middleware(['auth', 'can_see.dashboard'])->group(function () {
 
     // Sims
     Route::get('/sims/get-available-sims', [SimController::class, 'getAvailableSims']);
+    Route::get('/sims/physical', [SimController::class, 'getPhysicalSims']);
+    Route::get('/sims/e-sims', [SimController::class, 'getESims']);
 });

@@ -146,7 +146,7 @@
                     >Countries</router-link>
                 </li>
 
-                <li v-if="[userRoles[1].id].includes(user.role)"
+                <li v-if="[userRoles[1].id, userRoles[3].id].includes(user.role)"
                     class="nav-item"
                 >
                     <a
@@ -167,7 +167,9 @@
                     </a>
 
                     <ul class="collapse pl-4" id="collapseInventory">
-                        <li class="nav-item">
+                        <li v-if="[userRoles[1].id].includes(user.role)"
+                            class="nav-item"
+                        >
                             <router-link
                                 class="nav-link"
                                 :class="{'active': isActiveRoute(['internet_packages'])}"
@@ -183,7 +185,9 @@
                             >Physical SIMs</router-link>
                         </li>
 
-                        <li class="nav-item">
+                        <li v-if="[userRoles[1].id].includes(user.role)"
+                            class="nav-item"
+                        >
                             <router-link
                                 class="nav-link"
                                 :class="{'active': isActiveRoute(['inventory_e_sims'])}"
