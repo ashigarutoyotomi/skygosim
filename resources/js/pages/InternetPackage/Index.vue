@@ -102,6 +102,7 @@
 
                                     <div class="plan-button">
                                         <button
+                                            type="button"
                                             :class="`btn btn-maincolor${getRandomInt(1, 3)}`"
                                             @click="addToCart(internetPackage)"
                                         >
@@ -158,7 +159,9 @@
             loadMe() {
                 axios.get('/me')
                     .then(({data}) => {
-                        this.user = data;
+                        if (data) {
+                            this.user = data;
+                        }
                     });
             },
 

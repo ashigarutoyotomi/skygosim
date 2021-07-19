@@ -54,6 +54,8 @@ Vue.component('ProfileIndex', require('./pages/Profile/ProfileIndex').default);
 
 Vue.component('ApnIndex', require('./pages/Apn/Index').default);
 
+Vue.component('MobileAppsIndex', require('./pages/MobileApps/Index').default)
+
 Vue.component('InternetPackagesIndex', require('./pages/InternetPackage/Index').default);
 
 Vue.component('CartIndex', require('./pages/Cart/Index').default);

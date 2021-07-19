@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Apn\ApnController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Countries\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Dealer\DealerController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Pages\CheckoutPageController;
 use App\Http\Controllers\Pages\FaqPageController;
 use App\Http\Controllers\Pages\HomePageController;
 use App\Http\Controllers\Pages\HowToPageController;
+use App\Http\Controllers\Pages\MobileAppsPageController;
 use App\Http\Controllers\Pages\PackagesPageController;
 use App\Http\Controllers\Pages\ProfilePageController;
 use App\Http\Controllers\Pages\SimPageController;
@@ -83,13 +85,15 @@ Route::get('/faq', [FaqPageController::class, 'index']);
 
 Route::get('/apn', [ApnPageController::class, 'index']);
 
+Route::get('/app', [MobileAppsPageController::class, 'index']);
+
 Route::get('/checkout', [PagesController::class, 'checkout']);
 Route::get('/checkout/e-sim', [PagesController::class, 'checkoutESim']);
 Route::get('/checkout/result', [PagesController::class, 'checkoutResult']);
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/me', [UserController::class, 'me']);
+    Route::get('/me', [AuthController::class, 'me']);
 
     Route::get('/cart', [CartPageController::class, 'index']);
 

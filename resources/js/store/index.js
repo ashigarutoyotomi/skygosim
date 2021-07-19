@@ -19,7 +19,7 @@ export const store = new Vuex.Store({
             return new Promise((resolve, reject) => {
                 axios.get('/me')
                     .then(({data}) => {
-                        commit('setUser', data.user);
+                        commit('setUser', data);
 
                         resolve();
                     })
