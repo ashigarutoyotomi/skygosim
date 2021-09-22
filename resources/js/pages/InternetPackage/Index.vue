@@ -2,119 +2,97 @@
     <div id="internet-packages-index">
         <select-sim-modal/>
 
-        <header-comp
-            title="Packages"
-        />
+        <header-comp>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="divider-60"></div>
+
+                    <div class="col-md-12 text-center">
+                        <h5 class="">Choose</h5>
+                        <h1>Package</h1>
+                        <p class="">
+                            Get ready for more potential,
+                            more opportunity and more of everything you expect from internet provider
+                        </p>
+                    </div>
+
+                    <div class="divider-50"></div>
+                </div>
+            </div>
+
+            <ol class="breadcrumb full-width">
+                <li class="breadcrumb-item">
+                    <router-link to="/">Home</router-link>
+                </li>
+                <li class="breadcrumb-item active">
+                    Packages
+                </li>
+            </ol>
+        </header-comp>
 
         <section
             id="internet-packages"
-            class="ls s-pt-50 s-pb-50 s-pt-lg-120 s-pb-lg-90 s-pt-xl-160 s-pb-xl-130 c-gutter-30 c-mb-30 service-page"
+            class="internet-packages"
         >
             <div class="container">
-
-                <div class="row">
-                    <div class="col-lg-8 offset-lg-2" id="price">
-                        <h5 class="special-heading text-center">Choose</h5>
-                        <h1 class="text-center">Package</h1>
-                        <p class="text-center big">Get ready for more potential, more opportunity and more of everything you expect from internet provider</p>
-                    </div>
-                </div>
-
                 <template
                     v-if="internetPackages && !selectedCountry.length"
                 >
                     <div class="row">
-                        <template
-                            v-for="(internetPackage, area) in internetPackages"
-                        >
-                            <div class="col-lg-3 col-sm-6">
-                                <div class="vertical-item rounded rounded-image-top hero-bg content-padding padding-small text-center h-full">
-                                    <div class="item-media">
-                                        <img :src="`/images/regions/${getImgNameByArea(internetPackage[0].area_eng)}.jpg`" alt="">
-                                        <div class="media-links">
-                                            <a
-                                                class="abs-link"
-                                                href="#internet-packages"
-                                                @click="chooseCountry(internetPackage)"
-                                            ></a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <h5 class="service-title">
-                                            <a
-                                                href="#internet-packages"
-                                                @click="chooseCountry(internetPackage)"
-                                            >
-                                                {{ area }}
-                                            </a>
-                                        </h5>
-
-                                        <p>
-                                            {{ internetPackages[area].length }} <br> Packages
-                                        </p>
-                                    </div>
-                                </div>
+                        <div class="col-12">
+                            <div class="internet-packages__search">
+                                <input
+                                    type="text"
+                                    placeholder="Search by region"
+                                    v-model="searchKeywords"
+                                >
                             </div>
-                        </template>
-                    </div>
-                </template>
-
-                <template v-if="internetPackages && sortedPackages.length">
-                    <div class="row mb-4">
-                        <div class="col">
-                            <button
-                                type="button"
-                                class="btn btn-white"
-                                @click="backToAreas"
-                            >
-                                <span>Back</span>
-                            </button>
                         </div>
                     </div>
                     <div class="row">
-                        <template v-for="internetPackage in sortedPackages">
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="pricing-plan hero-bg rounded">
-                                    <div :class="`plan-name text-uppercase bg-maincolor${getRandomInt(1, 3)}`">
-                                        <h3>
-                                            {{ internetPackage.area_eng }}
-                                        </h3>
-                                    </div>
-                                    <div class="plan-features">
-                                        <ul class="list-bordered">
-                                            <li>
-                                                {{ internetPackage.destination_eng }}
-                                            </li>
-                                            <li>
-                                                {{ internetPackage.data_eng }}
-                                            </li>
-                                            <li>
-                                                {{ internetPackage.days }} Days
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="price-wrap d-flex">
-                                        <span class="plan-sign small-text">usd</span>
-                                        <span class="plan-price color-main3">
-                                        {{ internetPackage.gtt_price }}
-                                    </span>
-                                    </div>
-
-                                    <div class="plan-button">
-                                        <button
-                                            type="button"
-                                            :class="`btn btn-maincolor${getRandomInt(1, 3)}`"
-                                            @click="addToCart(internetPackage)"
-                                        >
-                                            <span>Add to card</span>
-                                        </button>
-                                    </div>
+                        <template
+                            v-for="(internetPackageItems, area) in filteredInternetPackages"
+                        >
+                            <div class="col-12">
+                                <div class="internet-packages__area">
+                                    <h1>{{ internetPackageItems[0].destination_eng }}</h1>
                                 </div>
                             </div>
+
+                            <template
+                                v-for="internetPackage in internetPackageItems"
+                            >
+                                <div class="col-lg-3 col-sm-6">
+                                    <div
+                                        class="internet-packages__item"
+                                        @click="addToCart(internetPackage)"
+                                    >
+                                        <div class="item-media">
+                                            <img :src="`/images/regions/${getImgNameByArea(internetPackage.area_eng)}.jpg`" alt="">
+                                        </div>
+                                        <div class="item-content">
+                                            <p>
+                                                {{ internetPackage.data_eng }}
+                                            </p>
+                                            <p>
+                                                {{ internetPackage.days }} Days
+                                            </p>
+
+                                            <h5>
+                                                <a
+                                                    href="#"
+                                                    @click="addToCart(internetPackage)"
+                                                >
+                                                    USD {{ internetPackage.gtt_price }}
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
                         </template>
                     </div>
                 </template>
-
             </div>
         </section>
     </div>
@@ -130,6 +108,7 @@
                 selectedCountry: [],
                 internetPackages: {},
                 user: {},
+                searchKeywords: '',
             }
         },
 
@@ -140,6 +119,26 @@
                 }
 
                 return [];
+            },
+
+            filteredInternetPackages() {
+                let internetPackages = [];
+                let searchKeywords = this.searchKeywords;
+
+                for (let key in this.internetPackages) {
+                    internetPackages.push(_.orderBy(this.internetPackages[key], 'days', 'asc'));
+                }
+
+                if (this.searchKeywords) {
+                    internetPackages = _.filter(internetPackages, function(packages) {
+                        return packages.find(packageItem => {
+                            let area = packageItem.destination_eng.toLowerCase();
+                            return area.includes(searchKeywords.toLowerCase());
+                        });
+                    });
+                }
+
+                return internetPackages;
             }
         },
 
@@ -206,6 +205,86 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+    .internet-packages {
+        padding: 4rem 0;
 
+        &__search {
+            margin: 0 0 1rem 0;
+
+            input {
+                box-shadow: none;
+                font-size: 1rem;
+                padding: .3rem 1rem;
+
+                &::placeholder {
+                    color: #ededed;
+                    opacity: 1; /* Firefox */
+                }
+
+                &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+                    color: #ededed;
+                }
+
+                &::-ms-input-placeholder { /* Microsoft Edge */
+                    color: #ededed;
+                }
+            }
+        }
+
+        &__area {
+            border-bottom: 2px solid #fafafa;
+            margin: 0 0 1rem 0;
+            padding: 1rem 0 1rem 0;
+
+            h1 {
+                font-size: 1.5rem;
+                color: #4c4c4c;
+                margin: 0;
+            }
+        }
+
+        &__item {
+            background: #f7f6fb;
+            border-radius: 5px;
+            margin: 0 0 2rem 0;
+            cursor: pointer;
+
+            .item-media {
+                img {
+                    border-radius: 5px 5px 0 0;
+                    transition: .2s;
+                }
+            }
+
+            .item-content {
+                h5 {
+                    margin: 0;
+                    transition: .2s;
+                }
+
+                p {
+                    transition: .2s;
+                }
+            }
+
+            &:hover {
+                .item-media {
+                    img {
+                        filter: sepia(100%);
+                    }
+                }
+
+                .item-content {
+                    h5 a {
+                        color: #5b83cd;
+                    }
+
+                    p {
+                        color: #5b83cd;
+                    }
+                }
+            }
+        }
+    }
 </style>

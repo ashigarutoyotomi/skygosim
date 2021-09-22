@@ -3,25 +3,27 @@
 <!--        <div id="particles-js"></div>-->
 
         <section class="header__section page_title cs s-pt-60 s-pb-10 s-pt-lg-130 s-pb-lg-60 page_title text-center">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="divider-60"></div>
+            <slot>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="divider-60"></div>
 
-                    <div class="col-md-12 text-center">
-                        <h1>{{ title }}</h1>
+                        <div class="col-md-12 text-center">
+                            <h1>{{ title }}</h1>
+                        </div>
+
+                        <div class="divider-50"></div>
                     </div>
-
-                    <div class="divider-50"></div>
                 </div>
-            </div>
-            <ol class="breadcrumb full-width">
-                <li class="breadcrumb-item">
-                    <router-link to="/">Home</router-link>
-                </li>
-                <li class="breadcrumb-item active">
-                    {{ title }}
-                </li>
-            </ol>
+                <ol class="breadcrumb full-width">
+                    <li class="breadcrumb-item">
+                        <router-link to="/">Home</router-link>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        {{ title }}
+                    </li>
+                </ol>
+            </slot>
         </section>
     </div>
 </template>
