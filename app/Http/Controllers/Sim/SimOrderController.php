@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Sim;
 
 
+use App\Domains\User\Gateways\UserGateway;
 use App\Http\Controllers\Controller;
 use App\Models\Sim\Sim;
 use App\Models\Sim\SimOrder;
@@ -14,17 +15,21 @@ class SimOrderController extends Controller
     public function index(Request $request)
     {
         $type = $request->get('type');
-        $query = SimOrder::with('user', 'sim')
-            ->orderBy('status', 'asc')
-            ->orderBy('created_at', 'desc');
+        $filters = json_decode($request->get('filters'), true);
+
+        $gateway = new UserGateway();
+
+        $gateway->with(['user', 'sim'])
+            ->setFilters($filters)
+            ->paginate(20);
 
         if ($type && $type === 'physical') {
-            $query->where('sim_type', SimOrder::SIM_TYPE_PHYSICAL);
+            $orders = $gateway->getUserPhysicalSimOrders();
         } else if ($type && $type === 'e-sim') {
-            $query->where('sim_type', SimOrder::SIM_TYPE_E_SIM);
+            $orders = $gateway->getUserESimOrders();
         }
 
-        return $query->paginate(20);
+        return $orders;
     }
 
     public function showPhysicalSim($sim_order_id)
