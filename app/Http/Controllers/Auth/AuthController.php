@@ -21,7 +21,10 @@ class AuthController extends Controller
             return null;
         }
 
-        $userQuery = User::query();
+        $userQuery = User::query()
+            ->with([
+                'sims.sim'
+            ]);
 
         if ($user->role === User::USER_ROLE_ADMIN) {
             return $userQuery->find($user->id);
@@ -31,8 +34,6 @@ class AuthController extends Controller
             return $userQuery->find($user->id);
         }
 
-        return $userQuery->with([
-            'sims.sim'
-        ])->find($user->id);
+        return $userQuery->find($user->id);
     }
 }

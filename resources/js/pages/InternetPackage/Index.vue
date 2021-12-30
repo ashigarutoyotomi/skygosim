@@ -184,14 +184,14 @@
             },
 
             addToCart(internetPackage) {
-                if (this.user.id && this.user.sims.length) {
+                if (this.user.id && this.user.sims && this.user.sims.length) {
                     this.$root.$emit('modal::show::SelectSimModal', {
                         user_id: this.user.id,
                         internet_package_id: internetPackage.id,
                         sims: this.user.sims,
                         price: internetPackage.gtt_price
                     });
-                } else if (this.user.id && !this.user.sims.length) {
+                } else if (this.user.id && this.user.sims && !this.user.sims.length) {
                     window.location.href = '/add-sim'
                 } else {
                     window.location.href = '/login'
