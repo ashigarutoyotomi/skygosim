@@ -83,33 +83,47 @@ class CheckoutPageController extends Controller
 
             $payment = $payment->asStripePaymentIntent();
 
-            $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
             $client = new \GuzzleHttp\Client();
+            $endpoint = "https://simapi.udbac.com/sim/v1/api/getAccessToken/GTT/GTT";
+            $response = $client->request('GET', $endpoint);
+            $statusCode = $response->getStatusCode();
+            $body = $response->getBody();
 
-            foreach ($carts as $cart) {
-                $package = InternetPackage::find($cart->item_id);
-                $sim = Sim::find($cart->sim_id);
+            $content = null;
+            if ($statusCode === 200) {
+                $content = json_decode($body->getContents(), true);
+                $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
 
-                if ($user && $package && $sim) {
-                    $response = $client->request('POST', $endpoint, ['query' => [
-                        'iccid' => $sim->iccid,
-                        'packageId' => $package->package_id,
-                        'currency' => 'USD',
-                        'ourOrderID' => 'skygosimorderid' . $request->input('package_id'),
-                    ]]);
+                foreach ($carts as $cart) {
+                    $package = InternetPackage::find($cart->item_id);
+                    $sim = Sim::find($cart->sim_id);
 
-                    $statusCode = $response->getStatusCode();
-                    $content = $response->getBody();
+                    if ($user && $package && $sim) {
+                        $requestBody = [
+                            'appKey' => env('SIM_API_APP_KEY'),
+                            'accessToken' => $content['accessToken'],
+                            'iccid' => $sim->iccid,
+                            'packageId' => $package->package_id,
+                            'currency' => 'USD',
+                            'ourOrderId' => 'skygosimorderid' . $request->input('package_id'),
+                        ];
 
-                    $userInternetPackage = UserInternetPackage::create([
-                        'user_id' => $user->id,
-                        'sim_id' => $sim->id,
-                        'internet_package_id' => $package->id,
-                        'bought_price' => $request->input('amount'),
-                    ]);
+                        $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
 
-                    $cart->status = UserCart::CART_STATUS_FINISHED;
-                    $cart->save();
+                        $statusCode = $response->getStatusCode();
+                        $body = $response->getBody();
+                        $content = json_decode($body->getContents(), true);
+
+                        $userInternetPackage = UserInternetPackage::create([
+                            'user_id' => $user->id,
+                            'sim_id' => $sim->id,
+                            'internet_package_id' => $package->id,
+                            'bought_price' => $request->input('amount'),
+                        ]);
+
+                        $cart->status = UserCart::CART_STATUS_FINISHED;
+                        $cart->save();
+                    }
                 }
             }
 

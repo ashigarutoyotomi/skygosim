@@ -26,6 +26,8 @@ use App\Http\Controllers\Sim\SimController;
 use App\Http\Controllers\Sim\SimOrderController;
 use App\Http\Controllers\User\UserCartController;
 use App\Http\Controllers\User\UserController;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,6 +63,47 @@ Auth::routes();
 //    ]);
 //
 //    Mail::to('amanzhol.fvfy@gmail.com')->send(new UserCreatedMail($userData));
+//});
+
+//Route::get('/test-api', function () {
+//    $client = new \GuzzleHttp\Client();
+//
+//    $endpoint = "https://simapi.udbac.com/sim/v1/api/getAccessToken/GTT/GTT";
+//    $response = $client->request('GET', $endpoint);
+//
+//    $statusCode = $response->getStatusCode();
+//    $body = $response->getBody();
+//
+//    $content = null;
+//    if ($statusCode === 200) {
+//        $content = json_decode($body->getContents(), true);
+//
+//        $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
+//        $requestBody = [
+//            'appKey' => env('SIM_API_APP_KEY'),
+//            'accessToken' => $content['accessToken'],
+//            'iccid' => "89852340003820810100",
+//            'packageId' => "D190129022941_83355",
+//            'currency' => 'CNY',
+//            'ourOrderId' => '2021092213130908689',
+//        ];
+//
+//        try {
+//            $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+//        } catch (ClientException $e) {
+//            dump(Message::toString($e->getRequest()));
+//            dd(Message::toString($e->getResponse()));
+//        }
+//
+//        $statusCode = $response->getStatusCode();
+//        $body = $response->getBody();
+//        $content = json_decode($body->getContents(), true);
+//    }
+//
+//    return [
+//        '$statusCode' => $statusCode,
+//        '$content' => $content,
+//    ];
 //});
 
 Route::get('/', [HomePageController::class, 'index']);
