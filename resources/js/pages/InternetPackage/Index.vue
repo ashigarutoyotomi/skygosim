@@ -35,8 +35,9 @@
             class="internet-packages"
         >
             <div class="container">
+                <spinner v-if="loading"/>
                 <template
-                    v-if="internetPackages && !selectedCountry.length"
+                    v-if="!loading"
                 >
                     <div class="row">
                         <div class="col-12">
@@ -51,45 +52,37 @@
                     </div>
                     <div class="row">
                         <template
-                            v-for="(internetPackageItems, area) in filteredInternetPackages"
+                            v-for="internetPackage in filteredInternetPackages"
                         >
-                            <div class="col-12">
-                                <div class="internet-packages__area">
-                                    <h1>{{ internetPackageItems[0].destination_eng }}</h1>
-                                </div>
-                            </div>
-
-                            <template
-                                v-for="internetPackage in internetPackageItems"
+                            <div
+                                class="col-lg-3 col-sm-6"
                             >
-                                <div class="col-lg-3 col-sm-6">
-                                    <div
-                                        class="internet-packages__item"
-                                        @click="addToCart(internetPackage)"
-                                    >
-                                        <div class="item-media">
-                                            <img :src="`/images/regions/${getImgNameByArea(internetPackage.area_eng)}.jpg`" alt="">
-                                        </div>
-                                        <div class="item-content">
-                                            <p>
-                                                {{ internetPackage.data_eng }}
-                                            </p>
-                                            <p>
-                                                {{ internetPackage.days }} Days
-                                            </p>
+                                <div
+                                    class="internet-packages__item"
+                                    @click="addToCart(internetPackage)"
+                                >
+                                    <div class="item-media">
+                                        <img :src="internetPackage.imgurl" alt="">
+                                    </div>
+                                    <div class="item-content">
+                                        <p>
+                                            {{ getPackageName(internetPackage) }}
+                                        </p>
+                                        <p>
+                                            {{ internetPackage.period }} Days
+                                        </p>
 
-                                            <h5>
-                                                <a
-                                                    href="#"
-                                                    @click="addToCart(internetPackage)"
-                                                >
-                                                    USD {{ internetPackage.gtt_price }}
-                                                </a>
-                                            </h5>
-                                        </div>
+                                        <h5>
+                                            <a
+                                                href="#"
+                                                @click="addToCart(internetPackage)"
+                                            >
+                                                USD {{ getPackagePrice(internetPackage) }}
+                                            </a>
+                                        </h5>
                                     </div>
                                 </div>
-                            </template>
+                            </div>
                         </template>
                     </div>
                 </template>
@@ -100,15 +93,17 @@
 
 <script>
     import SelectSimModal from "./modals/SelectSimModal";
+    import Spinner from "../../components/Spinner";
     export default {
         name: "InternetPackagesIndex",
-        components: {SelectSimModal},
+        components: {Spinner, SelectSimModal},
         data() {
             return {
                 selectedCountry: [],
                 internetPackages: {},
                 user: {},
                 searchKeywords: '',
+                loading: false,
             }
         },
 
@@ -122,19 +117,19 @@
             },
 
             filteredInternetPackages() {
-                let internetPackages = [];
+                let internetPackages = this.internetPackages;
                 let searchKeywords = this.searchKeywords;
 
-                for (let key in this.internetPackages) {
-                    internetPackages.push(_.orderBy(this.internetPackages[key], 'days', 'asc'));
-                }
+                // for (let key in this.internetPackages) {
+                //     internetPackages.push(_.orderBy(this.internetPackages, 'period', 'asc'));
+                // }
 
                 if (this.searchKeywords) {
-                    internetPackages = _.filter(internetPackages, function(packages) {
-                        return packages.find(packageItem => {
-                            let area = packageItem.destination_eng.toLowerCase();
-                            return area.includes(searchKeywords.toLowerCase());
-                        });
+                    let _vm = this;
+                    internetPackages = _.filter(this.internetPackages, function(packageItem) {
+                        let name = _vm.getPackageName(packageItem);
+                        let area = name.toLowerCase();
+                        return area.includes(searchKeywords.toLowerCase());
                     });
                 }
 
@@ -149,9 +144,11 @@
 
         methods: {
             loadPackages() {
+                this.loading = true;
                 axios.get('/packages/getAllPackages')
                     .then(({data}) => {
                         this.internetPackages = data;
+                        this.loading = false;
                     });
             },
 
@@ -184,12 +181,13 @@
             },
 
             addToCart(internetPackage) {
+                console.log(internetPackage)
                 if (this.user.id && this.user.sims && this.user.sims.length) {
                     this.$root.$emit('modal::show::SelectSimModal', {
                         user_id: this.user.id,
                         internet_package_id: internetPackage.id,
                         sims: this.user.sims,
-                        price: internetPackage.gtt_price
+                        price: this.getPackagePrice(internetPackage)
                     });
                 } else if (this.user.id && this.user.sims && !this.user.sims.length) {
                     window.location.href = '/add-sim'
@@ -200,6 +198,19 @@
 
             backToAreas() {
                 this.selectedCountry = [];
+            },
+
+            getPackageName(packageItem) {
+                let data = packageItem.name.find(item => item.langInfo.language === 'en');
+
+                return data.value;
+            },
+
+            getPackagePrice(packageItem) {
+                let data = packageItem.priceInfo.find(item => item.currencyCode === '840');
+
+                return data.price / 100;
+                // return Math.round(data.price / 100);
             }
         }
     }

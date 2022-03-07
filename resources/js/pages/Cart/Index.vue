@@ -36,9 +36,7 @@
                                         </td>
 
                                         <td class="product-name" data-title="Product">
-                                            <template v-if="item.package">
-                                                {{ item.package.destination_eng }}
-                                            </template>
+                                            {{ item.item_id }}
                                         </td>
 
                                         <td class="product-price" data-title="Price">

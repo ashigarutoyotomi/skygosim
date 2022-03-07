@@ -95,6 +95,18 @@ Auth::routes();
 //            dd(Message::toString($e->getResponse()));
 //        }
 //
+//        $endpoint = "https://simapi.udbac.com/sim/v1/api/getDataBundle";
+//        $requestBody = [
+//            'accessToken' => $content['accessToken'],
+//        ];
+//
+//        try {
+//            $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+//        } catch (ClientException $e) {
+//            dump(Message::toString($e->getRequest()));
+//            dd(Message::toString($e->getResponse()));
+//        }
+//
 //        $statusCode = $response->getStatusCode();
 //        $body = $response->getBody();
 //        $content = json_decode($body->getContents(), true);

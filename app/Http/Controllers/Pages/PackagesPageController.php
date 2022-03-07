@@ -32,11 +32,11 @@ class PackagesPageController extends Controller
     public function getAllPackages()
     {
         $internetPackagesGateway = new InternetPackageGateway;
-        $internetPackages = $internetPackagesGateway
-            ->toggleGTTPrice(true)
-            ->getAllInternetPackages();
+//        $internetPackages = $internetPackagesGateway
+//            ->toggleGTTPrice(true)
+//            ->getAllInternetPackages();
 
-        return $internetPackages->groupBy('destination_eng');
+        return $internetPackagesGateway->getAllInternetPackages();
     }
 
     public function checkout(PurchaseInternetPackageRequest $request)
@@ -117,7 +117,7 @@ class PackagesPageController extends Controller
         $userCartData = new CreateUserCartData([
             'user_id' => (int)$request->user_id,
             'item_type' => UserCart::ITEM_TYPE_INTERNET_PACKAGE,
-            'item_id' => (int)$request->internet_package_id,
+            'item_id' => $request->internet_package_id,
             'sim_id' => (int)$request->sim_id,
             'quantity' => 1,
             'currency' => UserCart::CURRENCY_USD,

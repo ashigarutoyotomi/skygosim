@@ -90,13 +90,45 @@ class InternetPackageGateway
 
     public function getAllInternetPackages()
     {
-        $internetPackages = InternetPackage::whereNull('expired_at')
-            ->orderBy('area_eng')
-            ->get();
+        $internetPackages = null;
+        $client = new \GuzzleHttp\Client();
 
-        if($this->gttPrices) {
-            $this->setGttPrices($internetPackages);
+        $endpoint = "https://simapi.udbac.com/sim/v1/api/getAccessToken/GTT/GTT";
+        $response = $client->request('GET', $endpoint);
+
+        $statusCode = $response->getStatusCode();
+        $body = $response->getBody();
+
+        if ($statusCode === 200) {
+            $content = json_decode($body->getContents(), true);
+
+            $endpoint = "https://simapi.udbac.com/sim/v1/api/getDataBundle";
+            $requestBody = [
+                'accessToken' => $content['accessToken'],
+            ];
+
+            $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+
+            $statusCode = $response->getStatusCode();
+            $body = $response->getBody();
+            $content = json_decode($body->getContents(), true);
+
+            $internetPackages = $content['dataBundles'];
+
+//            foreach ($content['dataBundles'] as $package) {
+//                dd($package['name']);
+//            }
+//
+//            dd('END');
         }
+
+//        $internetPackages = InternetPackage::whereNull('expired_at')
+//            ->orderBy('area_eng')
+//            ->get();
+//
+//        if($this->gttPrices) {
+//            $this->setGttPrices($internetPackages);
+//        }
 
         return $internetPackages;
     }

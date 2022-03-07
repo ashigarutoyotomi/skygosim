@@ -10,7 +10,7 @@ class CreateUserCartData extends DataTransferObject
 {
     public int $user_id;
     public int $item_type;
-    public int $item_id;
+    public string $item_id;
     public ?int $sim_id;
     public int $quantity;
     public int $currency;

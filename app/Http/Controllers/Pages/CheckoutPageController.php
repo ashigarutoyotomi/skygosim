@@ -95,15 +95,15 @@ class CheckoutPageController extends Controller
                 $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
 
                 foreach ($carts as $cart) {
-                    $package = InternetPackage::find($cart->item_id);
+//                    $package = InternetPackage::find($cart->item_id);
                     $sim = Sim::find($cart->sim_id);
 
-                    if ($user && $package && $sim) {
+                    if ($user && $sim) {
                         $requestBody = [
                             'appKey' => env('SIM_API_APP_KEY'),
                             'accessToken' => $content['accessToken'],
                             'iccid' => $sim->iccid,
-                            'packageId' => $package->package_id,
+                            'packageId' => $cart->item_id,
                             'currency' => 'USD',
                             'ourOrderId' => 'skygosimorderid' . $request->input('package_id'),
                         ];
@@ -114,12 +114,12 @@ class CheckoutPageController extends Controller
                         $body = $response->getBody();
                         $content = json_decode($body->getContents(), true);
 
-                        $userInternetPackage = UserInternetPackage::create([
-                            'user_id' => $user->id,
-                            'sim_id' => $sim->id,
-                            'internet_package_id' => $package->id,
-                            'bought_price' => $request->input('amount'),
-                        ]);
+//                        $userInternetPackage = UserInternetPackage::create([
+//                            'user_id' => $user->id,
+//                            'sim_id' => $sim->id,
+//                            'internet_package_id' => $cart->item_id,
+//                            'bought_price' => $request->input('amount'),
+//                        ]);
 
                         $cart->status = UserCart::CART_STATUS_FINISHED;
                         $cart->save();
