@@ -120,6 +120,14 @@ Auth::routes();
 
 Route::get('/test-api-payorder-example', function () {
     $client = new \GuzzleHttp\Client();
+
+    $endpoint = "https://simapi.udbac.com/sim/v1/api/getAccessToken/GTT/GTT";
+    $response = $client->request('GET', $endpoint);
+
+    $statusCode = $response->getStatusCode();
+    $body = $response->getBody();
+    $content = json_decode($body->getContents(), true);
+
     $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
     $requestBody = [
         'currency' => 'CNY',
@@ -127,7 +135,7 @@ Route::get('/test-api-payorder-example', function () {
         'ourOrderId' => '2021092213130908689',
         'iccid' => "89852340003820810100",
         'appKey' => "cdeb66c349cb4e0eb15d143192d1cd8d",
-        'accessToken' => "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJiMTQ2ZmYwOGRmYmU0ZmUyOTc4MWU0MTkxZTkwODQ1ZSIsInJvbGUiOjEwNn0.6Krbl7SjMieiOE6gba5g__JMHYyK8buoM5UzYgAPh5ywYNJaFxdJbJUbegVU7cNoBSnxFl1QB6wLOfr8ukiyvA",
+        'accessToken' => $content['accessToken'],
     ];
 
     try {
