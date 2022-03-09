@@ -118,45 +118,45 @@ Auth::routes();
 //    ];
 //});
 
-Route::get('/test-api-payorder-example', function () {
-    $client = new \GuzzleHttp\Client();
-
-    $endpoint = "https://simapi.udbac.com/sim/v1/api/getAccessToken/GTT/GTT";
-    $response = $client->request('GET', $endpoint);
-
-    $statusCode = $response->getStatusCode();
-    $body = $response->getBody();
-    $content = json_decode($body->getContents(), true);
-
-    $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
-    $requestBody = [
-        'currency' => 'CNY',
-        'packageId' => "D190129022941_83355",
-        'ourOrderId' => '2021092213130908689',
-        'iccid' => "89852340003820810100",
-        'appKey' => "cdeb66c349cb4e0eb15d143192d1cd8d",
-        'accessToken' => $content['accessToken'],
-    ];
-
-    try {
-        $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
-    }
-    catch (ClientException $e) {
-        return [
-            'error getRequest' => Message::toString($e->getRequest()),
-            'error getResponse' => Message::toString($e->getResponse())
-        ];
-    }
-
-    $statusCode = $response->getStatusCode();
-    $body = $response->getBody();
-    $content = json_decode($body->getContents(), true);
-
-    return [
-        'statusCode' => $statusCode,
-        'content' => $content,
-    ];
-});
+//Route::get('/test-api-payorder-example', function () {
+//    $client = new \GuzzleHttp\Client();
+//
+//    $endpoint = "https://simapi.udbac.com/sim/v1/api/getAccessToken/GTT/GTT";
+//    $response = $client->request('GET', $endpoint);
+//
+//    $statusCode = $response->getStatusCode();
+//    $body = $response->getBody();
+//    $content = json_decode($body->getContents(), true);
+//
+//    $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
+//    $requestBody = [
+//        'currency' => 'CNY',
+//        'packageId' => "D190129022941_83355",
+//        'ourOrderId' => '2021092213130908689',
+//        'iccid' => "89852340003820810100",
+//        'appKey' => "cdeb66c349cb4e0eb15d143192d1cd8d",
+//        'accessToken' => $content['accessToken'],
+//    ];
+//
+//    try {
+//        $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+//    }
+//    catch (ClientException $e) {
+//        return [
+//            'error getRequest' => Message::toString($e->getRequest()),
+//            'error getResponse' => Message::toString($e->getResponse())
+//        ];
+//    }
+//
+//    $statusCode = $response->getStatusCode();
+//    $body = $response->getBody();
+//    $content = json_decode($body->getContents(), true);
+//
+//    return [
+//        'statusCode' => $statusCode,
+//        'content' => $content,
+//    ];
+//});
 
 Route::get('/', [HomePageController::class, 'index']);
 
