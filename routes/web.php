@@ -118,6 +118,38 @@ Auth::routes();
 //    ];
 //});
 
+Route::get('/test-api-payorder-example', function () {
+    $client = new \GuzzleHttp\Client();
+    $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
+    $requestBody = [
+        'currency' => 'CNY',
+        'packageId' => "D190129022941_83355",
+        'ourOrderId' => '2021092213130908689',
+        'iccid' => "89852340003820810100",
+        'appKey' => "cdeb66c349cb4e0eb15d143192d1cd8d",
+        'accessToken' => "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyaWQiOiJiMTQ2ZmYwOGRmYmU0ZmUyOTc4MWU0MTkxZTkwODQ1ZSIsInJvbGUiOjEwNn0.6Krbl7SjMieiOE6gba5g__JMHYyK8buoM5UzYgAPh5ywYNJaFxdJbJUbegVU7cNoBSnxFl1QB6wLOfr8ukiyvA",
+    ];
+
+    try {
+        $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+    }
+    catch (ClientException $e) {
+        return [
+            'error getRequest' => Message::toString($e->getRequest()),
+            'error getResponse' => Message::toString($e->getResponse())
+        ];
+    }
+
+    $statusCode = $response->getStatusCode();
+    $body = $response->getBody();
+    $content = json_decode($body->getContents(), true);
+
+    return [
+        'statusCode' => $statusCode,
+        'content' => $content,
+    ];
+});
+
 Route::get('/', [HomePageController::class, 'index']);
 
 Route::get('/packages', [PackagesPageController::class, 'index']);
