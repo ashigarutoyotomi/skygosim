@@ -92,20 +92,21 @@ class CheckoutPageController extends Controller
             $content = null;
             if ($statusCode === 200) {
                 $content = json_decode($body->getContents(), true);
-                $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
+                $endpoint = "https://globalapi.udbac.com/sim/v1/api/prod/payorder";
 
                 foreach ($carts as $cart) {
 //                    $package = InternetPackage::find($cart->item_id);
                     $sim = Sim::find($cart->sim_id);
 
                     if ($user && $sim) {
+                        $unique_id = time() . mt_rand() . $user->id;
                         $requestBody = [
                             'appKey' => env('SIM_API_APP_KEY'),
                             'accessToken' => $content['accessToken'],
                             'iccid' => $sim->iccid,
                             'packageId' => $cart->item_id,
                             'currency' => 'USD',
-                            'ourOrderId' => 'skygosimorderid' . $request->input('package_id'),
+                            'ourOrderId' => $unique_id,
                         ];
 
                         $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
