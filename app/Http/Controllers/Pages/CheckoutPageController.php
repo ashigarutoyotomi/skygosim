@@ -84,7 +84,7 @@ class CheckoutPageController extends Controller
             $payment = $payment->asStripePaymentIntent();
 
             $client = new \GuzzleHttp\Client();
-            $endpoint = "https://simapi.udbac.com/sim/v1/api/getAccessToken/GTT/GTT";
+            $endpoint = env('SIM_API_APP_ENDPOINT') . '/getAccessToken/GTT/GTT';
             $response = $client->request('GET', $endpoint);
             $statusCode = $response->getStatusCode();
             $body = $response->getBody();
@@ -92,7 +92,7 @@ class CheckoutPageController extends Controller
             $content = null;
             if ($statusCode === 200) {
                 $content = json_decode($body->getContents(), true);
-                $endpoint = "https://globalapi.udbac.com/sim/v1/api/prod/payorder";
+                $endpoint = env('SIM_API_APP_ENDPOINT') . '/prod/payorder';
 
                 foreach ($carts as $cart) {
 //                    $package = InternetPackage::find($cart->item_id);

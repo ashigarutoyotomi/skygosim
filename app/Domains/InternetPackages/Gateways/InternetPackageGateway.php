@@ -93,7 +93,7 @@ class InternetPackageGateway
         $internetPackages = null;
         $client = new \GuzzleHttp\Client();
 
-        $endpoint = "https://simapi.udbac.com/sim/v1/api/getAccessToken/GTT/GTT";
+        $endpoint = env('SIM_API_APP_ENDPOINT') . '/getAccessToken/GTT/GTT';
         $response = $client->request('GET', $endpoint);
 
         $statusCode = $response->getStatusCode();
@@ -102,7 +102,7 @@ class InternetPackageGateway
         if ($statusCode === 200) {
             $content = json_decode($body->getContents(), true);
 
-            $endpoint = "https://simapi.udbac.com/sim/v1/api/getDataBundle";
+            $endpoint = env('SIM_API_APP_ENDPOINT') . "/getDataBundle";
             $requestBody = [
                 'accessToken' => $content['accessToken'],
             ];
