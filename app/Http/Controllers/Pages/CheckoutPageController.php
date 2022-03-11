@@ -84,7 +84,7 @@ class CheckoutPageController extends Controller
             $payment = $payment->asStripePaymentIntent();
 
             $client = new \GuzzleHttp\Client();
-            $endpoint = env('SIM_API_APP_ENDPOINT') . '/getAccessToken/GTT/GTT';
+            $endpoint = env('SIM_API_APP_GET_ACCESS_TOKEN_ENDPOINT');
             $response = $client->request('GET', $endpoint);
             $statusCode = $response->getStatusCode();
             $body = $response->getBody();
