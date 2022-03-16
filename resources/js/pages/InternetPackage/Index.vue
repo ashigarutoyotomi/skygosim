@@ -209,7 +209,7 @@
             getPackagePrice(packageItem) {
                 let data = packageItem.priceInfo.find(item => item.currencyCode === '840');
 
-                return data.price / 100;
+                return (data.price / 100) * 2;
                 // return Math.round(data.price / 100);
             }
         }
