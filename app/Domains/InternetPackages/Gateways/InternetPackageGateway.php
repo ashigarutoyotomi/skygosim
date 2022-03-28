@@ -5,63 +5,72 @@ namespace App\Domains\InternetPackages\Gateways;
 
 
 use App\Classes\Helpers\StringHelper;
-use App\Domains\InternetPackages\Models\InternetPackage;
+use App\Domains\InternetPackages\Models\InternetPackageFromApi;
+use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\Settings\Gateways\SettingGateway;
 use App\Domains\Settings\Models\Setting;
+use App\Traits\BasicGatewaysTrait;
 
 class InternetPackageGateway
 {
-    protected $filters = [];
-    protected $keywords = '';
-    protected $with = null;
-    protected $gttPrices = false;
-    protected $limit = null;
+    use BasicGatewaysTrait;
 
-
-    /**
-     * Begin querying a model with eager loading.
-     *
-     * @param array|string $with
-     * @return $this
-     */
-    public function with($with)
+    public function getPackagesFromApi()
     {
-        $this->with = $with;
-        return $this;
+        $query = InternetPackageFromApi::query();
+
+        if ($this->paginate) {
+            return $query->paginate($this->paginate);
+        }
+
+        return $query->get();
     }
 
-    /**
-     * Set limit.
-     *
-     * @param int $limit
-     * @return $this
-     */
-    public function limit(int $limit)
+    public function getPackagesFromFile()
     {
-        $this->limit = $limit;
-        return $this;
+        $query = InternetPackageFromFile::query();
+
+        if ($this->paginate) {
+            return $query->paginate($this->paginate);
+        }
+
+        return $query->get();
     }
 
-    /**
-     * Set filters
-     * @param array|null $filters
-     * @return $this
-     */
-    public function setFilters(?array $filters)
+    public function getSimApiPackages()
     {
-        $this->filters = $filters;
-        return $this;
+        $internetPackages = [];
+        $client = new \GuzzleHttp\Client();
+
+        $endpoint = config('services.sim_api.get_access_token');
+        $response = $client->request('GET', $endpoint);
+
+        $statusCode = $response->getStatusCode();
+        $body = $response->getBody();
+
+        if ($statusCode === 200) {
+            $content = json_decode($body->getContents(), true);
+
+            $endpoint = config('services.sim_api.get_data_bundle');
+            $requestBody = [
+                'accessToken' => $content['accessToken'],
+            ];
+
+            $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+
+            $statusCode = $response->getStatusCode();
+            $body = $response->getBody();
+            $content = json_decode($body->getContents(), true);
+
+            $internetPackages = $content['dataBundles'];
+        }
+
+        return $internetPackages;
     }
 
-    /**
-     * Set keywords
-     * @param string|null $keywords
-     * @return $this
-     */
-    public function setKeywords(?string $keywords)
+    public function getPackageFromApiById(int $id)
     {
-        $this->keywords = $keywords;
-        return $this;
+        return InternetPackageFromApi::find($id);
     }
 
     /**
@@ -90,45 +99,7 @@ class InternetPackageGateway
 
     public function getAllInternetPackages()
     {
-        $internetPackages = null;
-        $client = new \GuzzleHttp\Client();
-
-        $endpoint = env('SIM_API_APP_GET_ACCESS_TOKEN_ENDPOINT');
-        $response = $client->request('GET', $endpoint);
-
-        $statusCode = $response->getStatusCode();
-        $body = $response->getBody();
-
-        if ($statusCode === 200) {
-            $content = json_decode($body->getContents(), true);
-
-            $endpoint = env('SIM_API_APP_GET_DATA_BUNDLE_ENDPOINT');
-            $requestBody = [
-                'accessToken' => $content['accessToken'],
-            ];
-
-            $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
-
-            $statusCode = $response->getStatusCode();
-            $body = $response->getBody();
-            $content = json_decode($body->getContents(), true);
-
-            $internetPackages = $content['dataBundles'];
-
-//            foreach ($content['dataBundles'] as $package) {
-//                dd($package['name']);
-//            }
-//
-//            dd('END');
-        }
-
-//        $internetPackages = InternetPackage::whereNull('expired_at')
-//            ->orderBy('area_eng')
-//            ->get();
-//
-//        if($this->gttPrices) {
-//            $this->setGttPrices($internetPackages);
-//        }
+        $internetPackages = InternetPackageFromFile::all();
 
         return $internetPackages;
     }
@@ -144,46 +115,5 @@ class InternetPackageGateway
         }
 
         return $packages;
-    }
-
-    public function getPackages()
-    {
-        $query = InternetPackage::whereNull('expired_at');
-
-        // Search
-        if (!!$this->keywords) {
-            $query = $this->appendSearch($query);
-        }
-
-        // Limit
-        if (!!$this->limit) {
-            $query->limit($this->limit);
-        }
-
-        return $query->get();
-    }
-
-    /**
-     * Append search
-     * @param $query
-     * @return mixed
-     */
-    private function appendSearch($query)
-    {
-        $keywords = $this->keywords;
-
-        $query->where(function ($q) use ($keywords) {
-            $keywordParts = preg_split('/ /', $keywords, -1, PREG_SPLIT_NO_EMPTY);
-
-            foreach ($keywordParts as $index => $possiblePart) {
-                $like = "%" . StringHelper::escapeLike($possiblePart) . "%";
-                $whereClause = $index == 0 ? 'where' : 'orWhere';
-                $q->$whereClause(function ($q) use ($like) {
-                    $q->where('package_id', 'like', $like);
-                });
-            }
-        });
-
-        return $query;
     }
 }

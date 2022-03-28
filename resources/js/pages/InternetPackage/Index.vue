@@ -62,14 +62,17 @@
                                     @click="addToCart(internetPackage)"
                                 >
                                     <div class="item-media">
-                                        <img :src="internetPackage.imgurl" alt="">
+                                        <img :src="`/images/regions/${getImgNameByArea(internetPackage.area_eng)}.jpg`" alt="">
                                     </div>
                                     <div class="item-content">
+                                        <h5>
+                                            {{ internetPackage.area_eng }}
+                                        </h5>
                                         <p>
-                                            {{ getPackageName(internetPackage) }}
+                                            {{ internetPackage.data_eng }}
                                         </p>
                                         <p>
-                                            {{ internetPackage.period }} Days
+                                            {{ internetPackage.days }} Days
                                         </p>
 
                                         <h5>
@@ -77,7 +80,7 @@
                                                 href="#"
                                                 @click="addToCart(internetPackage)"
                                             >
-                                                USD {{ getPackagePrice(internetPackage) }}
+                                                USD {{ internetPackage.price_usd * 2 }}
                                             </a>
                                         </h5>
                                     </div>
@@ -127,7 +130,7 @@
                 if (this.searchKeywords) {
                     let _vm = this;
                     internetPackages = _.filter(this.internetPackages, function(packageItem) {
-                        let name = _vm.getPackageName(packageItem);
+                        let name = packageItem.area_eng;
                         let area = name.toLowerCase();
                         return area.includes(searchKeywords.toLowerCase());
                     });
@@ -181,13 +184,12 @@
             },
 
             addToCart(internetPackage) {
-                console.log(internetPackage)
                 if (this.user.id && this.user.sims && this.user.sims.length) {
                     this.$root.$emit('modal::show::SelectSimModal', {
                         user_id: this.user.id,
                         internet_package_id: internetPackage.id,
                         sims: this.user.sims,
-                        price: this.getPackagePrice(internetPackage)
+                        price: internetPackage.price_usd * 2
                     });
                 } else if (this.user.id && this.user.sims && !this.user.sims.length) {
                     window.location.href = '/add-sim'

@@ -1,28 +1,30 @@
 <?php
 
-
 namespace App\Domains\InternetPackages\Models;
-
 
 use Illuminate\Database\Eloquent\Model;
 
-class InternetPackage extends Model
+class InternetPackageFromFile extends Model
 {
-    protected $table = 'internet_packages';
+    protected $table = 'internet_packages_from_file';
 
     protected $fillable = [
-        'package_id',
-        'gtt_price_usd',
         'price_usd',
         'price_cny',
         'price_hkd',
-        'price_yen',
+        'area_chn',
         'area_eng',
+        'destination_chn',
         'destination_eng',
-        'data_eng',
-        'package_name_eng',
         'days',
+        'data_chn',
+        'data_eng',
+        'package_name_chn',
+        'package_name_eng',
+        'package_id',
         'validity_period',
-        'expired_at',
+        'price_yen',
+        'admin_package_id',
+        'on_sale_channel_type'
     ];
 }

@@ -25,6 +25,7 @@ class UserCart extends Model
     ];
 
     const ITEM_TYPE_INTERNET_PACKAGE = 1; // Internet package
+    const ITEM_TYPE_INTERNET_PACKAGE_FROM_FILE = 2; // Internet package from file
 
     const CURRENCY_USD = 1; // USD
 

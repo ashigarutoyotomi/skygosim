@@ -100,6 +100,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'internet-package' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/internet-package.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];

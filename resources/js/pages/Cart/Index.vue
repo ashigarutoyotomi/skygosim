@@ -36,7 +36,7 @@
                                         </td>
 
                                         <td class="product-name" data-title="Product">
-                                            {{ item.item_id }}
+                                            {{ item.package.data_eng }}
                                         </td>
 
                                         <td class="product-price" data-title="Price">

@@ -30,4 +30,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'sim_api' => [
+        'key' => env('SIM_API_APP_KEY'),
+        'spec' => env('SIM_API_APP_SPEC'),
+        'endpoint' => env('SIM_API_APP_ENDPOINT'),
+        'get_access_token' => env('SIM_API_APP_GET_ACCESS_TOKEN_ENDPOINT'),
+        'get_data_bundle' => env('SIM_API_APP_GET_DATA_BUNDLE_ENDPOINT'),
+        'get_carrier' => env('SIM_API_APP_GET_CARRIER_ENDPOINT'),
+    ],
 ];

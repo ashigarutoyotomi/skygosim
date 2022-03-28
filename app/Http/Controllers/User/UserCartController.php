@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 
 
 use App\Domains\InternetPackages\Models\InternetPackage;
+use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\User\Models\UserCart;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,11 +19,12 @@ class UserCartController extends Controller
         $carts = UserCart::with([
             'sim'
         ])->where('status', UserCart::CART_STATUS_NEW)
-            ->where('user_id', $user->id)->get();
+            ->where('user_id', $user->id)
+            ->get();
 
-        foreach ($carts as $cart) {
-            if ($cart->item_type === UserCart::ITEM_TYPE_INTERNET_PACKAGE) {
-                $cart->package = InternetPackage::find($cart->item_id);
+        foreach ($carts as $key => $cart) {
+            if ($cart->item_type === UserCart::ITEM_TYPE_INTERNET_PACKAGE_FROM_FILE) {
+                $carts[$key]['package'] = InternetPackageFromFile::find($cart->item_id);
             }
         }
 

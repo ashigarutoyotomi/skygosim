@@ -17,7 +17,7 @@ class UploadInternetPackagesFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|file|mimes:xlsx,xls'
+            'file' => 'required|file|mimes:csv,txt'
         ];
     }
 
@@ -26,7 +26,7 @@ class UploadInternetPackagesFileRequest extends FormRequest
         return [
             'file.required' => 'Choose a file',
             'file.file' => 'It is must be a file',
-            'file.mimes' => 'It is must be a Excel file'
+            'file.mimes' => 'It is must be a CSV file'
         ];
     }
 }

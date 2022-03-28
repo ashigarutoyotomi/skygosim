@@ -32,8 +32,26 @@ class InternetPackageController extends Controller
         $internetPackagesGateway = new InternetPackageGateway;
 
         return $internetPackagesGateway
-            ->toggleGTTPrice(true)
-            ->getPaginatedInternetPackages();
+            ->paginate(20)
+            ->getPackagesFromApi();
+    }
+
+    public function getInternetPackagesFromApi()
+    {
+        $internetPackagesGateway = new InternetPackageGateway;
+
+        return $internetPackagesGateway
+            ->paginate(20)
+            ->getPackagesFromApi();
+    }
+
+    public function getInternetPackagesFromFile()
+    {
+        $internetPackagesGateway = new InternetPackageGateway;
+
+        return $internetPackagesGateway
+            ->paginate(20)
+            ->getPackagesFromFile();
     }
 
     public function uploadPackages(UploadInternetPackagesFileRequest $request)

@@ -1,5 +1,5 @@
 <template>
-    <div id="internet-packages">
+    <div id="internet-packages-from-file">
         <upload-packages-modal />
 
         <template v-if="loading">

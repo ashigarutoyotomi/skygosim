@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\InternetPackages\Gateways\InternetPackageGateway;
 use App\Http\Controllers\Apn\ApnController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Countries\CountriesController;
@@ -65,10 +66,14 @@ Auth::routes();
 //    Mail::to('amanzhol.fvfy@gmail.com')->send(new UserCreatedMail($userData));
 //});
 
-//Route::get('/test-api', function () {
+//Route::get('/dataBundles/test', function () {
+//    return (new InternetPackageGateway)->getSimApiPackages();
+//});
+
+//Route::get('/getCarrier/test', function () {
 //    $client = new \GuzzleHttp\Client();
 //
-//    $endpoint = "https://simapi.udbac.com/sim/v1/api/getAccessToken/GTT/GTT";
+//    $endpoint = config('services.sim_api.get_access_token');
 //    $response = $client->request('GET', $endpoint);
 //
 //    $statusCode = $response->getStatusCode();
@@ -78,25 +83,9 @@ Auth::routes();
 //    if ($statusCode === 200) {
 //        $content = json_decode($body->getContents(), true);
 //
-//        $endpoint = "https://simapi.udbac.com/sim/v1/api/payorder";
+//        $endpoint = config('services.sim_api.get_carrier');
 //        $requestBody = [
-//            'appKey' => env('SIM_API_APP_KEY'),
-//            'accessToken' => $content['accessToken'],
-//            'iccid' => "89852340003820810100",
-//            'packageId' => "D190129022941_83355",
-//            'currency' => 'CNY',
-//            'ourOrderId' => '2021092213130908689',
-//        ];
-//
-//        try {
-//            $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
-//        } catch (ClientException $e) {
-//            dump(Message::toString($e->getRequest()));
-//            dd(Message::toString($e->getResponse()));
-//        }
-//
-//        $endpoint = "https://simapi.udbac.com/sim/v1/api/getDataBundle";
-//        $requestBody = [
+//            'language' => 3,
 //            'accessToken' => $content['accessToken'],
 //        ];
 //
@@ -226,6 +215,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Internet Packages
     Route::get('/internet-packages', [InternetPackageController::class, 'index']);
+    Route::get('/internet-packages-from-api', [InternetPackageController::class, 'getInternetPackagesFromApi']);
+    Route::get('/internet-packages-from-file', [InternetPackageController::class, 'getInternetPackagesFromFile']);
 //    Route::get('/internet-packages/get-available-packages', [InternetPackageController::class, 'getAvailablePackages']);
     Route::post('/internet-packages/upload_packages', [InternetPackageController::class, 'uploadPackages']);
 

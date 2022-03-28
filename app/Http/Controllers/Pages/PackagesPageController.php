@@ -116,7 +116,7 @@ class PackagesPageController extends Controller
     {
         $userCartData = new CreateUserCartData([
             'user_id' => (int)$request->user_id,
-            'item_type' => UserCart::ITEM_TYPE_INTERNET_PACKAGE,
+            'item_type' => UserCart::ITEM_TYPE_INTERNET_PACKAGE_FROM_FILE,
             'item_id' => $request->internet_package_id,
             'sim_id' => (int)$request->sim_id,
             'quantity' => 1,

@@ -172,9 +172,19 @@
                         >
                             <router-link
                                 class="nav-link"
-                                :class="{'active': isActiveRoute(['internet_packages'])}"
-                                to="/internet-packages"
-                            >Internet Packages</router-link>
+                                :class="{'active': isActiveRoute(['internet_packages_from_api'])}"
+                                :to="{name: 'internet_packages_from_api'}"
+                            >Internet Packages From Api</router-link>
+                        </li>
+
+                        <li v-if="[userRoles[1].id].includes(user.role)"
+                            class="nav-item"
+                        >
+                            <router-link
+                                class="nav-link"
+                                :class="{'active': isActiveRoute(['internet_packages_from_file'])}"
+                                :to="{name: 'internet_packages_from_file'}"
+                            >Internet Packages From File</router-link>
                         </li>
 
                         <li class="nav-item">
