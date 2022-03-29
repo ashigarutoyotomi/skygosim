@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="item-content">
                                         <h5>
-                                            {{ internetPackage.area_eng }}
+                                            {{ internetPackage.destination_eng }}
                                         </h5>
                                         <p>
                                             {{ internetPackage.data_eng }}
