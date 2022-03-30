@@ -92,7 +92,7 @@ class CheckoutPageController extends Controller
             $content = null;
             if ($statusCode === 200) {
                 $content = json_decode($body->getContents(), true);
-                $endpoint = env('SIM_API_APP_ENDPOINT') . '/prod/payorder';
+                $endpoint = config('services.sim_api.payorder');
 
                 foreach ($carts as $cart) {
 //                    $package = InternetPackage::find($cart->item_id);
@@ -115,12 +115,12 @@ class CheckoutPageController extends Controller
                         $body = $response->getBody();
                         $content = json_decode($body->getContents(), true);
 
-//                        $userInternetPackage = UserInternetPackage::create([
-//                            'user_id' => $user->id,
-//                            'sim_id' => $sim->id,
-//                            'internet_package_id' => $cart->item_id,
-//                            'bought_price' => $request->input('amount'),
-//                        ]);
+                        $userInternetPackage = UserInternetPackage::create([
+                            'user_id' => $user->id,
+                            'sim_id' => $sim->id,
+                            'internet_package_id' => $cart->item_id,
+                            'bought_price' => $request->input('amount'),
+                        ]);
 
                         $cart->status = UserCart::CART_STATUS_FINISHED;
                         $cart->save();

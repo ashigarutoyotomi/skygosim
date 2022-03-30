@@ -4,7 +4,7 @@
 namespace App\Models\User;
 
 
-use App\Models\InternetPackage;
+use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Models\Sim\Sim;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +32,6 @@ class UserInternetPackage extends Model
 
     public function internet_package()
     {
-        return $this->belongsTo(InternetPackage::class, 'internet_package_id');
+        return $this->belongsTo(InternetPackageFromFile::class, 'internet_package_id');
     }
 }
