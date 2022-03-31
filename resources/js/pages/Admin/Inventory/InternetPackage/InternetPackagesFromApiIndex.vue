@@ -39,6 +39,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Package ID</th>
                                     <th scope="col">Price</th>
                                 </tr>
                                 </thead>
@@ -48,6 +49,7 @@
                                         {{(key + 1) + (data.per_page * (data.current_page - 1))}}
                                     </th>
                                     <td>{{ internetPackage.nameValue }}</td>
+                                    <td>{{ internetPackage.package_id }}</td>
                                     <td>{{ internetPackage.priceValue }} $</td>
                                 </tr>
                                 </tbody>

@@ -57,6 +57,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Area</th>
+                                    <th scope="col">Package ID</th>
                                     <th scope="col">Price</th>
                                 </tr>
                                 </thead>
@@ -67,6 +68,7 @@
                                     </th>
                                     <td>{{ internetPackage.data_eng }}</td>
                                     <td>{{ internetPackage.area_eng }}</td>
+                                    <td>{{ internetPackage.package_id }}</td>
                                     <td>{{ internetPackage.price_usd }} $</td>
                                 </tr>
                                 </tbody>
