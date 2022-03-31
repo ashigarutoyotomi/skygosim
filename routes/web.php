@@ -52,9 +52,9 @@ Route::get('/clear-cache', function() {
     return "Cache is cleared";
 });
 
-Route::get('/test', function() {
-    return config('services.sim_api.payorder');
-});
+//Route::get('/test', function() {
+//    return config('services.sim_api.payorder');
+//});
 //
 //
 //Route::get('/test-mailgun', function() {
@@ -111,44 +111,44 @@ Route::get('/test', function() {
 //    ];
 //});
 
-Route::get('/test-api-payorder/{iccID}/{packageID}', function ($iccID, $packageID) {
-    $client = new \GuzzleHttp\Client();
-    $endpoint = env('SIM_API_APP_GET_ACCESS_TOKEN_ENDPOINT');
-    $response = $client->request('GET', $endpoint);
-    $statusCode = $response->getStatusCode();
-    $body = $response->getBody();
-    $content = json_decode($body->getContents(), true);
-    $endpoint = config('services.sim_api.payorder');
-    $unique_id = time() . mt_rand() . '-test';
-    $requestBody = [
-        'appKey' => env('SIM_API_APP_KEY'),
-        'accessToken' => $content['accessToken'],
-        'iccid' => $iccID,
-        'packageId' => $packageID,
-        'currency' => 'USD',
-        'ourOrderId' => $unique_id,
-    ];
-
-    try {
-        $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
-    }
-    catch (ClientException $e) {
-        return [
-            'error getRequest' => Message::toString($e->getRequest()),
-            'error getResponse' => Message::toString($e->getResponse())
-        ];
-    }
-
-    $statusCode = $response->getStatusCode();
-    $body = $response->getBody();
-    $content = json_decode($body->getContents(), true);
-
-    return [
-        'statusCode' => $statusCode,
-        'body' => $body,
-        'content' => $content,
-    ];
-});
+//Route::get('/test-api-payorder/{iccID}/{packageID}', function ($iccID, $packageID) {
+//    $client = new \GuzzleHttp\Client();
+//    $endpoint = env('SIM_API_APP_GET_ACCESS_TOKEN_ENDPOINT');
+//    $response = $client->request('GET', $endpoint);
+//    $statusCode = $response->getStatusCode();
+//    $body = $response->getBody();
+//    $content = json_decode($body->getContents(), true);
+//    $endpoint = config('services.sim_api.payorder');
+//    $unique_id = time() . mt_rand() . '-test';
+//    $requestBody = [
+//        'appKey' => env('SIM_API_APP_KEY'),
+//        'accessToken' => $content['accessToken'],
+//        'iccid' => $iccID,
+//        'packageId' => $packageID,
+//        'currency' => 'USD',
+//        'ourOrderId' => $unique_id,
+//    ];
+//
+//    try {
+//        $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+//    }
+//    catch (ClientException $e) {
+//        return [
+//            'error getRequest' => Message::toString($e->getRequest()),
+//            'error getResponse' => Message::toString($e->getResponse())
+//        ];
+//    }
+//
+//    $statusCode = $response->getStatusCode();
+//    $body = $response->getBody();
+//    $content = json_decode($body->getContents(), true);
+//
+//    return [
+//        'statusCode' => $statusCode,
+//        'body' => $body,
+//        'content' => $content,
+//    ];
+//});
 
 Route::get('/', [HomePageController::class, 'index']);
 
