@@ -13,7 +13,6 @@ use App\DTO\User\CreateUserData;
 use App\Gateways\User\UserGateway;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InternetPackage\PurchaseInternetPackageRequest;
-use App\Models\InternetPackage;
 use App\Models\Sim\Sim;
 use App\Models\User;
 use App\Models\User\UserInternetPackage;
