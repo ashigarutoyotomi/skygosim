@@ -47,6 +47,7 @@ class CheckoutPageController extends Controller
 
     public function purchase(PurchaseInternetPackageRequest $request)
     {
+        info("START purchase");
         $user = User::where('email', $request->get('email_address'))->first();
         $order = Order::find($request->order_id);
         $carts = UserCart::whereIn('id', $order->cart_items)->get();
@@ -63,6 +64,7 @@ class CheckoutPageController extends Controller
 
             $user = (new UserAction)->create($userData);
         }
+        info("User checked");
 
         if ($user && !$user->address) {
             $userAddressData = new CreateUserAddressData([
@@ -75,49 +77,50 @@ class CheckoutPageController extends Controller
 
             (new UserAddressAction)->create($userAddressData);
         }
+        info("Address checked");
 
-        try {
-            $payment = $user->charge(
-                $request->input('amount') * 100,
-                $request->input('payment_method_id'),
-            );
+        $payment = $user->charge(
+            $request->input('amount') * 100,
+            $request->input('payment_method_id'),
+        );
 
-            $payment = $payment->asStripePaymentIntent();
+        $payment = $payment->asStripePaymentIntent();
+        info("Payment charged");
 
-            $client = new \GuzzleHttp\Client();
-            $endpoint = config('services.sim_api.get_access_token');
-            $response = $client->request('GET', $endpoint);
-            $statusCode = $response->getStatusCode();
-            $body = $response->getBody();
+        $client = new \GuzzleHttp\Client();
+        $endpoint = config('services.sim_api.get_access_token');
+        $response = $client->request('GET', $endpoint);
+        info("Got access token");
+        $statusCode = $response->getStatusCode();
+        $body = $response->getBody();
 
-            if ($statusCode === 200) {
-                $content = json_decode($body->getContents(), true);
-                $endpoint = config('services.sim_api.payorder');
+        if ($statusCode === 200) {
+            $content = json_decode($body->getContents(), true);
+            $endpoint = config('services.sim_api.payorder');
 
-                foreach ($carts as $cart) {
-                    $sim = Sim::find($cart->sim_id);
+            foreach ($carts as $cart) {
+                $sim = Sim::find($cart->sim_id);
 
-                    if ($user && $sim) {
-                        $unique_id = time() . mt_rand() . $user->id;
-                        $requestBody = [
-                            'appKey' => env('SIM_API_APP_KEY'),
-                            'accessToken' => $content['accessToken'],
-                            'iccid' => $sim->iccid,
-                            'packageId' => $cart->item_id,
-                            'currency' => 'USD',
-                            'ourOrderId' => $unique_id,
-                        ];
+                if ($user && $sim) {
+                    info("START payorder");
+                    $unique_id = time() . mt_rand() . $user->id;
+                    $requestBody = [
+                        'appKey' => env('SIM_API_APP_KEY'),
+                        'accessToken' => $content['accessToken'],
+                        'iccid' => $sim->iccid,
+                        'packageId' => $cart->item_id,
+                        'currency' => 'USD',
+                        'ourOrderId' => $unique_id,
+                    ];
 
-                        try {
-                            $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
-                        } catch (ClientException $e) {
-                            info(Message::toString($e->getRequest()));
-                            info(Message::toString($e->getResponse()));
-                        }
+                    try {
+                        $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+                        info("END payorder");
 
                         $body = $response->getBody();
                         $content = json_decode($body->getContents(), true);
 
+                        info("START UserInternetPackage");
                         UserInternetPackage::create([
                             'user_id' => $user->id,
                             'sim_id' => $sim->id,
@@ -127,18 +130,21 @@ class CheckoutPageController extends Controller
 
                         $cart->status = UserCart::CART_STATUS_FINISHED;
                         $cart->save();
+                        info("END UserInternetPackage");
+                    } catch (ClientException $e) {
+                        info(Message::toString($e->getRequest()));
+                        info(Message::toString($e->getResponse()));
                     }
                 }
             }
-
-            $order->status = Order::ORDER_STATUS_DONE;
-            $order->save();
-
-            return [
-                'payment' => $payment,
-            ];
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
         }
+
+        $order->status = Order::ORDER_STATUS_DONE;
+        $order->save();
+
+        info("END purchase");
+        return [
+            'payment' => $payment,
+        ];
     }
 }
