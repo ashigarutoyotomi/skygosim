@@ -23,7 +23,7 @@ class UserCartController extends Controller
 
         foreach ($carts as $key => $cart) {
             if ($cart->item_type === UserCart::ITEM_TYPE_INTERNET_PACKAGE_FROM_FILE) {
-                $carts[$key]['package'] = InternetPackageFromFile::find($cart->item_id);
+                $carts[$key]['package'] = InternetPackageFromFile::where('package_id', $cart->item_id)->first();
             }
         }
 

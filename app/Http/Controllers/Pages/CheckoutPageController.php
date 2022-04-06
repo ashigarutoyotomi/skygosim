@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Pages;
 
 use App\Actions\User\UserAction;
 use App\Actions\User\UserAddressAction;
+use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\Order\Model\Order;
 use App\Domains\User\Models\UserCart;
 use App\DTO\User\CreateUserAddressData;
@@ -91,50 +92,49 @@ class CheckoutPageController extends Controller
         $endpoint = config('services.sim_api.get_access_token');
         $response = $client->request('GET', $endpoint);
         info("Got access token");
-        $statusCode = $response->getStatusCode();
         $body = $response->getBody();
 
-        if ($statusCode === 200) {
-            $content = json_decode($body->getContents(), true);
-            $endpoint = config('services.sim_api.payorder');
+        $content = json_decode($body->getContents(), true);
+        $endpoint = config('services.sim_api.payorder');
 
-            foreach ($carts as $cart) {
-                $sim = Sim::find($cart->sim_id);
+        foreach ($carts as $cart) {
+            $sim = Sim::find($cart->sim_id);
 
-                if ($user && $sim) {
-                    info("START payorder");
-                    $unique_id = time() . mt_rand() . $user->id;
-                    $requestBody = [
-                        'appKey' => env('SIM_API_APP_KEY'),
-                        'accessToken' => $content['accessToken'],
-                        'iccid' => $sim->iccid,
-                        'packageId' => $cart->item_id,
-                        'currency' => 'USD',
-                        'ourOrderId' => $unique_id,
-                    ];
+            if ($user && $sim) {
+                info("START payorder");
+                $unique_id = time() . mt_rand() . $user->id;
+                $requestBody = [
+                    'appKey' => config('services.sim_api.key'),
+                    'accessToken' => $content['accessToken'],
+                    'iccid' => $sim->iccid,
+                    'packageId' => $cart->item_id,
+                    'currency' => 'USD',
+                    'ourOrderId' => $unique_id,
+                ];
+                info("requestBody " . $cart->item_id);
 
-                    try {
-                        $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
-                        info("END payorder");
+                try {
+                    $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+                    info("END payorder");
 
-                        $body = $response->getBody();
-                        $content = json_decode($body->getContents(), true);
+                    $body = $response->getBody();
+                    $content = json_decode($body->getContents(), true);
 
-                        info("START UserInternetPackage");
-                        UserInternetPackage::create([
-                            'user_id' => $user->id,
-                            'sim_id' => $sim->id,
-                            'internet_package_id' => $cart->item_id,
-                            'bought_price' => $request->input('amount'),
-                        ]);
+                    info("START UserInternetPackage");
+                    $internetPackage = InternetPackageFromFile::where('package_id', $cart->item_id)->first();
+                    UserInternetPackage::create([
+                        'user_id' => $user->id,
+                        'sim_id' => $sim->id,
+                        'internet_package_id' => $internetPackage->id,
+                        'bought_price' => $request->input('amount'),
+                    ]);
 
-                        $cart->status = UserCart::CART_STATUS_FINISHED;
-                        $cart->save();
-                        info("END UserInternetPackage");
-                    } catch (ClientException $e) {
-                        info(Message::toString($e->getRequest()));
-                        info(Message::toString($e->getResponse()));
-                    }
+                    $cart->status = UserCart::CART_STATUS_FINISHED;
+                    $cart->save();
+                    info("END UserInternetPackage");
+                } catch (ClientException $e) {
+                    info(Message::toString($e->getRequest()));
+                    info(Message::toString($e->getResponse()));
                 }
             }
         }
