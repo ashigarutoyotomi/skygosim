@@ -4,7 +4,6 @@
 namespace App\Http\Controllers\User;
 
 
-use App\Domains\InternetPackages\Models\InternetPackage;
 use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\User\Models\UserCart;
 use App\Http\Controllers\Controller;

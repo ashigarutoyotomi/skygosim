@@ -16,7 +16,9 @@ use App\Http\Requests\InternetPackage\PurchaseInternetPackageRequest;
 use App\Models\Sim\Sim;
 use App\Models\User;
 use App\Models\User\UserInternetPackage;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Psr7\Message;
 
 class CheckoutPageController extends Controller
 {
@@ -83,18 +85,16 @@ class CheckoutPageController extends Controller
             $payment = $payment->asStripePaymentIntent();
 
             $client = new \GuzzleHttp\Client();
-            $endpoint = env('SIM_API_APP_GET_ACCESS_TOKEN_ENDPOINT');
+            $endpoint = config('services.sim_api.get_access_token');
             $response = $client->request('GET', $endpoint);
             $statusCode = $response->getStatusCode();
             $body = $response->getBody();
 
-            $content = null;
             if ($statusCode === 200) {
                 $content = json_decode($body->getContents(), true);
                 $endpoint = config('services.sim_api.payorder');
 
                 foreach ($carts as $cart) {
-//                    $package = InternetPackage::find($cart->item_id);
                     $sim = Sim::find($cart->sim_id);
 
                     if ($user && $sim) {
@@ -108,13 +108,17 @@ class CheckoutPageController extends Controller
                             'ourOrderId' => $unique_id,
                         ];
 
-                        $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+                        try {
+                            $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+                        } catch (ClientException $e) {
+                            info(Message::toString($e->getRequest()));
+                            info(Message::toString($e->getResponse()));
+                        }
 
-                        $statusCode = $response->getStatusCode();
                         $body = $response->getBody();
                         $content = json_decode($body->getContents(), true);
 
-                        $userInternetPackage = UserInternetPackage::create([
+                        UserInternetPackage::create([
                             'user_id' => $user->id,
                             'sim_id' => $sim->id,
                             'internet_package_id' => $cart->item_id,
