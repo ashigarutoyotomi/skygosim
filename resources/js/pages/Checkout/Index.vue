@@ -299,12 +299,8 @@
             }
         },
 
-        created() {
-            this.loadMe();
-        },
-
         mounted() {
-            setTimeout(this.initStripe(), 3000);
+            this.loadMe();
         },
 
         methods: {
@@ -389,6 +385,7 @@
 
                         Vue.nextTick(() => {
                             this.setUserData();
+                            this.initStripe();
                         });
                     });
             },
