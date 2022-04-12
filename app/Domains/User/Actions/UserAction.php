@@ -3,7 +3,6 @@
 
 namespace App\Domains\User\Actions;
 
-
 use App\Domains\User\DTO\UserDTO\CreateUserData;
 use App\Models\User;
 
