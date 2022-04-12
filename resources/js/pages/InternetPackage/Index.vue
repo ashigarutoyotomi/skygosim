@@ -187,7 +187,7 @@
                 if (this.user.id && this.user.sims && this.user.sims.length) {
                     this.$root.$emit('modal::show::SelectSimModal', {
                         user_id: this.user.id,
-                        internet_package_id: internetPackage.id,
+                        internet_package_id: internetPackage.package_id,
                         sims: this.user.sims,
                         price: internetPackage.price_usd * 2
                     });

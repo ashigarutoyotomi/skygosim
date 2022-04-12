@@ -8,11 +8,12 @@
             <div class="container">
                 <div class="row">
                     <main class="col-lg-12">
-                        <h1>
-                            Sorry, shopping is not available at the moment.
-                        </h1>
+<!--                        <h1-->
+<!--                        >-->
+<!--                            Sorry, shopping is not available at the moment.-->
+<!--                        </h1>-->
                         <form
-                            v-if="false"
+                            v-if="user"
                             name="checkout"
                             class="checkout woocommerce-checkout"
                             novalidate="novalidate"
@@ -297,12 +298,8 @@
             }
         },
 
-        created() {
-            this.loadMe();
-        },
-
         mounted() {
-            setTimeout(this.initStripe(), 3000);
+            this.loadMe();
         },
 
         methods: {
@@ -387,6 +384,7 @@
 
                         Vue.nextTick(() => {
                             this.setUserData();
+                            this.initStripe();
                         });
                     });
             },
