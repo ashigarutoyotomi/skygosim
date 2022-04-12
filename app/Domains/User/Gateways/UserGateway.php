@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domains\User\Gateways;
-
 
 use App\Models\Sim\SimOrder;
 use App\Models\User;
@@ -16,7 +14,6 @@ class UserGateway
     protected $paginate = null;
     protected $limit = null;
     protected $userRole = null;
-
 
     /**
      * Begin querying a model with eager loading.
@@ -88,13 +85,15 @@ class UserGateway
         return $this;
     }
 
-    public function getUsers() {
+    public function getUsers()
+    {
         $users = User::all();
 
         return $users;
     }
 
-    public function getCustomers() {
+    public function getCustomers()
+    {
         $query = User::where('role', User::USER_ROLE_USER);
 
         if ($this->paginate) {
@@ -104,7 +103,8 @@ class UserGateway
         return $query->get();
     }
 
-    public function getCustomersForDealer(int $dealer_id) {
+    public function getCustomersForDealer(int $dealer_id)
+    {
         $query = User::where('role', User::USER_ROLE_USER)
             ->where('creator_id', $dealer_id);
 

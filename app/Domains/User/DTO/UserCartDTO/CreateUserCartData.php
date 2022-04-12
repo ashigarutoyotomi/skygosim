@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domains\User\DTO\UserCartDTO;
-
 
 use Spatie\DataTransferObject\DataTransferObject;
 
