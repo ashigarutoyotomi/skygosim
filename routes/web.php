@@ -176,6 +176,7 @@ Route::get('/app', [MobileAppsPageController::class, 'index']);
 
 Route::get('/checkout', [PagesController::class, 'checkout']);
 Route::get('/checkout/e-sim', [PagesController::class, 'checkoutESim']);
+
 Route::get('/checkout/result', [PagesController::class, 'checkoutResult']);
 
 
