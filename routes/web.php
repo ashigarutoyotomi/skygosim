@@ -265,6 +265,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/settings', [SettingsController::class, 'index']);
     Route::get('/settings/prices', [SettingsController::class, 'pricesSettings']);
 
+    Route::post('/settings/update', [SettingsController::class, 'update']);
     Route::post('/settings/prices/store', [SettingsController::class, 'pricesSettingsStore']);
 });
 

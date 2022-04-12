@@ -10,6 +10,7 @@ use App\Domains\Settings\Gateways\SettingGateway;
 use App\Domains\Settings\Models\Setting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\CreateSettingRequest;
+use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
@@ -24,6 +25,25 @@ class SettingsController extends Controller
     public function pricesSettings()
     {
         return (new SettingGateway)->getPricesSettings();
+    }
+
+    public function update(Request $request)
+    {
+        $settings = $request->all();
+
+        foreach ($settings as $key => $setting) {
+            $settingData = new UpdateSettingData([
+                'id' => $setting['id'],
+                'section' => $setting['section'],
+                'title' => $setting['title'],
+                'type' => $setting['type'],
+                'value' => $setting['value'],
+            ]);
+
+            $settings[$key] = (new SettingAction)->update($settingData);
+        }
+
+        return $settings;
     }
 
     public function pricesSettingsStore(CreateSettingRequest $request)
