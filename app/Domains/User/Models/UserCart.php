@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domains\User\Models;
-
 
 use App\Domains\InternetPackages\Models\InternetPackage;
 use App\Models\Sim\Sim;

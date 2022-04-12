@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domains\User\DTO\UserDTO;
-
 
 use App\Http\Requests\Users\CreateUserRequest;
 use Illuminate\Support\Facades\Auth;

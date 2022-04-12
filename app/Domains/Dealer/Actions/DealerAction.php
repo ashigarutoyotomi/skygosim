@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domains\Dealer\Actions;
-
 
 use App\Domains\Dealer\DTO\DealerDTO\CreateDealerData;
 use App\Domains\Dealer\DTO\DealerDTO\UpdateDealerData;
