@@ -72,7 +72,7 @@ class AuthController extends Controller
             'password' => $request->input('password'),
         ];
 
-        $user = User::where('email', $credentials['email'])->first();
+        $user = User::where('email', (string)$credentials['email'])->first();
 
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
             return response([
