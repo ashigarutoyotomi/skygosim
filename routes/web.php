@@ -1,5 +1,4 @@
 <?php
-
 use App\Domains\InternetPackages\Gateways\InternetPackageGateway;
 use App\Http\Controllers\Apn\ApnController;
 use App\Http\Controllers\Auth\AuthController;
