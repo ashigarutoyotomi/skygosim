@@ -62,16 +62,16 @@
                                     @click="addToCart(internetPackage)"
                                 >
                                     <div class="item-media">
-                                        <img :src="`/images/regions/${getImgNameByArea(internetPackage.area_eng)}.jpg`" alt="">
+                                        <img :src="internetPackage.imgurl" alt="">
                                     </div>
                                     <div class="item-content">
-                                        <h5>
+                                        <h5 class="mb-3">
                                             {{ internetPackage.destination_eng }}
                                         </h5>
-                                        <p>
+                                        <p v-if="internetPackage.data_eng">
                                             {{ internetPackage.data_eng }}
                                         </p>
-                                        <p>
+                                        <p v-if="internetPackage.days">
                                             {{ internetPackage.days }} Days
                                         </p>
 
@@ -80,7 +80,7 @@
                                                 href="#"
                                                 @click="addToCart(internetPackage)"
                                             >
-                                                USD {{ internetPackage.price_usd * 2 }}
+                                                USD {{ internetPackage.gtt_price }}
                                             </a>
                                         </h5>
                                     </div>
@@ -122,10 +122,6 @@
             filteredInternetPackages() {
                 let internetPackages = this.internetPackages;
                 let searchKeywords = this.searchKeywords;
-
-                // for (let key in this.internetPackages) {
-                //     internetPackages.push(_.orderBy(this.internetPackages, 'period', 'asc'));
-                // }
 
                 if (this.searchKeywords) {
                     let _vm = this;
@@ -175,10 +171,6 @@
                 return randNumber;
             },
 
-            getImgNameByArea(area) {
-                return area.replace(/\s/g, '').toLowerCase()
-            },
-
             chooseCountry(country) {
                 this.selectedCountry = _.orderBy(country, 'gtt_price');
             },
@@ -189,7 +181,7 @@
                         user_id: this.user.id,
                         internet_package_id: internetPackage.package_id,
                         sims: this.user.sims,
-                        price: internetPackage.price_usd * 2
+                        price: internetPackage.gtt_price
                     });
                 } else if (this.user.id && this.user.sims && !this.user.sims.length) {
                     window.location.href = '/add-sim'
@@ -212,7 +204,6 @@
                 let data = packageItem.priceInfo.find(item => item.currencyCode === '840');
 
                 return (data.price / 100) * 2;
-                // return Math.round(data.price / 100);
             }
         }
     }

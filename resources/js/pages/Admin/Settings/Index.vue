@@ -27,9 +27,25 @@
                                     {{ setting.title }}
                                 </dt>
                                 <dd class="col-sm-8 d-flex align-items-center">
-                                    <input-toggle
-                                        v-model="setting.value"
-                                    />
+                                    <template v-if="setting.type === settingsTypes['boolean'].tag">
+                                        <div class="mb-4">
+                                            <input-toggle
+                                                v-model="setting.value"
+                                            />
+                                        </div>
+                                    </template>
+                                    <template v-if="setting.type === settingsTypes['string'].tag">
+                                        <div class="d-flex flex-wrap">
+                                            <div class="w-100">
+                                                <input type="radio" id="one" value="file" v-model="setting.value">
+                                                <label for="one">From file</label>
+                                            </div>
+                                            <div class="w-100">
+                                                <input type="radio" id="two" value="api" v-model="setting.value">
+                                                <label for="two">From API</label>
+                                            </div>
+                                        </div>
+                                    </template>
                                 </dd>
                             </template>
                         </dl>
@@ -64,7 +80,7 @@
 
 <script>
 import InputToggle from "../../../components/forms/input-toggle";
-import {SETTING_SECTIONS, SETTINGS} from "./constants";
+import {SETTING_SECTIONS, SETTINGS, SETTINGS_TYPE} from "./constants";
 
     export default {
         name: "SettingsIndex",
@@ -77,6 +93,7 @@ import {SETTING_SECTIONS, SETTINGS} from "./constants";
                 loading: false,
                 sections: SETTING_SECTIONS,
                 settings: SETTINGS,
+                settingsTypes: SETTINGS_TYPE,
             }
         },
 
@@ -96,6 +113,7 @@ import {SETTING_SECTIONS, SETTINGS} from "./constants";
             },
 
             save() {
+                this.loading = true;
                 let data = [];
                 for (let key in this.data) {
                     this.data[key].forEach(setting => {
@@ -105,7 +123,13 @@ import {SETTING_SECTIONS, SETTINGS} from "./constants";
 
                 axios.post('/settings/update', data)
                     .then(res => {
-                        console.log(res.data);
+                        this.$toast.open({
+                            message: 'Settings saved successfully',
+                            type: 'success',
+                            position: 'bottom-left'
+                        });
+
+                        this.loading = false;
                     });
             }
         }

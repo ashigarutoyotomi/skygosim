@@ -21,6 +21,14 @@ class AddMainSettingsToSettingsTable extends Migration
             'type' => Setting::TYPE_BOOLEAN,
             'value' => 0,
         ]);
+
+        Setting::insert([
+            'id' => Setting::ID_WHICH_INTERNET_PACKAGES_USE,
+            'section' => Setting::SECTION_MAIN,
+            'title' => 'Which internet packages use',
+            'type' => Setting::TYPE_STRING,
+            'value' => 'file',
+        ]);
     }
 
     /**
@@ -31,6 +39,12 @@ class AddMainSettingsToSettingsTable extends Migration
     public function down()
     {
         $setting = Setting::find(Setting::ID_DISABLE_INTERNET_PACKAGES_PURCHASING);
+
+        if ($setting) {
+            $setting->delete();
+        }
+
+        $setting = Setting::find(Setting::ID_WHICH_INTERNET_PACKAGES_USE);
 
         if ($setting) {
             $setting->delete();

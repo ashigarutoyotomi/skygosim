@@ -32,9 +32,6 @@ class PackagesPageController extends Controller
     public function getAllPackages()
     {
         $internetPackagesGateway = new InternetPackageGateway;
-//        $internetPackages = $internetPackagesGateway
-//            ->toggleGTTPrice(true)
-//            ->getAllInternetPackages();
 
         return $internetPackagesGateway->getAllInternetPackages();
     }

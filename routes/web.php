@@ -178,6 +178,8 @@ Route::get('/checkout/e-sim', [PagesController::class, 'checkoutESim']);
 
 Route::get('/checkout/result', [PagesController::class, 'checkoutResult']);
 
+Route::get('/settings', [SettingsController::class, 'index']);
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/me', [AuthController::class, 'me']);

@@ -8,12 +8,13 @@
             <div class="container">
                 <div class="row">
                     <main class="col-lg-12">
-<!--                        <h1-->
-<!--                        >-->
-<!--                            Sorry, shopping is not available at the moment.-->
-<!--                        </h1>-->
+                        <h1
+                            v-if="!isPurchasingActive"
+                        >
+                            Sorry, shopping is not available at the moment.
+                        </h1>
                         <form
-                            v-if="user"
+                            v-if="user && isPurchasingActive"
                             name="checkout"
                             class="checkout woocommerce-checkout"
                             novalidate="novalidate"
@@ -266,7 +267,8 @@
 </template>
 
 <script>
-    import {loadStripe} from "@stripe/stripe-js";
+    import { loadStripe } from "@stripe/stripe-js";
+    import { SETTINGS } from "../Admin/Settings/constants";
 
     export default {
         name: "CheckoutIndex",
@@ -295,11 +297,32 @@
                 loading: false,
                 errors: {},
                 stripeCardError: {},
+                settings: {
+                    main: [],
+                },
+                settingsConst: SETTINGS,
             }
         },
 
         mounted() {
-            this.loadMe();
+            this.loadSettings();
+
+            Vue.nextTick(() => {
+                this.loadMe();
+            });
+        },
+
+        computed: {
+            isPurchasingActive() {
+                let canPurchase = false;
+                this.settings.main.forEach(setting => {
+                    if (setting.id === this.settingsConst[5].id && setting.value === "0") {
+                        canPurchase = true;
+                    }
+                });
+
+                return canPurchase;
+            },
         },
 
         methods: {
@@ -386,6 +409,13 @@
                             this.setUserData();
                             this.initStripe();
                         });
+                    });
+            },
+
+            loadSettings() {
+                axios.get('/settings')
+                    .then(({data}) => {
+                        Vue.set(this, 'settings', data);
                     });
             },
         }

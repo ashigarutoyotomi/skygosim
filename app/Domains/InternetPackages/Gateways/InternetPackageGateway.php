@@ -99,7 +99,45 @@ class InternetPackageGateway
 
     public function getAllInternetPackages()
     {
-        $internetPackages = InternetPackageFromFile::all();
+        $internetPackages = [];
+
+        $whichPackages = (new SettingGateway)->getSettingValueById(Setting::ID_WHICH_INTERNET_PACKAGES_USE);
+
+        switch ($whichPackages) {
+            case "file":
+                $internetPackages = InternetPackageFromFile::all();
+                break;
+            case "api":
+                $internetPackages = InternetPackageFromApi::all();
+                break;
+        }
+
+        $percentage = (new SettingGateway)->getSettingValueById(Setting::ID_INTERNET_PACKAGE_PRICE_PERCENTAGE);
+
+        foreach ($internetPackages as $key => $package) {
+            switch ($whichPackages) {
+                case "file":
+                    $price = $package->price_usd;
+                    $percentPrice = (floatval($price) * floatval($percentage)) / 100;
+                    $internetPackages[$key]['gtt_price'] = round($price + $percentPrice, 2, PHP_ROUND_HALF_UP);
+                    $internetPackages[$key]['imgurl'] = '/images/regions/' . strtolower(str_replace(' ', '', $package->area_eng)) . '.jpg';
+                    break;
+                case "api":
+                    $priceKey = array_search('840', array_column($package->priceInfo, 'currencyCode'));
+                    $price = $package->priceInfo[$priceKey]['price'] / 100;
+                    $percentPrice = (floatval($price) * floatval($percentage)) / 100;
+                    $internetPackages[$key]['gtt_price'] = round($price + $percentPrice, 2, PHP_ROUND_HALF_UP);
+
+                    $nameInfo = collect($package->name);
+
+                    foreach ($nameInfo as $item) {
+                        if ($item['langInfo']['language'] === 'en') {
+                            $internetPackages[$key]['destination_eng'] = $item['value'];
+                        }
+                    }
+                    break;
+            }
+        }
 
         return $internetPackages;
     }
