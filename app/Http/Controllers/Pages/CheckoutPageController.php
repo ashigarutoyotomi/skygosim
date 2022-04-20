@@ -9,6 +9,7 @@ use App\Actions\User\UserAddressAction;
 use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\Order\Model\Order;
 use App\Domains\User\Models\UserCart;
+use App\Domains\User\Models\UserInternetPackage;
 use App\DTO\User\CreateUserAddressData;
 use App\DTO\User\CreateUserData;
 use App\Gateways\User\UserGateway;
@@ -16,7 +17,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\InternetPackage\PurchaseInternetPackageRequest;
 use App\Models\Sim\Sim;
 use App\Models\User;
-use App\Models\User\UserInternetPackage;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Psr7\Message;
@@ -113,11 +113,14 @@ class CheckoutPageController extends Controller
                     $content = json_decode($body->getContents(), true);
 
                     $internetPackage = InternetPackageFromFile::where('package_id', $cart->item_id)->first();
+
                     UserInternetPackage::create([
                         'user_id' => $user->id,
                         'sim_id' => $sim->id,
                         'internet_package_id' => $internetPackage->id,
                         'bought_price' => $request->input('amount'),
+                        'internet_package_from_type' => UserInternetPackage::INTERNET_PACKAGE_FROM_TYPE_FILE,
+                        'activated_from_type' => UserInternetPackage::ACTIVATED_FROM_TYPE_WEB,
                     ]);
 
                     $cart->status = UserCart::CART_STATUS_FINISHED;

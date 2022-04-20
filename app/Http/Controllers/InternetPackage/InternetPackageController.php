@@ -7,19 +7,19 @@ namespace App\Http\Controllers\InternetPackage;
 use App\Actions\User\UserAddressAction;
 use App\Domains\InternetPackages\Gateways\InternetPackageGateway;
 use App\Domains\InternetPackages\Imports\InternetPackagesImport;
-use App\Domains\InternetPackages\Models\InternetPackage;
+use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\Settings\Gateways\SettingGateway;
 use App\Domains\Settings\Models\Setting;
 use App\Domains\Sim\Models\Sim;
 use App\Domains\User\Actions\UserCartAction;
 use App\Domains\User\DTO\UserCartDTO\CreateUserCartData;
 use App\Domains\User\Models\UserCart;
+use App\Domains\User\Models\UserInternetPackage;
 use App\DTO\User\CreateUserAddressData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InternetPackage\Purchase\PurchaseInternetPackagesRequest;
 use App\Http\Requests\InternetPackage\UploadInternetPackagesFileRequest;
 use App\Models\User;
-use App\Models\User\UserInternetPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -66,19 +66,16 @@ class InternetPackageController extends Controller
         $keywords = $request->get('keywords');
         $filters = json_decode($request->get('filters'), true);
 
-        $gateway = (new InternetPackageGateway())
-            ->setFilters($filters)
-            ->setKeywords($keywords)
-            ->limit(10);
+        $gateway = (new InternetPackageGateway());
 
-        return $gateway->getPackages();
+        return $gateway->getAllInternetPackages();
     }
 
     public function getWidgetData()
     {
         $user = Auth::user();
 
-        $inventoryCount = InternetPackage::whereNull('expired_at')->count();
+        $inventoryCount = InternetPackageFromFile::count();
         $purchased = collect([]);
 
         if ($user->role === User::USER_ROLE_ADMIN) {
@@ -114,27 +111,35 @@ class InternetPackageController extends Controller
     public function activatePackages(Request $request)
     {
         $items = $request->all();
-        $endpoint = env('SIM_API_ACTIVATE_PACKAGE', '');
-        $client = new \GuzzleHttp\Client();
+
         $user = Auth::user();
+        $client = new \GuzzleHttp\Client();
+        $endpoint = config('services.sim_api.get_access_token');
+        $response = $client->request('GET', $endpoint);
+        $body = $response->getBody();
+
+        $content = json_decode($body->getContents(), true);
+        $endpoint = config('services.sim_api.payorder');
+        $requestBody = [
+            'appKey' => config('services.sim_api.key'),
+            'accessToken' => $content['accessToken'],
+            'currency' => 'USD',
+        ];
 
         foreach ($items as $item) {
-            try {
+//            try {
                 $sim = Sim::where([
                     'iccid' => $item['iccid'],
                 ])->first();
-                abort_unless($sim, 404, 'This iccid is not available.');
 
-                $internetPackage = InternetPackage::where([
+                $internetPackage = InternetPackageFromFile::where([
                     'package_id' => $item['packageId'],
-                    'expired_at' => null,
                 ])->first();
-                abort_unless($internetPackage, 404, 'This package is not available.');
 
                 $userCartData = new CreateUserCartData([
                     'user_id' => $user->id,
                     'item_type' => UserCart::ITEM_TYPE_INTERNET_PACKAGE,
-                    'item_id' => $internetPackage->id,
+                    'item_id' => (string)$internetPackage->id,
                     'sim_id' => $sim->id,
                     'quantity' => 1,
                     'currency' => UserCart::CURRENCY_USD,
@@ -144,21 +149,30 @@ class InternetPackageController extends Controller
 
                 $userCart = (new UserCartAction)->create($userCartData);
 
-                $response = $client->request('POST', $endpoint, ['query' => [
-                    'iccid' => $item['iccid'],
-                    'packageId' => $item['packageId'],
-                    'currency' => 'USD',
-                    'ourOrderID' => 'skygosimorderid' . $item['packageId'],
-                ]]);
+                $unique_id = time() . mt_rand() . $user->id;
+                $requestBody['iccid'] = $sim->iccid;
+                $requestBody['packageId'] = $userCart->item_id;
+                $requestBody['ourOrderId'] = $unique_id;
 
-                $statusCode = $response->getStatusCode();
-                $content = $response->getBody();
+                $response = $client->request('POST', $endpoint, ['form_params' => $requestBody]);
+
+                $body = $response->getBody();
+                $content = json_decode($body->getContents(), true);
+
+                UserInternetPackage::create([
+                    'user_id' => $user->id,
+                    'sim_id' => $sim->id,
+                    'internet_package_id' => $internetPackage->id,
+                    'bought_price' => 0,
+                    'internet_package_from_type' => UserInternetPackage::INTERNET_PACKAGE_FROM_TYPE_FILE,
+                    'activated_from_type' => UserInternetPackage::ACTIVATED_FROM_TYPE_DASHBOARD,
+                ]);
 
                 $userCart->status = UserCart::CART_STATUS_FINISHED;
                 $userCart->save();
-            } catch (\Exception $exception) {
-                Log::info($exception->getMessage());
-            }
+//            } catch (\Exception $exception) {
+//                Log::info($exception->getMessage());
+//            }
         }
 
         return true;

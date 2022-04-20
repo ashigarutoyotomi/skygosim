@@ -237,6 +237,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // Purchases
     Route::get('/purchases/internet-packages', [PurchasesInternetPackagesController::class, 'index']);
+    Route::get('/purchases/internet-packages-from-web', [PurchasesInternetPackagesController::class, 'purchasesFromWeb']);
+    Route::get('/purchases/internet-packages-from-dashboard', [PurchasesInternetPackagesController::class, 'purchasesFromDashboard']);
     Route::get('/purchases/internet-packages/{id}/show', [PurchasesInternetPackagesController::class, 'show']);
     Route::get('/purchases/internet-packages/download-excel', [PurchasesInternetPackagesController::class, 'downloadExcel']);
 

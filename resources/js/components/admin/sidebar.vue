@@ -23,7 +23,7 @@
                 >
                     <a
                         class="nav-link"
-                        :class="{'active': isActiveRoute(['purchases_internet_packages', 'purchases_internet_package_show'])}"
+                        :class="{'active': isActiveRoute(['purchases_internet_packages_from_web', 'purchases_internet_packages_from_dashboard'])}"
                         data-bs-toggle="collapse"
                         href="#collapsePurchases"
                         role="button"
@@ -38,9 +38,17 @@
                         <li class="nav-item">
                             <router-link
                                 class="nav-link"
-                                :class="{'active': isActiveRoute(['purchases_internet_packages'])}"
-                                to="/purchases/internet-packages"
-                            >Internet packages</router-link>
+                                :class="{'active': isActiveRoute(['purchases_internet_packages_from_web'])}"
+                                to="/purchases/internet-packages-from-web"
+                            >Internet packages from web</router-link>
+                        </li>
+
+                        <li class="nav-item">
+                            <router-link
+                                class="nav-link"
+                                :class="{'active': isActiveRoute(['purchases_internet_packages_from_dashboard'])}"
+                                to="/purchases/internet-packages-from-dashboard"
+                            >Internet packages from dashboard</router-link>
                         </li>
                     </ul>
                 </li>

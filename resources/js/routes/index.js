@@ -21,6 +21,8 @@ import SimOrdersIndex from "../pages/Admin/SimOrders/Index";
 import ShowPhysicalSimOrder from "../pages/Admin/SimOrders/ShowPhysicalSim";
 
 import PurchasesInternetPackages from "../pages/Admin/Purchases/InternetPackages/InternetPackages";
+import PurchasedInternetPackagesFromWeb from "../pages/Admin/Purchases/InternetPackages/PurchasedInternetPackagesFromWeb";
+import PurchasedInternetPackagesFromDashboard from "../pages/Admin/Purchases/InternetPackages/PurchasedInternetPackagesFromDashboard";
 import ShowPurchasesInternetPackages from "../pages/Admin/Purchases/InternetPackages/ShowInternetPackage";
 
 import PagesApnIndex from "../pages/Admin/Pages/Apn/Index";
@@ -143,10 +145,17 @@ const allRoutes = [
         component: ShowPhysicalSimOrder
     },
 
+    // Purchases
     {
-        name: 'purchases_internet_packages',
-        path: '/purchases/internet-packages',
-        component: PurchasesInternetPackages
+        name: 'purchases_internet_packages_from_web',
+        path: '/purchases/internet-packages-from-web',
+        component: PurchasedInternetPackagesFromWeb
+    },
+
+    {
+        name: 'purchases_internet_packages_from_dashboard',
+        path: '/purchases/internet-packages-from-dashboard',
+        component: PurchasedInternetPackagesFromDashboard
     },
 
     {
