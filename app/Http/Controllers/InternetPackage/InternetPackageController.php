@@ -127,7 +127,7 @@ class InternetPackageController extends Controller
         ];
 
         foreach ($items as $item) {
-//            try {
+            try {
                 $sim = Sim::where([
                     'iccid' => $item['iccid'],
                 ])->first();
@@ -139,7 +139,7 @@ class InternetPackageController extends Controller
                 $userCartData = new CreateUserCartData([
                     'user_id' => $user->id,
                     'item_type' => UserCart::ITEM_TYPE_INTERNET_PACKAGE,
-                    'item_id' => (string)$internetPackage->id,
+                    'item_id' => (string)$internetPackage->package_id,
                     'sim_id' => $sim->id,
                     'quantity' => 1,
                     'currency' => UserCart::CURRENCY_USD,
@@ -170,9 +170,9 @@ class InternetPackageController extends Controller
 
                 $userCart->status = UserCart::CART_STATUS_FINISHED;
                 $userCart->save();
-//            } catch (\Exception $exception) {
-//                Log::info($exception->getMessage());
-//            }
+            } catch (\Exception $exception) {
+                Log::info($exception->getMessage());
+            }
         }
 
         return true;
