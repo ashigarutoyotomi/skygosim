@@ -21,8 +21,11 @@
                         <th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-status">
                             <span class="nobr">ICCID</span>
                         </th>
+<!--                        <th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-total">-->
+<!--                            <span class="nobr">Price</span>-->
+<!--                        </th>-->
                         <th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-total">
-                            <span class="nobr">Price</span>
+                            <span class="nobr">Expiration Date</span>
                         </th>
                     </tr>
                 </thead>
@@ -40,9 +43,12 @@
                         <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-status" data-title="Status">
                             {{internet.sim.iccid}}
                         </td>
-                        <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-total" data-title="Total">
-                            <span class="woocommerce-Price-amount amount">
-                                <span class="woocommerce-Price-currencySymbol">$</span>{{ internet.internet_package.gtt_price_usd }}</span>
+<!--                        <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-total" data-title="Total">-->
+<!--                            <span class="woocommerce-Price-amount amount">-->
+<!--                                <span class="woocommerce-Price-currencySymbol">$</span>{{ internet.bought_price }}</span>-->
+<!--                        </td>-->
+                        <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-status" data-title="Status">
+                            {{ getExpirationDate(internet.created_at) }}
                         </td>
                     </tr>
                 </tbody>
@@ -53,10 +59,18 @@
 </template>
 
 <script>
+    import moment from "moment";
+
     export default {
         name: "ProfileInternetPackages",
 
         props: ['user'],
+
+        methods: {
+            getExpirationDate(date) {
+               return moment(date).add(180, 'days').format('MM/DD/YYYY');
+            }
+        }
     }
 </script>
 

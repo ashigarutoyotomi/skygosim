@@ -77,8 +77,9 @@ class CheckoutPageController extends Controller
             (new UserAddressAction)->create($userAddressData);
         }
 
+        $boughtPrice = $request->input('amount') * 100;
         $payment = $user->charge(
-            $request->input('amount') * 100,
+            $boughtPrice,
             $request->input('payment_method_id'),
         );
 

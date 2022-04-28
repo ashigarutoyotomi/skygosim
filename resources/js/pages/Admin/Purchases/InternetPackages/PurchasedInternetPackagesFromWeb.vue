@@ -73,11 +73,12 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Dealer name</th>
+<!--                                    <th scope="col">Dealer name</th>-->
                                     <th scope="col">ICCID</th>
                                     <th scope="col">Package ID</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Date</th>
+                                    <th scope="col">Expiration Date</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -86,19 +87,20 @@
                                     <th scope="row">
                                         {{(key + 1) + (data.per_page * (data.current_page - 1))}}
                                     </th>
-                                    <td>
-                                        <template v-if="internetPackage.sim.dealer">
-                                            {{ internetPackage.sim.dealer.first_name }} {{ internetPackage.sim.dealer.last_name }}
-                                        </template>
+<!--                                    <td>-->
+<!--                                        <template v-if="internetPackage.sim.dealer">-->
+<!--                                            {{ internetPackage.sim.dealer.first_name }} {{ internetPackage.sim.dealer.last_name }}-->
+<!--                                        </template>-->
 
-                                        <template v-else>
-                                            No dealer
-                                        </template>
-                                    </td>
+<!--                                        <template v-else>-->
+<!--                                            No dealer-->
+<!--                                        </template>-->
+<!--                                    </td>-->
                                     <td>{{ internetPackage.sim.iccid }}</td>
                                     <td>{{ internetPackage.internet_package_from_file.package_id }}</td>
                                     <td>{{ internetPackage.bought_price }} $</td>
                                     <td>{{ moment(internetPackage.created_at).format('DD/MM/YYYY HH:mm') }}</td>
+                                    <td>{{ getExpirationDate(internetPackage.created_at) }}</td>
                                     <td>
                                         <button
                                             type="button"
@@ -217,6 +219,10 @@ export default {
                 this.loadData();
             });
         },
+
+        getExpirationDate(date) {
+            return moment(date).add(180, 'days').format('MM/DD/YYYY');
+        }
     }
 }
 </script>

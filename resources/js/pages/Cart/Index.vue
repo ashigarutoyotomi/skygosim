@@ -14,6 +14,7 @@
                                     <th class="product-remove">&nbsp;</th>
                                     <th class="product-thumbnail">&nbsp;</th>
                                     <th class="product-name">Product</th>
+                                    <th class="product-price">Expiration Date</th>
                                     <th class="product-price">Price</th>
                                     <th class="product-quantity product">Quantity</th>
                                     <th class="product-subtotal">Total</th>
@@ -37,6 +38,10 @@
 
                                         <td class="product-name" data-title="Product">
                                             {{ item.package.data_eng }}
+                                        </td>
+
+                                        <td class="product-name" data-title="Product">
+                                            {{ getExpirationDate() }}
                                         </td>
 
                                         <td class="product-price" data-title="Price">
@@ -91,6 +96,8 @@
 </template>
 
 <script>
+    import moment from "moment";
+
     export default {
         name: "CartIndex",
 
@@ -144,6 +151,10 @@
                             this.loadCart();
                         }
                     })
+            },
+
+            getExpirationDate() {
+                return moment().add(180, 'days').format('MM/DD/YYYY');
             }
         }
     }
