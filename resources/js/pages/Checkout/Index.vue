@@ -211,28 +211,54 @@
                                         <th class="product-total">#</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr class="cart_item">
-                                        <td class="product-name">
-                                            Id
-                                        </td>
-                                        <td class="product-total">
-                                        <span class="woocommerce-Price-amount amount">
-                                            {{ order.order_key }}
-                                        </span>
-                                        </td>
-                                    </tr>
-                                    <tr class="cart_item">
-                                        <td class="product-name">
-                                            Price
-                                        </td>
-                                        <td class="product-total">
-                                        <span class="woocommerce-Price-amount amount">
-                                            <span class="woocommerce-Price-currencySymbol">$</span>{{ order.price }}
-                                        </span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                                    <template v-for="cartItem in order.user_cart_items">
+                                        <tbody>
+                                            <tr class="cart_item">
+                                                <td class="">
+                                                    Area
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {{ cartItem.package.area_eng }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr class="cart_item">
+                                                <td class="">
+                                                    Data
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {{ cartItem.package.days }} Days:
+                                                    </span>
+
+                                                    {{ cartItem.package.data_eng }}
+                                                </td>
+                                            </tr>
+                                            <tr class="cart_item">
+                                                <td class="">
+                                                    Expiration Days
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        180
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr class="cart_item">
+                                                <td class="">
+                                                    Price
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        <span class="woocommerce-Price-currencySymbol">$</span>{{ order.price }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="cart_item border-bottom"></tr>
+                                        </tbody>
+                                    </template>
                                 </table>
 
                                 <div id="payment" class="woocommerce-checkout-payment">
@@ -269,6 +295,7 @@
 <script>
     import { loadStripe } from "@stripe/stripe-js";
     import { SETTINGS } from "../Admin/Settings/constants";
+    import moment from "moment";
 
     export default {
         name: "CheckoutIndex",
@@ -418,6 +445,12 @@
                         Vue.set(this, 'settings', data);
                     });
             },
+
+            getExpirationDays(date) {
+                let endDate = moment(date).add(180, 'days');
+
+                return endDate.diff(moment(), 'days');
+            }
         }
     }
 </script>

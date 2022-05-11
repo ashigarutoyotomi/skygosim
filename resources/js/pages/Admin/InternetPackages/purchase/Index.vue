@@ -19,11 +19,21 @@
                             </button>
 
                             <button
-                                class="btn btn-light btn-sm"
+                                class="btn btn-light btn-sm me-2"
                                 title="Add new user"
+                                @click="openAddFromFileInternetPackageForPurchaseModal"
                             >
                                 Add from excel file
                             </button>
+
+                            <a
+                                class="btn btn-light btn-sm"
+                                title="Get example excel file"
+                                href="/files/example_excel_file.xlsx"
+                                download
+                            >
+                                Get example excel file
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -47,12 +57,21 @@
                         </button>
 
                         <button
-                            class="btn btn-light btn-sm"
-                            title="Add new user"
+                            class="btn btn-light btn-sm me-2"
+                            title="Add from excel file"
                             @click="openAddFromFileInternetPackageForPurchaseModal"
                         >
                             Add from excel file
                         </button>
+
+                        <a
+                            class="btn btn-light btn-sm"
+                            title="Get example excel file"
+                            href="/files/example_excel_file.xlsx"
+                            download
+                        >
+                            Get example excel file
+                        </a>
                     </div>
                 </div>
             </div>
@@ -66,6 +85,7 @@
                                     <th class="fw-bold text-black-50" scope="col">#</th>
                                     <th class="fw-bold text-black-50" scope="col">ICCID</th>
                                     <th class="fw-bold text-black-50" scope="col">Package ID</th>
+                                    <th class="fw-bold text-black-50" scope="col">Package Name</th>
                                     <th class="fw-bold text-black-50" scope="col"></th>
                                 </tr>
                             </thead>
@@ -74,6 +94,7 @@
                                     <th class="fw-bold text-black-50" scope="row">{{ key + 1 }}</th>
                                     <td>{{ item.iccid }}</td>
                                     <td>{{ item.packageId }}</td>
+                                    <td>{{ item.packageNameEng }}</td>
                                     <td>
                                         <button
                                             type="button"

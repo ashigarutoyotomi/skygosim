@@ -29,6 +29,18 @@ class CheckoutPageController extends Controller
         $order = Order::find($order_id);
 
         if ($order->user_id === $user->id) {
+            $cartItems = UserCart::with('sim')
+                ->whereIn('id', $order['cart_items'])
+                ->get();
+
+            foreach ($cartItems as $key => $cart) {
+                if ($cart->item_type === UserCart::ITEM_TYPE_INTERNET_PACKAGE_FROM_FILE) {
+                    $cartItems[$key]['package'] = InternetPackageFromFile::where('package_id', $cart->item_id)->first();
+                }
+            }
+
+            $order->user_cart_items = $cartItems;
+
             return view('checkouts.checkout', [
                 'order' => $order,
             ]);

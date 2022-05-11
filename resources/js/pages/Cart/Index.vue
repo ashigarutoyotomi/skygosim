@@ -13,6 +13,7 @@
                                 <tr>
                                     <th class="product-remove">&nbsp;</th>
                                     <th class="product-thumbnail">&nbsp;</th>
+                                    <th class="product-name">Area</th>
                                     <th class="product-name">Product</th>
                                     <th class="product-price">Expiration Date</th>
                                     <th class="product-price">Price</th>
@@ -37,7 +38,17 @@
                                         </td>
 
                                         <td class="product-name" data-title="Product">
-                                            {{ item.package.data_eng }}
+                                            <span class="font-weight-bold">
+                                                {{item.package.area_eng}}
+                                            </span>
+                                        </td>
+
+                                        <td class="product-name" data-title="Product">
+                                            {{item.package.data_eng}}
+                                            <br>
+                                            <span class="font-weight-bold">
+                                                {{item.package.days}} Days
+                                            </span>
                                         </td>
 
                                         <td class="product-name" data-title="Product">

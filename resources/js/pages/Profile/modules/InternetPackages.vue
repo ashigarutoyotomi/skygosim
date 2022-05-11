@@ -13,11 +13,11 @@
                 <thead>
                     <tr>
                         <th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-number">
-                            <span class="nobr">Area</span>
-                        </th>
-                        <th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-date">
                             <span class="nobr">Data</span>
                         </th>
+<!--                        <th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-date">-->
+<!--                            <span class="nobr">Data</span>-->
+<!--                        </th>-->
                         <th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-status">
                             <span class="nobr">ICCID</span>
                         </th>
@@ -27,6 +27,10 @@
                         <th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-total">
                             <span class="nobr">Expiration Date</span>
                         </th>
+
+                        <th class="woocommerce-orders-table__header woocommerce-orders-table__header-order-total">
+                            <span class="nobr">Expiration Days</span>
+                        </th>
                     </tr>
                 </thead>
 
@@ -35,11 +39,19 @@
                         class="woocommerce-orders-table__row woocommerce-orders-table__row--status-processing order"
                     >
                         <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-number" data-title="Order">
-                            {{internet.internet_package.area_eng}}
-                        </td>
-                        <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Date">
+                            <span class="font-weight-bold">
+                                {{internet.internet_package.area_eng}}
+                                <br>
+                                {{internet.internet_package.days}} Days
+                            </span>
+                            <br>
+
                             {{internet.internet_package.data_eng}}
                         </td>
+<!--                        <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-date" data-title="Date">-->
+<!--                            {{internet.internet_package.data_eng}}-->
+<!--                            {{internet.internet_package.days}} Days-->
+<!--                        </td>-->
                         <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-status" data-title="Status">
                             {{internet.sim.iccid}}
                         </td>
@@ -49,6 +61,9 @@
 <!--                        </td>-->
                         <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-status" data-title="Status">
                             {{ getExpirationDate(internet.created_at) }}
+                        </td>
+                        <td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-order-status" data-title="Status">
+                            {{ getExpirationDays(internet.created_at) }} Days
                         </td>
                     </tr>
                 </tbody>
@@ -69,6 +84,12 @@
         methods: {
             getExpirationDate(date) {
                return moment(date).add(180, 'days').format('MM/DD/YYYY');
+            },
+
+            getExpirationDays(date) {
+                let endDate = moment(date).add(180, 'days');
+
+                return endDate.diff(moment(), 'days');
             }
         }
     }

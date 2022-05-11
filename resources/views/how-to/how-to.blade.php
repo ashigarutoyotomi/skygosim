@@ -153,11 +153,13 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-12">
-                    <div class="icon-box rounded text-center hero-bg">
+                    <div class="icon-box rounded text-center hero-bg pb-1">
                         <img src="/images/icon-4.png" alt="">
                         <h5>
-                            Activates Upon Use! Simply Turn On Your Device, Turn On Data Roaming, Your Package Will Activate Automatically!
+                            Activates Upon Use! Simply Turn On Your Device, Turn On Data Roaming, Your Package Will Activate!
                         </h5>
+
+                        <span class="font-italic fs-12 text-info">Must activate within 180 days of purchase.</span>
                     </div>
                 </div>
             </div>

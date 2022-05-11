@@ -30,13 +30,14 @@
                             ></v-select>
                         </div>
                         <div class="mb-2">
-                            <label for="packageId" class="form-label">Package ID</label>
+                            <label for="packageId" class="form-label">Package Name</label>
                             <v-select
                                 id="packageId"
                                 :options="packages"
-                                label="package_id"
+                                label="package_name_eng"
                                 :reduce="packageItem => packageItem.package_id"
                                 @search="packageQuerySearch"
+                                @input="selectedPackage(key, $event)"
                                 v-model="form.packageId"
                             ></v-select>
                         </div>
@@ -86,6 +87,7 @@
                     {
                         iccid: null,
                         packageId: null,
+                        packageNameEng: ''
                     }
                 ],
                 sims: [],
@@ -178,6 +180,14 @@
 
                 this.closeModal();
             },
+
+            selectedPackage(key, item) {
+                let findPackage = this.packages.find(findItem => findItem.package_id === item);
+
+                if (findPackage) {
+                    this.forms[key].packageNameEng = findPackage.package_name_eng;
+                }
+            }
         }
     }
 </script>
