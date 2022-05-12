@@ -225,6 +225,16 @@
                                             </tr>
                                             <tr class="cart_item">
                                                 <td class="">
+                                                    ICCID
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {{ cartItem.sim.iccid }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr class="cart_item">
+                                                <td class="">
                                                     Data
                                                 </td>
                                                 <td class="product-total">
