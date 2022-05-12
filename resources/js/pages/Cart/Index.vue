@@ -12,8 +12,8 @@
                             <thead>
                                 <tr>
                                     <th class="product-remove">&nbsp;</th>
-                                    <th class="product-name">ICCID</th>
                                     <th class="product-name">Area</th>
+                                    <th class="product-name">ICCID</th>
                                     <th class="product-name">Product</th>
                                     <th class="product-price">Expiration Date</th>
                                     <th class="product-price">Price</th>
