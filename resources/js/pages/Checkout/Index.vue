@@ -351,12 +351,15 @@
 
         computed: {
             isPurchasingActive() {
-                let canPurchase = false;
-                this.settings.main.forEach(setting => {
-                    if (setting.id === this.settingsConst[5].id && setting.value === "0") {
-                        canPurchase = true;
-                    }
-                });
+                let canPurchase = true;
+
+                if (this.settings && this.settings.main && this.settings.main.length) {
+                    this.settings.main.forEach(setting => {
+                        if (setting.id === this.settingsConst[5].id && setting.value === "1") {
+                            canPurchase = false;
+                        }
+                    });
+                }
 
                 return canPurchase;
             },

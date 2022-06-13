@@ -266,7 +266,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/countries/{country_id}/update', [CountriesController::class, 'update']);
 
     // Settings
-    Route::get('/settings', [SettingsController::class, 'index']);
+//    Route::get('/settings', [SettingsController::class, 'index']);
     Route::get('/settings/prices', [SettingsController::class, 'pricesSettings']);
 
     Route::post('/settings/update', [SettingsController::class, 'update']);
