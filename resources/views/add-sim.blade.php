@@ -22,22 +22,16 @@
                     <div class="item-content">
                         <h4>Don't have SKYGO SIM yet?</h4>
                         <h6 class="fw-500 font-italic">
-                            ORDER NOW, do you want a physical SIM? or an eSIM?
+                            ORDER NOW, do you want a physical SIM?
                         </h6>
 
                         <div class="d-none d-lg-block divider-20"></div>
 
                         <a
-                            href="/checkout/physical-sim"
+                            href="/physical-sim/order"
                             class="btn btn-maincolor"
                         >
                             <span>Physical SIM</span>
-                        </a>
-                        <a
-                            href="/checkout/e-sim"
-                            class="btn btn-maincolor2"
-                        >
-                            <span>E-SIM</span>
                         </a>
                     </div>
                 </div>

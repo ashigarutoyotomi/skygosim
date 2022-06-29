@@ -28,7 +28,8 @@ class InternetPackageGateway
 
     public function getPackagesFromFile()
     {
-        $query = InternetPackageFromFile::query();
+        $query = InternetPackageFromFile::orderBy('destination_eng')
+            ->orderBy('price_usd');
 
         if ($this->paginate) {
             return $query->paginate($this->paginate);
