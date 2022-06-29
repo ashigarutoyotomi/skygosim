@@ -105,7 +105,7 @@ class InternetPackageGateway
 
         switch ($whichPackages) {
             case "file":
-                $internetPackages = InternetPackageFromFile::all();
+                $internetPackages = InternetPackageFromFile::orderBy('destination_eng')->get();
                 break;
             case "api":
                 $internetPackages = InternetPackageFromApi::all();
