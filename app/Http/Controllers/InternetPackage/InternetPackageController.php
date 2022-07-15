@@ -67,6 +67,9 @@ class InternetPackageController extends Controller
         $filters = json_decode($request->get('filters'), true);
 
         $gateway = (new InternetPackageGateway());
+        if ($keywords) {
+            $gateway->setSearch($keywords, ['destination_eng', 'days', 'price_usd']);
+        }
 
         return $gateway->getAllInternetPackages();
     }

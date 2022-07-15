@@ -33,12 +33,12 @@
                             <label for="packageId" class="form-label">Package Name</label>
                             <v-select
                                 id="packageId"
-                                :options="packages"
                                 label="package_name_eng"
+                                v-model="form.packageId"
+                                :options="packages"
                                 :reduce="packageItem => packageItem.package_id"
                                 @search="packageQuerySearch"
                                 @input="selectedPackage(key, $event)"
-                                v-model="form.packageId"
                             ></v-select>
                         </div>
 
@@ -100,7 +100,7 @@
             }
         },
 
-        created() {
+        mounted() {
             this.$root.$on('modal::show::' + this.modalId, this.showModal);
             this.loadAvailableSims();
             this.loadPackages();
@@ -134,6 +134,7 @@
             },
 
             loadPackages() {
+                this.loading = true;
                 axios.get('/internet-packages/get-available-packages', {
                     params: {
                         keywords: this.search.packageKeywords,
@@ -141,6 +142,7 @@
                 })
                     .then(res => {
                         this.packages = res.data;
+                        this.loading = false;
                     });
             },
 

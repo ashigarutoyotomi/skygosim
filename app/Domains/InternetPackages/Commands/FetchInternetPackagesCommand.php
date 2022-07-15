@@ -6,8 +6,6 @@ use App\Domains\InternetPackages\Actions\InternetPackageAction;
 use App\Domains\InternetPackages\DTO\InternetPackageFromApiDTO\CreateInternetPackageFromApiData;
 use App\Domains\InternetPackages\DTO\InternetPackageFromApiDTO\UpdateInternetPackageFromApiData;
 use App\Domains\InternetPackages\Gateways\InternetPackageGateway;
-use App\Domains\InternetPackages\Models\InternetPackage;
-use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -48,43 +46,45 @@ class FetchInternetPackagesCommand extends Command
         $newInternetPackages = $internetPackagesGateway->getSimApiPackages();
         $oldInternetPackages = $internetPackagesGateway->getPackagesFromApi();
 
-        foreach ($newInternetPackages as $newInternetPackage) {
-            try {
-                $oldInternetPackage = $oldInternetPackages->firstWhere('package_id', $newInternetPackage['id']);
+        foreach ($newInternetPackages as $newInternetPackagesPart) {
+            foreach ($newInternetPackagesPart as $newInternetPackage) {
+                try {
+                    $oldInternetPackage = $oldInternetPackages->firstWhere('package_id', $newInternetPackage['id']);
 
-                $newInternetPackageData = [
-                    'package_id' => $newInternetPackage['id'],
-                    'name' => $newInternetPackage['name'],
-                    'desc' => $newInternetPackage['desc'],
-                    'cardPools' => $newInternetPackage['cardPools'],
-                    'status' => $newInternetPackage['status'],
-                    'type' => $newInternetPackage['type'],
-                    'periodType' => $newInternetPackage['periodType'],
-                    'period' => $newInternetPackage['period'],
-                    'imgurl' => $newInternetPackage['imgurl'],
-                    'priceInfo' => $newInternetPackage['priceInfo'],
-                    'refuelingPackage' => $newInternetPackage['refuelingPackage'],
-                    'createTime' => $newInternetPackage['createTime'],
-                    'expireTime' => $newInternetPackage['expireTime'],
-                    'lastModifyTime' => $newInternetPackage['lastModifyTime'],
-                    'originalPriceInfo' => $newInternetPackage['originalPriceInfo'],
-                    'ext' => $newInternetPackage['ext'],
-                ];
+                    $newInternetPackageData = [
+                        'package_id' => $newInternetPackage['id'],
+                        'name' => $newInternetPackage['name'],
+                        'desc' => $newInternetPackage['desc'],
+                        'cardPools' => $newInternetPackage['cardPools'],
+                        'status' => $newInternetPackage['status'],
+                        'type' => $newInternetPackage['type'],
+                        'periodType' => $newInternetPackage['periodType'],
+                        'period' => $newInternetPackage['period'],
+                        'imgurl' => $newInternetPackage['imgurl'],
+                        'priceInfo' => $newInternetPackage['priceInfo'],
+                        'refuelingPackage' => $newInternetPackage['refuelingPackage'],
+                        'createTime' => $newInternetPackage['createTime'],
+                        'expireTime' => $newInternetPackage['expireTime'],
+                        'lastModifyTime' => $newInternetPackage['lastModifyTime'],
+                        'originalPriceInfo' => $newInternetPackage['originalPriceInfo'],
+                        'ext' => $newInternetPackage['ext'],
+                    ];
 
-                if ($oldInternetPackage) {
-                    $newInternetPackageData['id'] = $oldInternetPackage->id;
-                    $data = new UpdateInternetPackageFromApiData($newInternetPackageData);
+                    if ($oldInternetPackage) {
+                        $newInternetPackageData['id'] = $oldInternetPackage->id;
+                        $data = new UpdateInternetPackageFromApiData($newInternetPackageData);
 
-                    (new InternetPackageAction)->updatePackageFromApi($data);
+                        (new InternetPackageAction)->updatePackageFromApi($data);
 
-                    continue;
+                        continue;
+                    }
+
+                    $data = new CreateInternetPackageFromApiData($newInternetPackageData);
+
+                    (new InternetPackageAction)->createPackageFromApi($data);
+                } catch (\Exception $exception) {
+                    Log::channel('internet-package')->info($exception->getMessage());
                 }
-
-                $data = new CreateInternetPackageFromApiData($newInternetPackageData);
-
-                (new InternetPackageAction)->createPackageFromApi($data);
-            } catch (\Exception $exception) {
-                Log::channel('internet-package')->info($exception->getMessage());
             }
         }
     }

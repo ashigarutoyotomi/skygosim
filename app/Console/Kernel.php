@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\CreateAdminUserCommand;
 use App\Domains\InternetPackages\Commands\FetchInternetPackagesCommand;
+use App\Domains\InternetPackages\Commands\UpdateInternetPackagesFromFilePriceByApiCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         CreateAdminUserCommand::class,
         FetchInternetPackagesCommand::class,
+        UpdateInternetPackagesFromFilePriceByApiCommand::class,
     ];
 
     /**

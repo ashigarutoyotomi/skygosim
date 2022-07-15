@@ -106,7 +106,13 @@ class InternetPackageGateway
 
         switch ($whichPackages) {
             case "file":
-                $internetPackages = InternetPackageFromFile::orderBy('destination_eng')->get();
+                $query = InternetPackageFromFile::orderBy('destination_eng');
+
+                if ($this->search['keywords'] && count($this->search['columns'])) {
+                    $this->appendSearch($query);
+                }
+
+                $internetPackages = $query->get();
                 break;
             case "api":
                 $internetPackages = InternetPackageFromApi::all();
