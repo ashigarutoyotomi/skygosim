@@ -46,9 +46,9 @@ class UpdateInternetPackagesFromFilePriceByApiCommand extends Command
         $newInternetPackages = $internetPackagesGateway->getSimApiPackages();
         $oldInternetPackages = $internetPackagesGateway->getPackagesFromFile();
 
-        foreach ($newInternetPackages as $newInternetPackagesPart) {
-            foreach ($newInternetPackagesPart as $newInternetPackage) {
-                try {
+        foreach ($newInternetPackages as $newInternetPackage) {
+//            foreach ($newInternetPackagesPart as $newInternetPackage) {
+//                try {
                     $oldInternetPackage = $oldInternetPackages->firstWhere('package_id', $newInternetPackage['id']);
 
                     if ($oldInternetPackage) {
@@ -57,10 +57,10 @@ class UpdateInternetPackagesFromFilePriceByApiCommand extends Command
                         $oldInternetPackage->price_usd = $price;
                         $oldInternetPackage->save();
                     }
-                } catch (\Exception $exception) {
-                    Log::channel('internet-package')->info($exception->getMessage());
-                }
-            }
+//                } catch (\Exception $exception) {
+//                    Log::channel('internet-package')->info($exception->getMessage());
+//                }
+//            }
         }
     }
 }
