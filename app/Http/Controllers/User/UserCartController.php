@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\User;
 
 
+use App\Domains\InternetPackages\Models\InternetPackage;
 use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\User\Models\UserCart;
 use App\Http\Controllers\Controller;
@@ -23,7 +24,7 @@ class UserCartController extends Controller
 
         foreach ($carts as $key => $cart) {
             if ($cart->item_type === UserCart::ITEM_TYPE_INTERNET_PACKAGE_FROM_FILE) {
-                $carts[$key]['package'] = InternetPackageFromFile::where('package_id', $cart->item_id)->first();
+                $carts[$key]['package'] = InternetPackage::where('package_id', $cart->item_id)->first();
             }
         }
 

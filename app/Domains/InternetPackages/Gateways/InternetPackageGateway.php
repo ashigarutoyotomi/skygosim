@@ -5,6 +5,7 @@ namespace App\Domains\InternetPackages\Gateways;
 
 
 use App\Classes\Helpers\StringHelper;
+use App\Domains\InternetPackages\Models\InternetPackage;
 use App\Domains\InternetPackages\Models\InternetPackageFromApi;
 use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\Settings\Gateways\SettingGateway;
@@ -14,6 +15,25 @@ use App\Traits\BasicGatewaysTrait;
 class InternetPackageGateway
 {
     use BasicGatewaysTrait;
+
+    public function getInternetPackages()
+    {
+        $query = InternetPackage::query();
+
+        if ($this->with) {
+            return $query->with($this->with);
+        }
+
+        if ($this->paginate) {
+            return $query->paginate($this->paginate);
+        }
+
+        $query
+            ->orderBy('name_en')
+            ->orderBy('price_usd');
+
+        return $query->get();
+    }
 
     public function getPackagesFromApi()
     {
@@ -160,5 +180,90 @@ class InternetPackageGateway
         }
 
         return $packages;
+    }
+
+    public function setLocalImages($internetPackages)
+    {
+        foreach ($internetPackages as $internetPackage) {
+            if (count($internetPackage['card_pools']) === 1) {
+                $firstKey = array_key_first($internetPackage['card_pools']);
+                $countryMccCode = $internetPackage['card_pools'][$firstKey][0]['mcc'];
+
+                switch ($countryMccCode) {
+                    case '505':
+                        $internetPackage['imgurl'] = '/images/regions/australia.jpg';
+                        break;
+                    case '456':
+                        $internetPackage['imgurl'] = '/images/regions/cambodia.jpg';
+                        break;
+                    case '454':
+                        $internetPackage['imgurl'] = '/images/regions/hongkong.jpg';
+                        break;
+                    case '510':
+                        $internetPackage['imgurl'] = '/images/regions/indonesia.jpg';
+                        break;
+                    case '440':
+                        $internetPackage['imgurl'] = '/images/regions/japan.jpg';
+                        break;
+                    case '455':
+                        $internetPackage['imgurl'] = '/images/regions/macao.jpg';
+                        break;
+                    case '530':
+                        $internetPackage['imgurl'] = '/images/regions/newzealand.jpg';
+                        break;
+                    case '525':
+                        $internetPackage['imgurl'] = '/images/regions/singapore.jpg';
+                        break;
+                    case '450':
+                        $internetPackage['imgurl'] = '/images/regions/SouthKorea.jpg';
+                        break;
+                    case '466':
+                        $internetPackage['imgurl'] = '/images/regions/Taiwan.jpg';
+                        break;
+                    case '520':
+                        $internetPackage['imgurl'] = '/images/regions/Thailand.jpg';
+                        break;
+                    case '424':
+                        $internetPackage['imgurl'] = '/images/regions/uae.png';
+                        break;
+                    case '310':
+                        $internetPackage['imgurl'] = '/images/regions/usa.jpg';
+                        break;
+                    default:
+                        $internetPackage['imgurl'] = $countryMccCode;
+                }
+            } else {
+                $cardPoolsMccs = [];
+                foreach ($internetPackage['card_pools'] as $key => $cardPool) {
+                    foreach ($internetPackage['card_pools'][$key] as $mcc) {
+                        $cardPoolsMccs[] = $mcc['mcc'];
+                    }
+                }
+
+                if (count(['310$', '302', '310']) === count($cardPoolsMccs) && !array_diff(['310$', '302', '310'], $cardPoolsMccs)) {
+                    $internetPackage['imgurl'] = '/images/regions/canada.png';
+                } else if (count(['310$', '310']) === count($cardPoolsMccs) && !array_diff(['310$', '310'], $cardPoolsMccs)) {
+                    $internetPackage['imgurl'] = '/images/regions/usa.jpg';
+                } else if (count(['502', '520', '525']) === count($cardPoolsMccs) && !array_diff(['502', '520', '525'], $cardPoolsMccs)) {
+                    $internetPackage['imgurl'] = '/images/regions/singaporeandmalaysiaandthailand.jpg';
+                } else if (count($cardPoolsMccs) === 147 && in_array('460', $cardPoolsMccs)) {
+                    $internetPackage['imgurl'] = '/images/regions/multiregional.jpg';
+                } else if (count($cardPoolsMccs) === 146) {
+                    $internetPackage['imgurl'] = '/images/regions/multiregionchinaexcluded.jpg';
+                } else if (count(['455', '454', '460']) === count($cardPoolsMccs) && !array_diff(['455', '454', '460'], $cardPoolsMccs)) {
+                    $internetPackage['imgurl'] = '/images/regions/hongkongandmacau.jpg';
+                } else if (count(['455', '454']) === count($cardPoolsMccs) && !array_diff(['455', '454'], $cardPoolsMccs)) {
+                    $internetPackage['imgurl'] = '/images/regions/hongkongandmacau.jpg';
+                } else if (count(['455', '454', '460', '466']) === count($cardPoolsMccs) && !array_diff(['455', '454', '460', '466'], $cardPoolsMccs)) {
+                    $internetPackage['imgurl'] = '/images/regions/greaterchina.jpg';
+                } else if (count($cardPoolsMccs) === 41 || count($cardPoolsMccs) === 40) {
+                    $internetPackage['imgurl'] = '/images/regions/europe.jpg';
+                } else if (count($cardPoolsMccs) === 15) {
+                    $internetPackage['imgurl'] = '/images/regions/asia.jpg';
+                }
+            }
+        }
+
+        return $internetPackages;
     }
 }

@@ -96,7 +96,7 @@
                                         </template>
                                     </td>
                                     <td>{{ internetPackage.sim.iccid }}</td>
-                                    <td>{{ internetPackage.internet_package.package_id }}</td>
+                                    <td>{{ internetPackage.internet_package ? internetPackage.internet_package.package_id : 'Not found' }}</td>
                                     <td>{{ internetPackage.bought_price }} $</td>
                                     <td>{{ moment(internetPackage.created_at).format('DD/MM/YYYY HH:mm') }}</td>
                                     <td>

@@ -66,13 +66,10 @@
                                     </div>
                                     <div class="item-content">
                                         <h5 class="mb-3">
-                                            {{ internetPackage.destination_eng }}
+                                            {{ internetPackage.name_en }}
                                         </h5>
-                                        <p v-if="internetPackage.data_eng">
-                                            {{ internetPackage.data_eng }}
-                                        </p>
-                                        <p v-if="internetPackage.days">
-                                            {{ internetPackage.days }} Days
+                                        <p>
+                                            {{ internetPackage.period }} Days
                                         </p>
 
                                         <h5>
@@ -80,7 +77,7 @@
                                                 href="#"
                                                 @click="addToCart(internetPackage)"
                                             >
-                                                USD {{ internetPackage.gtt_price }}
+                                                USD {{ internetPackage.price_usd }}
                                             </a>
                                         </h5>
                                     </div>
@@ -126,7 +123,7 @@
                 if (this.searchKeywords) {
                     let _vm = this;
                     internetPackages = _.filter(this.internetPackages, function(packageItem) {
-                        let name = packageItem.area_eng;
+                        let name = packageItem.name_en;
                         let area = name.toLowerCase();
                         return area.includes(searchKeywords.toLowerCase());
                     });
@@ -181,7 +178,7 @@
                         user_id: this.user.id,
                         internet_package_id: internetPackage.package_id,
                         sims: this.user.sims,
-                        price: internetPackage.gtt_price
+                        price: internetPackage.price_usd
                     });
                 } else if (this.user.id && this.user.sims && !this.user.sims.length) {
                     window.location.href = '/add-sim'

@@ -215,11 +215,11 @@
                                         <tbody>
                                             <tr class="cart_item">
                                                 <td class="">
-                                                    Area
+                                                    Name
                                                 </td>
                                                 <td class="product-total">
                                                     <span class="woocommerce-Price-amount amount">
-                                                        {{ cartItem.package.area_eng }}
+                                                        {{ cartItem.package.name_en }}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -239,10 +239,8 @@
                                                 </td>
                                                 <td class="product-total">
                                                     <span class="woocommerce-Price-amount amount">
-                                                        {{ cartItem.package.days }} Days:
+                                                        {{ cartItem.package.period }} Days
                                                     </span>
-
-                                                    {{ cartItem.package.data_eng }}
                                                 </td>
                                             </tr>
                                             <tr class="cart_item">
@@ -261,7 +259,7 @@
                                                 </td>
                                                 <td class="product-total">
                                                     <span class="woocommerce-Price-amount amount">
-                                                        <span class="woocommerce-Price-currencySymbol">$</span>{{ order.price }}
+                                                        <span class="woocommerce-Price-currencySymbol">$</span>{{ cartItem.price }}
                                                     </span>
                                                 </td>
                                             </tr>

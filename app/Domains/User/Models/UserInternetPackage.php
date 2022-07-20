@@ -2,6 +2,7 @@
 
 namespace App\Domains\User\Models;
 
+use App\Domains\InternetPackages\Models\InternetPackage;
 use App\Domains\InternetPackages\Models\InternetPackageFromApi;
 use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\Sim\Models\Sim;
@@ -34,6 +35,11 @@ class UserInternetPackage extends Model
     public function sim()
     {
         return $this->belongsTo(Sim::class, 'sim_id');
+    }
+
+    public function internet_package()
+    {
+        return $this->belongsTo(InternetPackage::class, 'internet_package_id');
     }
 
     public function internet_package_from_file()

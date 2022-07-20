@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Pages;
 
 use App\Actions\User\UserAction;
 use App\Actions\User\UserAddressAction;
+use App\Domains\InternetPackages\Models\InternetPackage;
 use App\Domains\InternetPackages\Models\InternetPackageFromFile;
 use App\Domains\Order\Model\Order;
 use App\Domains\User\Models\UserCart;
@@ -35,7 +36,7 @@ class CheckoutPageController extends Controller
 
             foreach ($cartItems as $key => $cart) {
                 if ($cart->item_type === UserCart::ITEM_TYPE_INTERNET_PACKAGE_FROM_FILE) {
-                    $cartItems[$key]['package'] = InternetPackageFromFile::where('package_id', $cart->item_id)->first();
+                    $cartItems[$key]['package'] = InternetPackage::where('package_id', $cart->item_id)->first();
                 }
             }
 
@@ -125,7 +126,7 @@ class CheckoutPageController extends Controller
                     $body = $response->getBody();
                     $content = json_decode($body->getContents(), true);
 
-                    $internetPackage = InternetPackageFromFile::where('package_id', $cart->item_id)->first();
+                    $internetPackage = InternetPackage::where('package_id', $cart->item_id)->first();
 
                     UserInternetPackage::create([
                         'user_id' => $user->id,

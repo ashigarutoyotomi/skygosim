@@ -33,7 +33,11 @@ class PackagesPageController extends Controller
     {
         $internetPackagesGateway = new InternetPackageGateway;
 
-        return $internetPackagesGateway->getAllInternetPackages();
+        $internetPackages = $internetPackagesGateway->getInternetPackages();
+
+        $internetPackages = $internetPackagesGateway->setLocalImages($internetPackages);
+
+        return $internetPackages;
     }
 
     public function checkout(PurchaseInternetPackageRequest $request)

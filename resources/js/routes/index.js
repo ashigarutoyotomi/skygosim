@@ -147,6 +147,11 @@ const allRoutes = [
 
     // Purchases
     {
+        name: 'purchases_internet_packages',
+        path: '/purchases/internet-packages',
+        component: PurchasesInternetPackages
+    },
+    {
         name: 'purchases_internet_packages_from_web',
         path: '/purchases/internet-packages-from-web',
         component: PurchasedInternetPackagesFromWeb

@@ -38,6 +38,14 @@
                         <li class="nav-item">
                             <router-link
                                 class="nav-link"
+                                :class="{'active': isActiveRoute(['purchases_internet_packages'])}"
+                                to="/purchases/internet-packages"
+                            >Internet packages</router-link>
+                        </li>
+
+                        <li class="nav-item">
+                            <router-link
+                                class="nav-link"
                                 :class="{'active': isActiveRoute(['purchases_internet_packages_from_web'])}"
                                 to="/purchases/internet-packages-from-web"
                             >Internet packages from web</router-link>
