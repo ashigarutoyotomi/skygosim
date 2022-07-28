@@ -20,6 +20,10 @@ class InternetPackageGateway
     {
         $query = InternetPackage::query();
 
+        $query
+            ->orderBy('name_en')
+            ->orderBy('price_usd');
+
         if ($this->with) {
             return $query->with($this->with);
         }
@@ -27,10 +31,6 @@ class InternetPackageGateway
         if ($this->paginate) {
             return $query->paginate($this->paginate);
         }
-
-        $query
-            ->orderBy('name_en')
-            ->orderBy('price_usd');
 
         return $query->get();
     }

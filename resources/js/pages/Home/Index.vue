@@ -43,40 +43,40 @@
             </div>
         </section>
 
-        <section class="ls s-pt-75 s-pb-80 s-pb-lg-100 about-section text-center text-lg-left">
-            <div class="d-none d-lg-block divider-10"></div>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-12 col-lg-6 order-2 order-lg-1">
-                        <div class="d-none d-lg-block divider-20"></div>
-                        <div class="item-content">
-                            <h3>eSIM Instant Connections</h3>
+<!--        <section class="ls s-pt-75 s-pb-80 s-pb-lg-100 about-section text-center text-lg-left">-->
+<!--            <div class="d-none d-lg-block divider-10"></div>-->
+<!--            <div class="container">-->
+<!--                <div class="row align-items-center">-->
+<!--                    <div class="col-12 col-lg-6 order-2 order-lg-1">-->
+<!--                        <div class="d-none d-lg-block divider-20"></div>-->
+<!--                        <div class="item-content">-->
+<!--                            <h3>eSIM Instant Connections</h3>-->
 
-                            <p>
-                                A contactless solution to a physical SIM card, you can now install SkyGo’s eSIM on your device to access seamless worldwide data coverage.
-                                <br>
-                                You'll never be confused by a plethora of SIM cards again when you can manage your data and plans directly on your own device.
-                            </p>
+<!--                            <p>-->
+<!--                                A contactless solution to a physical SIM card, you can now install SkyGo’s eSIM on your device to access seamless worldwide data coverage.-->
+<!--                                <br>-->
+<!--                                You'll never be confused by a plethora of SIM cards again when you can manage your data and plans directly on your own device.-->
+<!--                            </p>-->
 
-                            <div class="d-none d-lg-block divider-20"></div>
+<!--                            <div class="d-none d-lg-block divider-20"></div>-->
 
-                            <a
-                                href="/e-sim/order"
-                                class="btn btn-maincolor2"
-                            >
-                                <span>E-SIM</span>
-                            </a>
-                        </div>
-                    </div>
+<!--                            <a-->
+<!--                                href="/e-sim/order"-->
+<!--                                class="btn btn-maincolor2"-->
+<!--                            >-->
+<!--                                <span>E-SIM</span>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="col-12 col-lg-6 order-1 order-lg-2">
-                        <div class="">
-                            <img src="/images/cellular-connectivity.svg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!--                    <div class="col-12 col-lg-6 order-1 order-lg-2">-->
+<!--                        <div class="">-->
+<!--                            <img src="/images/cellular-connectivity.svg" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </section>-->
 
         <section class="ls s-pt-40 s-pb-50 s-pt-lg-120 s-pb-lg-90 s-pt-xl-160 s-pb-xl-130 c-mb-30 service-page2">
             <div class="container">
