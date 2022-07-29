@@ -8,6 +8,8 @@ use App\Actions\User\UserAction;
 use App\Actions\User\UserAddressAction;
 use App\Domains\InternetPackages\Gateways\InternetPackageGateway;
 use App\Domains\InternetPackages\Models\InternetPackage;
+use App\Domains\Settings\Gateways\SettingGateway;
+use App\Domains\Settings\Models\Setting;
 use App\Domains\User\Actions\UserCartAction;
 use App\Domains\User\DTO\UserCartDTO\CreateUserCartData;
 use App\Domains\User\Models\UserCart;
@@ -36,6 +38,12 @@ class PackagesPageController extends Controller
         $internetPackages = $internetPackagesGateway->getInternetPackages();
 
         $internetPackages = $internetPackagesGateway->setLocalImages($internetPackages);
+
+        $percentage = (new SettingGateway)->getSettingValueById(Setting::ID_INTERNET_PACKAGE_PRICE_PERCENTAGE);
+        foreach ($internetPackages as $internetPackage) {
+            $percentPrice = ($internetPackage->price_usd * floatval($percentage)) / 100;
+            $internetPackage->price_usd = round($internetPackage->price_usd + $percentPrice, 2, PHP_ROUND_HALF_UP);
+        }
 
         return $internetPackages;
     }
