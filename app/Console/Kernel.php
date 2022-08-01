@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\CreateAdminUserCommand;
+use App\Console\Commands\DatabaseBackupCommand;
 use App\Domains\InternetPackages\Commands\FetchInternetPackagesCommand;
 use App\Domains\InternetPackages\Commands\FetchInternetPackagesFromApiCommand;
 use App\Domains\InternetPackages\Commands\UpdateInternetPackagesFromFilePriceByApiCommand;
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
         FetchInternetPackagesCommand::class,
         UpdateInternetPackagesFromFilePriceByApiCommand::class,
         FetchInternetPackagesFromApiCommand::class,
+        DatabaseBackupCommand::class,
     ];
 
     /**
